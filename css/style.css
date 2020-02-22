@@ -540,3 +540,12 @@ figure.highlight .section {
 .gist .file {
   all: initial;
 }
+.post-copyright {
+  font-size: 1rem;
+  letter-spacing: 0.02rem;
+  word-break: break-all;
+  margin: 2.5rem 0 0;
+  padding: 1rem 1rem;
+  border-left: 3px solid #06c;
+  background-color: #f9f9f9;
+}
