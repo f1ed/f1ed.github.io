@@ -210,6 +210,7 @@ img.thumbnail {
 }
 .article .content {
   font-size: 1.1rem;
+  letter-spacing: 0.02rem;
 }
 .article .content blockquote.pullquote {
   float: right;
@@ -219,30 +220,6 @@ img.thumbnail {
 }
 .article .content a {
   word-wrap: break-word;
-}
-.article {
-  counter-reset: section;
-}
-.article h2 {
-  counter-reset: sub-section;
-}
-.article h3 {
-  counter-reset: composite;
-}
-.article h4 {
-  counter-reset: detail;
-}
-.article h2:before {
-  content: counter(section) " ";
-  counter-increment: section;
-}
-.article h3:before {
-  content: counter(section) "." counter(sub-section) " ";
-  counter-increment: sub-section;
-}
-.article h4:before {
-  content: counter(section) "." counter(sub-section) "." counter(composite) " ";
-  counter-increment: composite;
 }
 .rtl {
   direction: rtl;
@@ -572,4 +549,28 @@ figure.highlight .section {
   padding: 1rem 1rem;
   border-left: 3px solid #06c;
   background-color: #f9f9f9;
+}
+.article {
+  counter-reset: section;
+}
+.article h2 {
+  counter-reset: sub-section;
+}
+.article h3 {
+  counter-reset: composite;
+}
+.article h4 {
+  counter-reset: detail;
+}
+.article h2:before {
+  content: counter(section) " ";
+  counter-increment: section;
+}
+.article h3:before {
+  content: counter(section) "." counter(sub-section) " ";
+  counter-increment: sub-section;
+}
+.article h4:before {
+  content: counter(section) "." counter(sub-section) "." counter(composite) " ";
+  counter-increment: composite;
 }
