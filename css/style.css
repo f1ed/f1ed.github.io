@@ -65,6 +65,9 @@ textarea {
   border-radius: 4px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.1);
 }
+.card:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
+}
 .card + .card,
 .card + .column-right-shadow {
   margin-top: 1.5rem;
@@ -147,6 +150,9 @@ img.thumbnail {
 .widget .menu-list li ul {
   margin-right: 0;
 }
+.widget .menu-list a {
+  transition: background-color 0.3s ease-in-out;
+}
 .widget .menu-list a.level {
   display: flex;
 }
@@ -207,6 +213,12 @@ img.thumbnail {
 }
 .article .article-meta {
   margin-bottom: 0.5rem !important;
+}
+.article .title {
+  margin: 0 0 0.5rem;
+}
+.article .title .fas {
+  margin-right: 0.8rem;
 }
 .article .content {
   font-size: 1.1rem;
@@ -303,6 +315,9 @@ img.thumbnail {
 }
 .is-overflow-x-auto {
   overflow-x: auto !important;
+}
+.is-overflow-x-auto::-webkit-scrollbar {
+  width: 0 !important;
 }
 .is-flex-grow {
   flex-grow: 1 !important;
