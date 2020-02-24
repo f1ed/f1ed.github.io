@@ -418,7 +418,7 @@ img.thumbnail {
   font-family: "Source Code Pro", monospace, "Microsoft YaHei";
 }
 .content pre {
-  font-size: 0.85em;
+  font-size: 0.95em;
 }
 .content code {
   padding: 0;
@@ -566,7 +566,7 @@ figure.highlight .section {
   background-color: #f9f9f9;
 }
 .article {
-  counter-reset: section;
+  counter-reset: sectio;
 }
 .article h2 {
   counter-reset: sub-section;
