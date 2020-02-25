@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>fred&#39;s blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://f1ed.github.io/"/>
+  <updated>2020-02-24T10:15:22.289Z</updated>
+  <id>https://f1ed.github.io/</id>
+  
+  <author>
+    <name>f1ed</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello f1ed</title>
+    <link href="https://f1ed.github.io/2020/02/24/hello-f1ed/"/>
+    <id>https://f1ed.github.io/2020/02/24/hello-f1ed/</id>
+    <published>2020-02-24T10:15:22.289Z</published>
+    <updated>2020-02-24T10:15:22.289Z</updated>
+    
+    <summary type="html">
+    
+      只是一个测试啦～
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="https://f1ed.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="测试" scheme="https://f1ed.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Paul---big thief(Test)</title>
+    <link href="https://f1ed.github.io/2020/02/20/Paul/"/>
+    <id>https://f1ed.github.io/2020/02/20/Paul/</id>
+    <published>2020-02-19T16:00:00.000Z</published>
+    <updated>2020-02-24T09:00:49.312Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;还是一个测试测试&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="https://f1ed.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="测试" scheme="https://f1ed.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+</feed>
