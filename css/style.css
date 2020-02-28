@@ -211,6 +211,9 @@ img.thumbnail {
 .timeline .media:first-child:last-child:after {
   top: calc(0.3rem + 9px);
 }
+.article {
+  margin-left: 1rem;
+}
 .article .article-meta {
   margin-bottom: 0.5rem !important;
 }
@@ -232,6 +235,10 @@ img.thumbnail {
 }
 .article .content a {
   word-wrap: break-word;
+}
+.article .content a img {
+  margin: auto;
+  display: block;
 }
 .rtl {
   direction: rtl;
@@ -564,28 +571,4 @@ figure.highlight .section {
   padding: 1rem 1rem;
   border-left: 3px solid #06c;
   background-color: #f9f9f9;
-}
-.article {
-  counter-reset: sectio;
-}
-.article h2 {
-  counter-reset: sub-section;
-}
-.article h3 {
-  counter-reset: composite;
-}
-.article h4 {
-  counter-reset: detail;
-}
-.article h2:before {
-  content: counter(section) " ";
-  counter-increment: section;
-}
-.article h3:before {
-  content: counter(section) "." counter(sub-section) " ";
-  counter-increment: sub-section;
-}
-.article h4:before {
-  content: counter(section) "." counter(sub-section) "." counter(composite) " ";
-  counter-increment: composite;
 }
