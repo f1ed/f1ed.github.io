@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/Paul.jpg">
 <meta property="article:published_time" content="2020-02-26T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-29T09:39:46.443Z">
+<meta property="article:modified_time" content="2020-02-29T09:42:08.036Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="Regression">
@@ -164,7 +164,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-26T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-27</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-29T09:39:46.443Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-29</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-02-29T09:42:08.036Z"><i class="far fa-calendar-check">&nbsp;</i>2020-02-29</time>
                 
                 
                 <div class="level-item">
@@ -177,7 +177,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    20 分钟 读完 (大约 2990 个字)
+                    20 分钟 读完 (大约 3006 个字)
                 </span>
                 
                 
@@ -350,10 +350,10 @@ $ 等都属于这个集合，但是显然像$f_3$这种函数是bad，CP值不�
 <p><a href="https://imgchr.com/i/3rgVr6"><img src="https://s2.ax1x.com/2020/02/28/3rgVr6.md.png" alt="3rgVr6.md.png"></a></p>
 <p><strong>Model 4</strong>:$y = b+w_1\cdot x_{cp}+w_2\cdot (x_{cp})^2+w_3\cdot(x_{cp})^3+w_4 \cdot (x_{cp})^4$</p>
 <p>Testing error =28.8,比Model3更差。</p>
-<img src="/images/截屏2020-02-27下午11.11.18.png" alt="figure 11: Model 4 Error " style="zoom: 50%;" />
-
+<p><a href="https://imgchr.com/i/3rgZqK"><img src="https://s2.ax1x.com/2020/02/28/3rgZqK.md.png" alt="3rgZqK.md.png"></a></p>
 <p><strong>Model 5</strong>：$y = b+w_1\cdot x_{cp}+w_2\cdot (x_{cp})^2+w_3\cdot(x_{cp})^3+w_4 \cdot (x_{cp})^4+w_5\cdot (x_{cp})^5$</p>
-<p>Testing error = 232.1,爆炸了一样的差。<br><a href="https://imgchr.com/i/3rgmVO"><img src="https://s2.ax1x.com/2020/02/28/3rgmVO.md.png" alt="3rgmVO.md.png"></a></p>
+<p>Testing error = 232.1,爆炸了一样的差。</p>
+<p><a href="https://imgchr.com/i/3rgmVO"><img src="https://s2.ax1x.com/2020/02/28/3rgmVO.md.png" alt="3rgmVO.md.png"></a></p>
 <h3 id="Overfiting（过拟合了）"><a href="#Overfiting（过拟合了）" class="headerlink" title="Overfiting（过拟合了）"></a>Overfiting（过拟合了）</h3><p>从上面5个Model中可以得出，越复杂的函数模型，在Testing data上不一定能得到更好的结果。（过拟合使Training data 的误差越来越小）</p>
 <p>所以在选择Model时，需要选择合适的Model。</p>
 <h2 id="对模型进行改进"><a href="#对模型进行改进" class="headerlink" title="对模型进行改进"></a>对模型进行改进</h2><p>如果收集更多的Training Data，可以发现他好像不是一个Linear Model。</p>
