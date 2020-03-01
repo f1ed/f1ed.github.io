@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/shine.jpg">
 <meta property="article:published_time" content="2020-02-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-01T12:04:45.703Z">
+<meta property="article:modified_time" content="2020-03-01T12:44:15.899Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="Gradient">
@@ -164,7 +164,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-29T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-01</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-01T12:04:45.703Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-01</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-01T12:44:15.899Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-01</time>
                 
                 
                 <div class="level-item">
@@ -177,7 +177,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    23 分钟 读完 (大约 3477 个字)
+                    23 分钟 读完 (大约 3479 个字)
                 </span>
                 
                 
@@ -244,14 +244,14 @@
 <p>在Vanilla Gradient descent中， $g^t$越大，也就是当前梯度大，也就有更大的step。</p>
 <p>而在Adagrad中，当 $g^t$越大，有更大的step,而当  $\sqrt{\sum_{i=0}^t (g^i)^2} $  越大，反而有更小step。</p>
 <p>Contradiction？</p>
-<h4 id="Intuitive-Reason（直观上解释）"><a href="#Intuitive-Reason（直观上解释）" class="headerlink" title="Intuitive Reason（直观上解释）"></a>Intuitive Reason（直观上解释）</h4>  $ w^{t+1}  \leftarrow w^{t}-\frac{\eta}{\sqrt{\sum_{i=0}^{t}\left(g^{i}\right)^{2}}} g^{t}$  
+<h4 id="「Intuitive-Reason（直观上解释）」"><a href="#「Intuitive-Reason（直观上解释）」" class="headerlink" title="「Intuitive Reason（直观上解释）」"></a>「Intuitive Reason（直观上解释）」</h4>  $ w^{t+1}  \leftarrow w^{t}-\frac{\eta}{\sqrt{\sum_{i=0}^{t}\left(g^{i}\right)^{2}}} g^{t}$  
 
   $\sqrt{\sum_{i=0}^t (g^i)^2} $  是为了造成反差的效果。
 
 <p><a href="https://imgchr.com/i/3gbqTU"><img src="https://s2.ax1x.com/2020/03/01/3gbqTU.md.png" alt="3gbqTU.md.png"></a></p>
 <p>类比一下，如果一个一直很凶的人，突然温柔了一些，你会觉得他特别温柔。所以同样是 $0.1$,第一行中，你会觉得特别大，第二行中，你会觉得特别小。</p>
 <p>因此  $\sqrt{\sum_{i=0}^t (g^i)^2} $  这一项的存在就能体现 $g^t$的变化有多surprise。</p>
-<h4 id="数学一些的解释"><a href="#数学一些的解释" class="headerlink" title="数学一些的解释"></a>数学一些的解释</h4><h5 id="Larger-Gradient-larger-steps"><a href="#Larger-Gradient-larger-steps" class="headerlink" title="Larger Gradient,larger steps?"></a>Larger Gradient,larger steps?</h5><p>在前面我们都深信不疑这一点，但这样的描述真的是正确的吗？</p>
+<h4 id="「数学一些的解释」"><a href="#「数学一些的解释」" class="headerlink" title="「数学一些的解释」"></a>「数学一些的解释」</h4><h5 id="1-Larger-Gradient-larger-steps"><a href="#1-Larger-Gradient-larger-steps" class="headerlink" title="1. Larger Gradient,larger steps?"></a>1. <strong>Larger Gradient,larger steps?</strong></h5><p>在前面我们都深信不疑这一点，但这样的描述真的是正确的吗？</p>
 <p><a href="https://imgchr.com/i/3gbbwT"><img src="https://s2.ax1x.com/2020/03/01/3gbbwT.md.png" alt="3gbbwT.md.png"></a></p>
 <p>在这张图中，只有一个参数，认为当该点的导数越大，离minima越远，这样看来，Larger Gradient,larger steps是正确的。</p>
 <p>在上图中的 $x_0$点，该点迭代更新的best step 应该正比于 $|x_0+\frac{b}{2a}|$ ，即 $\frac{|2,a, x_0+b|}{2a}$。</p>
@@ -266,7 +266,7 @@
 <p>再看左图的图像，横着的弧度更平滑，竖着的弧度更尖一些，直观上看应该c点离minima更近一些。</p>
 <p><strong>所以Larger Gradient,larger steps点比较方法不能（cross parameters)跨参数比较。</strong></p>
 <p><strong>所以最好的step $\propto$ 一阶导数（Do not cross parameters)。</strong></p>
-<h5 id="Second-Derivative"><a href="#Second-Derivative" class="headerlink" title="Second Derivative"></a>Second Derivative</h5><p><a href="https://imgchr.com/i/3gbHmV"><img src="https://s2.ax1x.com/2020/03/01/3gbHmV.md.png" alt="3gbHmV.md.png"></a></p>
+<h5 id="2-Second-Derivative"><a href="#2-Second-Derivative" class="headerlink" title="2.** Second Derivative**"></a>2.** Second Derivative**</h5><p><a href="https://imgchr.com/i/3gbHmV"><img src="https://s2.ax1x.com/2020/03/01/3gbHmV.md.png" alt="3gbHmV.md.png"></a></p>
 <p>前面讨论best step $\frac{|2,a, x_0+b|}{2a}$的分子是该点一阶导数，那么其分母呢？</p>
 <p>当对一阶导数再求导时，可以发现其二阶导数就是best step的分母。</p>
 <p><strong>得出结论：the best step $\propto$  |First dertivative| /  Second derivative。</strong></p>
@@ -310,52 +310,50 @@
 <p>随机变量 $X$ 的期望和方差均存在，且 $ D(X)&gt;0$,令  $X^*=\frac{X-E(X)}{\sqrt{D(X)}} $  ，那么 $E(X^<em>)=0,D(X)=1$, $X^</em>$称为X的标准化随机变量。</p>
 </blockquote>
 <p><a href="https://imgchr.com/i/3gbgw8"><img src="https://s2.ax1x.com/2020/03/01/3gbgw8.md.png" alt="3gbgw8.md.png"></a></p>
-<p>对所有向量的每一维度，进行标准化处理： $x_{i}^{r}  \leftarrow \frac{x_{i}^{r}-m_{i}}{\sigma_{i}} $ { % endraw %}
+<p>对所有向量的每一维度，进行标准化处理： $x_{i}^{r} \leftarrow \frac{x_{i}^{r}-m_{i}}{\sigma_{i}} $ </p>
+<p>（ $m_i$是该维度变量的均值， $\sigma_i$ 是该维度变量的方差）</p>
+<p>标准化后，每一个feature的期望都是0，方差都是1。</p>
+<h1 id="Gradient-Descent-Theory-公式推导"><a href="#Gradient-Descent-Theory-公式推导" class="headerlink" title="Gradient Descent Theory(公式推导)"></a>Gradient Descent Theory(公式推导)</h1><p>当用Gradient Descent解决 $\theta^*=\arg \min_\theta L(\theta)$时，我们希望每次更新 $\theta $ 都能得到 $L(\theta^0)&gt;L(\theta^1)&gt;L(\theta^2)&gt;…$ 这样的理论结果，但是不总能得到这样的结果。</p>
+<p><a href="https://imgchr.com/i/3gb0Wd"><img src="https://s2.ax1x.com/2020/03/01/3gb0Wd.md.png" alt="3gb0Wd.md.png"></a></p>
+<p>上图中，我们虽然不能一下知道minima的方向，但是我们希望：当给一个点 $\theta^0$ 时，我们能很容易的知道他附近（极小的附近）的最小的loss 是哪个方向。</p>
+<p>所以怎么做呢？</p>
+<h2 id="Tylor-Series"><a href="#Tylor-Series" class="headerlink" title="Tylor Series"></a>Tylor Series</h2><p>微积分知识：Taylor Series（泰勒公式）。</p>
+<p>Tylor Series:<br>函数 $h(x)$ 在 $x_0$ 无限可导，那么 </p>
+ 
 
-（ $m_i$是该维度变量的均值， $\sigma_i$ 是该维度变量的方差）
+$\begin{aligned}
+\mathrm{h}(\mathrm{x}) &=\sum_{k=0}^{\infty} \frac{\mathrm{h}^{(k)}\left(x_{0}\right)}{k !}\left(x-x_{0}\right)^{k} \\
+&=h\left(x_{0}\right)+h^{\prime}\left(x_{0}\right)\left(x-x_{0}\right)+\frac{h^{\prime \prime}\left(x_{0}\right)}{2 !}\left(x-x_{0}\right)^{2}+\ldots
+\end{aligned}$ 
 
-标准化后，每一个feature的期望都是0，方差都是1。
+ 
 
-# Gradient Descent Theory（公式推导）
 
-当用Gradient Descent解决 $\theta^*=\arg \min_\theta L(\theta)$时，我们希望每次更新 $\theta $ 都能得到 $L(\theta^0)>L(\theta^1)>L(\theta^2)>...$ 这样的理论结果，但是不总能得到这样的结果。
 
-[![3gb0Wd.md.png](https://s2.ax1x.com/2020/03/01/3gb0Wd.md.png)](https://imgchr.com/i/3gb0Wd)
-
-上图中，我们虽然不能一下知道minima的方向，但是我们希望：当给一个点 $\theta^0$ 时，我们能很容易的知道他附近（极小的附近）的最小的loss 是哪个方向。
-
-所以怎么做呢？
-
-## Tylor Series
-
-微积分知识：Taylor Series（泰勒公式）。
-
-> Tylor Series:
->
-> 函数 $h(x)$ 在 $x_0$ 无限可导，那么 {% raw %} $ \begin{aligned}
-> \mathrm{h}(\mathrm{x}) &=\sum_{k=0}^{\infty} \frac{\mathrm{h}^{(k)}\left(x_{0}\right)}{k !}\left(x-x_{0}\right)^{k} \\
-> &=h\left(x_{0}\right)+h^{\prime}\left(x_{0}\right)\left(x-x_{0}\right)+\frac{h^{\prime \prime}\left(x_{0}\right)}{2 !}\left(x-x_{0}\right)^{2}+\ldots
-> \end{aligned}$  {% endraw %}</p>
-<p>当 x 无限接近 $x_0$ 时，忽略后面无穷小的高次项，{% raw %} **$h(x) \approx h\left(x_{0}\right)+h^{\prime}\left(x_{0}\right)\left(x-x_{0}\right)  $** {% endraw %}</p>
+<p>当 x 无限接近 $x_0$ 时，忽略后面无穷小的高次项，  $h(x) \approx h\left(x_{0}\right)+h^{\prime}\left(x_{0}\right)\left(x-x_{0}\right)  $ </p>
 <p><a href="https://imgchr.com/i/3gbrQI"><img src="https://s2.ax1x.com/2020/03/01/3gbrQI.md.png" alt="3gbrQI.md.png"></a></p>
 <p>上图中，用 $\pi/4$ 处的一阶泰勒展示来表达 $\sin(x)$ ,图像是直线，和 $\sin(x)$ 图像相差很大，但当 x无限接近 $\pi/4$ 是，函数值估算很好。</p>
 <p><strong>Multivariable Taylor Series</strong></p>
-{% raw %} $h(x, y)=h\left(x_{0}, y_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial x}\left(x-x_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial y}\left(y-y_{0}\right) +\text{something raleted to} (x-x_x^0)^2 \text{and} (y-y_0)^2+…$ { % endraw %}
+ $h(x, y)=h\left(x_{0}, y_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial x}\left(x-x_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial y}\left(y-y_{0}\right) +\text{something raleted to} (x-x_x^0)^2 \text{and} (y-y_0)^2+…$ 
 
-当  $(x,y)$ 接近 $(x_0,y_0)$ 时， $h(x,y)$ 用 $(x_0,y_0)$ 处的一阶泰勒展开式估计。
+<p>当  $(x,y)$ 接近 $(x_0,y_0)$ 时， $h(x,y)$ 用 $(x_0,y_0)$ 处的一阶泰勒展开式估计。</p>
 
-{% raw %} $ h(x, y) \approx h\left(x_{0}, y_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial x}\left(x-x_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial y}\left(y-y_{0}\right)$ {%  endraw %}
+ $ h(x, y) \approx h\left(x_{0}, y_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial x}\left(x-x_{0}\right)+\frac{\partial h\left(x_{0}, y_{0}\right)}{\partial y}\left(y-y_{0}\right)$ 
+
 
 <h2 id="Back-to-Formal-Derivation"><a href="#Back-to-Formal-Derivation" class="headerlink" title="Back to Formal Derivation"></a>Back to Formal Derivation</h2><p><a href="https://imgchr.com/i/3gLTaT"><img src="https://s2.ax1x.com/2020/03/01/3gLTaT.png" alt="3gLTaT.png"></a></p>
 <p>当图中的红色圆圈足够小时，红色圆圈中的loss 值就可以用 $(a,b)$ 处的一阶泰勒展开式来表示。</p>
-{% raw %} $\mathrm{L}(\theta) \approx \mathrm{L}(a, b)+\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{1}}\left(\theta_{1}-a\right)+\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{2}}\left(\theta_{2}-b\right) $  {% endraw %}
 
-<p>$(\theta_1-a)^2+(\theta_2-b)^2 \leq d^2$,d 足够小。</p>
-<p>用 $s=L(a,b)$ , {% raw %} $u=\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{1}}, v=\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{2}} $ { % endraw %}表示。
+ $ \mathrm{L}(\theta) \approx \mathrm{L}(a, b)+\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{1}}\left(\theta_{1}-a\right)+\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{2}}\left(\theta_{2}-b\right) $ 
 
-**最后问题变成：**
 
-**{% raw %} $L(\theta)\approx s+u(\theta_1-a)+v(\theta_2-b)$  {% endraw %}**</p>
+<p>$(\theta_1-a)^2+(\theta_2-b)^2 \leq d^2$ ,d 足够小。</p>
+<p>用 $s=L(a,b)$ ,  $ u=\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{1}}, v=\frac{\partial \mathrm{L}(a, b)}{\partial \theta_{2}} $ 表示。</p>
+<p><strong>最后问题变成：</strong></p>
+ 
+ $L(\theta)\approx s+u(\theta_1-a)+v(\theta_2-b)$ 
+
+
 <p><strong>找 $(\theta_1,\theta_2)$，且满足 $(\theta_1-a)^2+(\theta_2-b)^2 \leq d^2$，使 $L(\theta)$ 最小。</strong></p>
 <p>变成了一个简单的最优化问题。</p>
 <p>令 $\Delta \theta_1=\theta_1-a$ , $\Delta\theta_2=\theta_2-b$</p>
@@ -365,15 +363,20 @@
 <p><a href="https://imgchr.com/i/3gbwJH"><img src="https://s2.ax1x.com/2020/03/01/3gbwJH.png" alt="3gbwJH.png"></a></p>
 <p>画出图，就是初中数学了。更新的方向应该是 $(u,v)$ 向量反向的方向。</p>
 <p>所以：</p>
-{% raw %} $\left[\begin{array}{l}
+
+ $\left[\begin{array}{l}
 \Delta \theta_{1} \\
 \Delta \theta_{2}
 \end{array}\right]=-\eta\left[\begin{array}{l}
 u \\
 v
-\end{array}\right] $  {% endraw %}
+\end{array}\right] $ 
+ 
 
-{% raw %} $\left[\begin{array}{l}
+<br>
+
+
+ $\left[\begin{array}{l}
 \theta_{1} \\
 \theta_{2}
 \end{array}\right]=\left[\begin{array}{l}
@@ -382,9 +385,11 @@ b
 \end{array}\right]-\eta\left[\begin{array}{l}
 u \\
 v
-\end{array}\right] $  {% endraw %}
+\end{array}\right] $
+ 
+<br>
 
-{% raw %} $\left[\begin{array}{l}
+ $ \left[\begin{array}{l}
 \theta_{1} \\
 \theta_{2}
 \end{array}\right]=\left[\begin{array}{l}
@@ -399,7 +404,8 @@ b
 \end{array}\right]-\eta\left[\begin{array}{l}
 \frac{\partial \mathrm{L}(a, b)}{\partial \theta_{1}} \\
 \frac{\partial \mathrm{L}(a, b)}{\partial \theta_{2}}
-\end{array}\right] $  {% endraw %}
+\end{array}\right] $
+ 
 
 <h1 id="Limitation-of-Gradient-Descent"><a href="#Limitation-of-Gradient-Descent" class="headerlink" title="Limitation of Gradient Descent"></a>Limitation of Gradient Descent</h1><p><a href="https://imgchr.com/i/3gbsyt"><img src="https://s2.ax1x.com/2020/03/01/3gbsyt.md.png" alt="3gbsyt.md.png"></a></p>
 <ol>
@@ -671,17 +677,25 @@ b
         <a class="is-flex" href="#How-Feature-Scaling">
         <span class="has-mr-6">3.3</span>
         <span>How Feature Scaling</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Gradient-Descent-Theory-公式推导">
+        <span class="has-mr-6">4</span>
+        <span>Gradient Descent Theory(公式推导)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Tylor-Series">
+        <span class="has-mr-6">4.1</span>
+        <span>Tylor Series</span>
         </a></li><li>
         <a class="is-flex" href="#Back-to-Formal-Derivation">
-        <span class="has-mr-6">3.4</span>
+        <span class="has-mr-6">4.2</span>
         <span>Back to Formal Derivation</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#Limitation-of-Gradient-Descent">
-        <span class="has-mr-6">4</span>
+        <span class="has-mr-6">5</span>
         <span>Limitation of Gradient Descent</span>
         </a></li><li>
         <a class="is-flex" href="#Reference">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">6</span>
         <span>Reference</span>
         </a></li></ul>
             </div>
