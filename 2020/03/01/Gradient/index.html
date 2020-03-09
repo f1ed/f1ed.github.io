@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/shine.jpg">
 <meta property="article:published_time" content="2020-02-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-01T12:44:15.899Z">
+<meta property="article:modified_time" content="2020-03-09T12:28:52.703Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="公开课">
@@ -164,7 +164,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-29T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-01</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-01T12:44:15.899Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-01</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-09T12:28:52.703Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-09</time>
                 
                 
                 <div class="level-item">
@@ -177,7 +177,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    23 分钟 读完 (大约 3479 个字)
+                    23 分钟 读完 (大约 3495 个字)
                 </span>
                 
                 
@@ -192,7 +192,7 @@
         <div class="content">
             <p>总结「李宏毅老师-机器学习」的Gradient，主要从以下三个方面展开：调节learning rate；加快训练速度；对数据进行Feature Scaling。</p>
 <a id="more"></a>
-
+<p>阅读完三个tips，具体实现可<a href="/2020/03/09/Adagrad-demo/" title="demo">demo</a></p>
 <h1 id="Tip-1-Tuning-your-learning-rates-carefully"><a href="#Tip-1-Tuning-your-learning-rates-carefully" class="headerlink" title="Tip 1: Tuning your learning rates carefully"></a>Tip 1: Tuning your learning rates carefully</h1><h2 id="Visualize-损失函数随着参数变化的函数图"><a href="#Visualize-损失函数随着参数变化的函数图" class="headerlink" title="Visualize 损失函数随着参数变化的函数图"></a>Visualize 损失函数随着参数变化的函数图</h2><p><a href="https://imgchr.com/i/3gbjfJ"><img src="https://s2.ax1x.com/2020/03/01/3gbjfJ.md.png" alt="3gbjfJ.md.png"></a></p>
 <p>左图是Loss Function的函数图，红色是最好的Step，当Step过小（蓝色），会花费很多时间，当Step过大（绿色、黄色），会发现Loss越来越大，找不到最低点。</p>
 <p>所以在Training中，尽可能的visualize loss值的变化。</p>
@@ -307,8 +307,11 @@
 <h2 id="How-Feature-Scaling"><a href="#How-Feature-Scaling" class="headerlink" title="How Feature Scaling"></a>How Feature Scaling</h2><p>概率论知识：标准化。</p>
 <blockquote>
 <p>概率论：</p>
-<p>随机变量 $X$ 的期望和方差均存在，且 $ D(X)&gt;0$,令  $X^*=\frac{X-E(X)}{\sqrt{D(X)}} $  ，那么 $E(X^<em>)=0,D(X)=1$, $X^</em>$称为X的标准化随机变量。</p>
 </blockquote>
+
+ 随机变量 $X$ 的期望和方差均存在，且 $ D(X)>0$,令 $X^*=\frac{X-E(X)}{\sqrt{D(X)}}$ 
+ 那么 $E(X^*)=0,D(X)=1 $ , $ X^* $ 称为X的标准化随机变量。
+
 <p><a href="https://imgchr.com/i/3gbgw8"><img src="https://s2.ax1x.com/2020/03/01/3gbgw8.md.png" alt="3gbgw8.md.png"></a></p>
 <p>对所有向量的每一维度，进行标准化处理： $x_{i}^{r} \leftarrow \frac{x_{i}^{r}-m_{i}}{\sigma_{i}} $ </p>
 <p>（ $m_i$是该维度变量的均值， $\sigma_i$ 是该维度变量的方差）</p>
@@ -568,7 +571,7 @@ b
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            4
+                            5
                         </p>
                     </a>
                 </div>
