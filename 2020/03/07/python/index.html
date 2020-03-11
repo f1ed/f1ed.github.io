@@ -15,20 +15,20 @@
 <title>「Python」：Module &amp; Method - fred&#39;s blog</title>
 
 
-    <meta name="description" content="长期记录帖：关于遇到过的那些Python模块和方法。中英记录。">
+    <meta name="description" content="长期记录帖：关于遇到过的那些Python 的Packets &amp; Module &amp; Method &amp; Attribute。中英记录。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Python」：Module &amp; Method">
 <meta property="og:url" content="https://f1ed.github.io/2020/03/07/python/index.html">
 <meta property="og:site_name" content="fred&#39;s blog">
-<meta property="og:description" content="长期记录帖：关于遇到过的那些Python模块和方法。中英记录。">
+<meta property="og:description" content="长期记录帖：关于遇到过的那些Python 的Packets &amp; Module &amp; Method &amp; Attribute。中英记录。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://f1ed.github.io/gallery/banners/76518566_p0_master1200.jpg">
+<meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/77538838_p0_master1200.jpg">
 <meta property="article:published_time" content="2020-03-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-09T11:35:41.306Z">
+<meta property="article:modified_time" content="2020-03-11T15:03:35.400Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://f1ed.github.io/gallery/banners/76518566_p0_master1200.jpg">
+<meta name="twitter:image" content="https://f1ed.github.io/gallery/thumbnails/77538838_p0_master1200.jpg">
 
 
 
@@ -147,7 +147,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/gallery/banners/76518566_p0_master1200.jpg" alt="「Python」：Module &amp; Method">
+            <img class="thumbnail" src="/gallery/thumbnails/77538838_p0_master1200.jpg" alt="「Python」：Module &amp; Method">
         </span>
     </div>
     
@@ -162,7 +162,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-06T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-07</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-09T11:35:41.306Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-09</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-11T15:03:35.400Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-11</time>
                 
                 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    4 分钟 读完 (大约 644 个字)
+                    10 分钟 读完 (大约 1431 个字)
                 </span>
                 
                 
@@ -188,9 +188,12 @@
         </div>
         
         <div class="content">
-            <p>长期记录帖：关于遇到过的那些Python模块和方法。中英记录。</p>
+            <p>长期记录帖：关于遇到过的那些Python 的Packets &amp; Module &amp; Method &amp; Attribute。中英记录。</p>
 <a id="more"></a>
 
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><ul>
+<li>print(*objects, sep=’ ‘, end=’\n’, file=sys.stdout)</li>
+</ul>
 <h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h2 id="numpy-zeros"><a href="#numpy-zeros" class="headerlink" title="numpy.zeros"></a>numpy.zeros</h2><ul>
 <li><p>numpy.zeros(shape, dtype=float, order=’C’)</p>
 </li>
@@ -237,6 +240,203 @@
 </ul>
 </li>
 <li>e.g., X, Y = np.meshgrid(x, y) 【X,Y 都是网格点坐标矩阵】</li>
+</ul>
+<h2 id="numpy-genfromtext"><a href="#numpy-genfromtext" class="headerlink" title="numpy.genfromtext"></a>numpy.genfromtext</h2><ul>
+<li><p>numpy.genfromtxt (fname, delimiter=None)</p>
+</li>
+<li><p>Load data from a text file, with missing values handled as specified. </p>
+<p>Each line past the first <em>skip_header</em> lines is split at the delimiter character, and characters following the <em>comments</em> characters are discarded.</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><strong>fname</strong> :file, str, list of str, generator.</li>
+<li><strong>dtype</strong> :dtype, optional. </li>
+<li><strong>delimiter</strong> :str, int, or sequence, optional. <ul>
+<li>(default = whitespace)</li>
+<li>The strin used to separate values. </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Python的列表读取处理数据很慢，numpy.genfromtext就很棒。</p>
+</li>
+</ul>
+<h2 id="numpy-isnan"><a href="#numpy-isnan" class="headerlink" title="numpy.isnan"></a>numpy.isnan</h2><ul>
+<li>numpy.isnan(x)</li>
+<li>Test element-wise for NaN(Not a number) and return result as a boolean array.</li>
+<li>Parameters:<ul>
+<li><strong>x</strong> :array_like</li>
+</ul>
+</li>
+<li>Returns:  y:ndarray or bool.<ul>
+<li>True where x is NaN, false otherwise.</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-empty"><a href="#numpy-empty" class="headerlink" title="numpy.empty"></a>numpy.empty</h2><ul>
+<li>nmpy.empty(shape, dtype=float, order=’C’)</li>
+<li>Return a new arry of given shape and type, without initializing entries.</li>
+<li>Parameters:<ul>
+<li><strong>shape</strong> :int or tuple of int</li>
+<li><strong>dtype</strong> :data-type,optional<ul>
+<li>Default is numpy.float64.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Returns: <ul>
+<li>out: ndarray</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-reshape"><a href="#numpy-reshape" class="headerlink" title="numpy.reshape"></a>numpy.reshape</h2><ul>
+<li>numpy.reshape(a, newshape, order=’C’)</li>
+<li>Gives a new shape to an array without changing its data.【改变张量的shape，不改变张量的数据】</li>
+<li>Parameters:<ul>
+<li><strong>a</strong> : array-like</li>
+<li><strong>newshape</strong> : int or tuple of ints<ul>
+<li>One shape dimension can be -1. The value is inferred from the length of the array and remaning dimensions.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Returns: reshaped_array:ndarray</li>
+</ul>
+<h2 id="numpy-mean"><a href="#numpy-mean" class="headerlink" title="numpy.mean"></a>numpy.mean</h2><ul>
+<li>numpy.mean(a, axis=None)</li>
+<li>Compute the arithmetic mean along the specifiied axis.(the average of the array elements)</li>
+<li>Parameters:<ul>
+<li><strong>a</strong> : array_like</li>
+<li><strong>axis</strong> ：None or int or tuple of ints, optional<ul>
+<li>Axis or axes along which the means are computed.</li>
+<li>axis=0 ：沿行的垂直往下（列）</li>
+<li>axis=1 ：沿列的方向水平向右（行）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-std"><a href="#numpy-std" class="headerlink" title="numpy.std"></a>numpy.std</h2><ul>
+<li>numpy.std(a, axis=None,)</li>
+<li>Compute the standard deviation along the specified axis.【标准差】</li>
+<li>Parameters:<ul>
+<li><strong>a</strong> :array_like</li>
+<li><strong>axis</strong> :Axis or axes along which the means are computed.</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-shape"><a href="#numpy-shape" class="headerlink" title="numpy.shape"></a>numpy.shape</h2><ul>
+<li>attribute</li>
+<li>Tuple of array dimensions.</li>
+</ul>
+<h2 id="numpy-concatenate"><a href="#numpy-concatenate" class="headerlink" title="numpy.concatenate"></a>numpy.concatenate</h2><ul>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html">numpy.concatenate((a1, a2, …), axis=0)</a> </li>
+<li>Join a sequence of arrays along an existing axis.</li>
+<li>Parameters: <ul>
+<li><strong>a1, a2, …</strong> :sequence of array_like<ul>
+<li>The arrays must have the same shape, excepting in the dimension corresponding to axis.【除了axia方向，其他维度的shape要相同】</li>
+<li>If axis is None, arrays are flattened before use.【值为None，就先将向量变成一维的】</li>
+<li>Default=0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-ndarray-astype"><a href="#numpy-ndarray-astype" class="headerlink" title="numpy.ndarray.astype"></a>numpy.ndarray.astype</h2><ul>
+<li>method</li>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html">numpy.ndarray.astype(dtype)</a></li>
+<li>Copy of the array cast to a specified type.【强制转换数据类型】</li>
+<li>Parameters:<ul>
+<li><strong>dtype</strong> : str or dtype</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-ones"><a href="#numpy-ones" class="headerlink" title="numpy.ones"></a>numpy.ones</h2><ul>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ones.html">numpy.ones(shape, dtype=None)</a></li>
+<li>Return a new array of given shape and type, filled with ones.</li>
+<li>Parameters:<ul>
+<li><strong>shape</strong> : int or sequence of ints.</li>
+<li><strong>dtype</strong> : data-type, optional</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-ndarray-运算"><a href="#numpy-ndarray-运算" class="headerlink" title="numpy ndarray 运算"></a>numpy ndarray 运算</h2><ul>
+<li>[[1]]*3 = [[1],[1],[1]]</li>
+<li>A * B 元素相乘</li>
+<li>numpy.dot(A, B) 矩阵相乘</li>
+</ul>
+<h2 id="numpy-dot"><a href="#numpy-dot" class="headerlink" title="numpy.dot"></a>numpy.dot</h2><ul>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html">numpy.dot(a,b)</a> </li>
+</ul>
+<h2 id="numpy-power"><a href="#numpy-power" class="headerlink" title="numpy.power"></a>numpy.power</h2><ul>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.power.html">numpy.power(x1, x2)</a> </li>
+<li>First array elements raised to powers from second array.</li>
+<li>Parameters:<ul>
+<li><strong>x1</strong> :array_like .<ul>
+<li>The bases.</li>
+</ul>
+</li>
+<li><strong>x2</strong> :array_like<ul>
+<li>The exponents. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-sum"><a href="#numpy-sum" class="headerlink" title="numpy.sum"></a>numpy.sum</h2><ul>
+<li>numpy.sum(a, axis=None, dtype=None)</li>
+<li>Sum of arrays elements over a given axis.</li>
+<li>Parameters:<ul>
+<li><strong>a</strong> :array_like<ul>
+<li>Elements to sum.</li>
+</ul>
+</li>
+<li><strong>axis</strong> :None or int or tuple of ints, optional<ul>
+<li>Axis or axes along which a sum is perfomed.</li>
+<li>The default, None, will sum all of the elementsof the input array.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-transpose"><a href="#numpy-transpose" class="headerlink" title="numpy.transpose"></a>numpy.transpose</h2><ul>
+<li><p>numpy.transpose(a, axes=None)</p>
+</li>
+<li><p>Permute the dimensions of the array.【tensor的维度换位】</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><strong>a</strong> : array_like</li>
+<li><strong>axes</strong> : list of ints, optinal<ul>
+<li>Default, reverse the dimensions.</li>
+<li>Otherwise permute the axes according to the values given.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Returns : ndarray</p>
+</li>
+<li><p>张量a的shape是(10,2,15), numpy.transport(2,0,1)的shape就是(15,10,2)</p>
+</li>
+<li><p>对于一维：行向量变成列向量</p>
+</li>
+<li><p>对于二维：矩阵的转置</p>
+</li>
+</ul>
+<h2 id="numpy-save"><a href="#numpy-save" class="headerlink" title="numpy.save"></a>numpy.save</h2><ul>
+<li><p><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.save.html">numpy.save(file, arr)</a> </p>
+</li>
+<li><p>Save an array to a binary file in Numpy .npy format.</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><p><strong>file</strong> :file, str, or pathlib</p>
+</li>
+<li><p><strong>arr</strong> :array_like</p>
+<p>Array data to be saved.</p>
+</li>
+</ul>
+</li>
 </ul>
 <h1 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h1><h2 id="skelearn-linear-model-LinearRegression"><a href="#skelearn-linear-model-LinearRegression" class="headerlink" title="skelearn.linear_model.LinearRegression"></a>skelearn.linear_model.LinearRegression</h2><ul>
 <li>class sklearn.linear_model.LinearRegression(fit_intercept=True, normalize=False, copy_X=True, n_jobs=None)</li>
@@ -309,6 +509,12 @@
 <h2 id="matplotlib-pyplot-show"><a href="#matplotlib-pyplot-show" class="headerlink" title="matplotlib.pyplot.show"></a>matplotlib.pyplot.show</h2><ul>
 <li>show(<em>args, *</em>kwargs)</li>
 <li>display a figure.</li>
+</ul>
+<h1 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h1><h2 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv[]"></a>sys.argv[]</h2><ul>
+<li>python a.py data.csv<ul>
+<li>sys.argv = [‘a.py’, ‘data.csv’]</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -534,49 +740,129 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#numpy">
+        <a class="is-flex" href="#Python">
         <span class="has-mr-6">1</span>
+        <span>Python</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#print">
+        <span class="has-mr-6">1.1</span>
+        <span>print</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#numpy">
+        <span class="has-mr-6">2</span>
         <span>numpy</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#numpy-zeros">
-        <span class="has-mr-6">1.1</span>
+        <span class="has-mr-6">2.1</span>
         <span>numpy.zeros</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-arange">
-        <span class="has-mr-6">1.2</span>
+        <span class="has-mr-6">2.2</span>
         <span>numpy.arange</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-meshgrid">
-        <span class="has-mr-6">1.3</span>
+        <span class="has-mr-6">2.3</span>
         <span>numpy.meshgrid</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-genfromtext">
+        <span class="has-mr-6">2.4</span>
+        <span>numpy.genfromtext</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-isnan">
+        <span class="has-mr-6">2.5</span>
+        <span>numpy.isnan</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-empty">
+        <span class="has-mr-6">2.6</span>
+        <span>numpy.empty</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-reshape">
+        <span class="has-mr-6">2.7</span>
+        <span>numpy.reshape</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-mean">
+        <span class="has-mr-6">2.8</span>
+        <span>numpy.mean</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-std">
+        <span class="has-mr-6">2.9</span>
+        <span>numpy.std</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-shape">
+        <span class="has-mr-6">2.10</span>
+        <span>numpy.shape</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-concatenate">
+        <span class="has-mr-6">2.11</span>
+        <span>numpy.concatenate</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-ndarray-astype">
+        <span class="has-mr-6">2.12</span>
+        <span>numpy.ndarray.astype</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-ones">
+        <span class="has-mr-6">2.13</span>
+        <span>numpy.ones</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-ndarray-运算">
+        <span class="has-mr-6">2.14</span>
+        <span>numpy ndarray 运算</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-dot">
+        <span class="has-mr-6">2.15</span>
+        <span>numpy.dot</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-power">
+        <span class="has-mr-6">2.16</span>
+        <span>numpy.power</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-sum">
+        <span class="has-mr-6">2.17</span>
+        <span>numpy.sum</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-transpose">
+        <span class="has-mr-6">2.18</span>
+        <span>numpy.transpose</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-save">
+        <span class="has-mr-6">2.19</span>
+        <span>numpy.save</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#sklearn">
-        <span class="has-mr-6">2</span>
+        <span class="has-mr-6">3</span>
         <span>sklearn</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#skelearn-linear-model-LinearRegression">
-        <span class="has-mr-6">2.1</span>
+        <span class="has-mr-6">3.1</span>
         <span>skelearn.linear_model.LinearRegression</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#matplotlib-pyplot">
-        <span class="has-mr-6">3</span>
+        <span class="has-mr-6">4</span>
         <span>matplotlib.pyplot</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#matplotlib-pyplot-contourf">
-        <span class="has-mr-6">3.1</span>
+        <span class="has-mr-6">4.1</span>
         <span>matplotlib.pyplot.contourf</span>
         </a></li><li>
         <a class="is-flex" href="#matplotlib-pyplot-plot">
-        <span class="has-mr-6">3.2</span>
+        <span class="has-mr-6">4.2</span>
         <span>matplotlib.pyplot.plot</span>
         </a></li><li>
         <a class="is-flex" href="#matplotlib-pyplot-xlim">
-        <span class="has-mr-6">3.3</span>
+        <span class="has-mr-6">4.3</span>
         <span>matplotlib.pyplot.xlim</span>
         </a></li><li>
         <a class="is-flex" href="#matplotlib-pyplot-show">
-        <span class="has-mr-6">3.4</span>
+        <span class="has-mr-6">4.4</span>
         <span>matplotlib.pyplot.show</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#sys">
+        <span class="has-mr-6">5</span>
+        <span>sys</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#sys-argv">
+        <span class="has-mr-6">5.1</span>
+        <span>sys.argv[]</span>
         </a></li></ul></li></ul>
             </div>
         </div>
