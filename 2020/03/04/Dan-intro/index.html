@@ -18,13 +18,13 @@
     <meta name="description" content="本系列是学习Dan Boneh教授的Online Cryptography Course。 这是Dan教授的第一讲：对密码学的一些Introduction。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Cryptography-Dan」：Introduction">
-<meta property="og:url" content="https://f1ed.github.io/2020/03/04/Dan-intro/index.html">
+<meta property="og:url" content="https://f1ed.github.io/2020/03/04/Dan-Intro/index.html">
 <meta property="og:site_name" content="fred&#39;s blog">
 <meta property="og:description" content="本系列是学习Dan Boneh教授的Online Cryptography Course。 这是Dan教授的第一讲：对密码学的一些Introduction。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/0304.jpg">
 <meta property="article:published_time" content="2020-03-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-04T13:10:15.946Z">
+<meta property="article:modified_time" content="2020-03-12T13:24:31.398Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="公开课">
 <meta property="article:tag" content="Cryptography">
@@ -163,7 +163,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-03T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-04</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-04T13:10:15.946Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-04</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-12T13:24:31.398Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-12</time>
                 
                 
                 <div class="level-item">
@@ -176,7 +176,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    27 分钟 读完 (大约 4003 个字)
+                    27 分钟 读完 (大约 4071 个字)
                 </span>
                 
                 
@@ -369,10 +369,14 @@
 <h3 id="Deterministic-algorithm"><a href="#Deterministic-algorithm" class="headerlink" title="Deterministic algorithm"></a>Deterministic algorithm</h3><p><a href="https://imgchr.com/i/3odNGV"><img src="https://s2.ax1x.com/2020/03/04/3odNGV.png" alt="3odNGV.png"></a> </p>
 <p>$ y\longleftarrow A(m)$ ，这是一个确定的函数，输入映射到唯一输出。</p>
 <h3 id="Randomized-algorithm"><a href="#Randomized-algorithm" class="headerlink" title="Randomized algorithm"></a>Randomized algorithm</h3><p><a href="https://imgchr.com/i/3odaxU"><img src="https://s2.ax1x.com/2020/03/04/3odaxU.png" alt="3odaxU.png"></a> </p>
-<p>$y \leftarrow A(m ; r) \quad \text { where } r \stackrel{R}{\leftarrow}{0,1}^{n}$ ，output： $y \stackrel{R}{\leftarrow} A(m)$ ，y is a random variable.</p>
-<p>随机变量R服从和01序列分布相同的概率分布。</p>
-<p>因此，函数的输入除了m还有一个随机变量r,m会因为r的不同映射到不同的输出。</p>
-<p>如上图所示，m不是映射到唯一的输出。</p>
+<p>$y\longleftarrow A(m ; r) \quad \text { where } r \stackrel{R}{\longleftarrow}{0,1}^{n}$ </p>
+<p>output： $y \stackrel{R}{\longleftarrow} A(m)$ ，y is a random variable.</p>
+<blockquote>
+<p>$ r \stackrel{R}\longleftarrow {0,1}^n $ :意思是r是n位01序列中的任意一个取值。R，random。变量r服从在 ${0,1}^n$ 取值的均匀分布。</p>
+</blockquote>
+<p>由于随机变量r，对于给定m，$A(m;r)$ 是 ${0,1}^n$ 中的一个子集。</p>
+<p>所以，对m的加密结果y，也是一个的随机变量，而且，y在 $A(m,r)$ 也是服从均匀分布。</p>
+<p>因此，由于r的影响，对于给定m，加密结果不会映射到同一个值。（如上图所示）</p>
 <h2 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h2><p>XOR有两种理解：（  $x \oplus y $  ）</p>
 <ul>
 <li>一种是：x,y的bit位相比较，相同则为0，相异为1.</li>
@@ -432,9 +436,9 @@ $P(A) \approx 1-0.492703=0.507297 \quad(50.7297 \%)$
         </div>
     
         <ul class="post-copyright">
-        <li><strong>本文标题：</strong><a href="https://f1ed.github.io/2020/03/04/Dan-intro/">「Cryptography-Dan」：Introduction</a></li>
+        <li><strong>本文标题：</strong><a href="https://f1ed.github.io/2020/03/04/Dan-Intro/">「Cryptography-Dan」：Introduction</a></li>
         <li><strong>本文作者：</strong><a href="https://f1ed.github.io">f1ed</a></li>
-        <li><strong>本文链接：</strong><a href="https://f1ed.github.io/2020/03/04/Dan-intro/">https://f1ed.github.io/2020/03/04/Dan-intro/</a></li>
+        <li><strong>本文链接：</strong><a href="https://f1ed.github.io/2020/03/04/Dan-Intro/">https://f1ed.github.io/2020/03/04/Dan-Intro/</a></li>
         <li><strong>发布时间：</strong>2020-03-04</li>
         <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
