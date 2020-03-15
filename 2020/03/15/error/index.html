@@ -12,29 +12,30 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Adagrag-demo - fred&#39;s blog</title>
+<title>「机器学习-李宏毅」：Error - fred&#39;s blog</title>
 
 
-    <meta name="description" content="实现这篇文章中前面两个tips。">
+    <meta name="description" content="这篇文章叙述了进行regression时，where dose the error come from?这篇文章除了解释了error为什么来自bias和variance，还给出了当error产生时应该怎么办？如何让模型在实践应用中也能表现地和测试时几乎一样的好？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Adagrag-demo">
-<meta property="og:url" content="https://f1ed.github.io/2020/03/09/Adagrad-demo/index.html">
+<meta property="og:title" content="「机器学习-李宏毅」：Error">
+<meta property="og:url" content="https://f1ed.github.io/2020/03/15/error/index.html">
 <meta property="og:site_name" content="fred&#39;s blog">
-<meta property="og:description" content="实现这篇文章中前面两个tips。">
+<meta property="og:description" content="这篇文章叙述了进行regression时，where dose the error come from?这篇文章除了解释了error为什么来自bias和variance，还给出了当error产生时应该怎么办？如何让模型在实践应用中也能表现地和测试时几乎一样的好？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/shine.jpg">
-<meta property="article:published_time" content="2020-03-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-09T12:20:56.586Z">
+<meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/03151.jpg">
+<meta property="article:published_time" content="2020-03-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-15T15:13:42.640Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="公开课">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://f1ed.github.io/gallery/thumbnails/shine.jpg">
+<meta name="twitter:image" content="https://f1ed.github.io/gallery/thumbnails/03151.jpg">
 
 
 
 
 
-<link rel="alternative" href="/atom.xml" title="Adagrag-demo" type="application/atom+xml">
+<link rel="alternative" href="/atom.xml" title="「机器学习-李宏毅」：Error" type="application/atom+xml">
 
 
 
@@ -89,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/f1ed_logo.png" alt="Adagrag-demo" height="28">
+                <img src="/images/f1ed_logo.png" alt="「机器学习-李宏毅」：Error" height="28">
             
             </a>
         </div>
@@ -147,27 +148,27 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/shine.jpg" alt="Adagrag-demo">
+            <img class="thumbnail" src="/gallery/thumbnails/03151.jpg" alt="「机器学习-李宏毅」：Error">
         </span>
     </div>
     
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <i class="fas fa-bars"></i>Adagrag-demo
+                <i class="fas fa-bars"></i>「机器学习-李宏毅」：Error
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-08T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-09</time>
+                <time class="level-item has-text-grey" datetime="2020-03-14T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-15</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-09T12:20:56.586Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-09</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-15T15:13:42.640Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-15</time>
                 
                 
                 <div class="level-item">
                 <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                <a class="has-link-grey -link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/">机器学习-李宏毅</a>
                 </div>
                 
                 
@@ -175,7 +176,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    2 分钟 读完 (大约 304 个字)
+                    11 分钟 读完 (大约 1665 个字)
                 </span>
                 
                 
@@ -188,23 +189,115 @@
         </div>
         
         <div class="content">
-            <p>实现<a href="/2020/03/01/Gradient/" title="这篇文章">这篇文章</a>中前面两个tips。</p>
+            <p>这篇文章叙述了进行regression时，where dose the error come from?<br>这篇文章除了解释了error为什么来自bias和variance，还给出了当error产生时应该怎么办？如何让模型在实践应用中也能表现地和测试时几乎一样的好？</p>
 <a id="more"></a>
 
-
-<p>实现了tip1 Adagrad + tip2 Stochastic Gradient Descent</p>
-<h3 id="demo代码"><a href="#demo代码" class="headerlink" title="demo代码"></a>demo代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#################</span></span><br><span class="line"><span class="comment"># 2020/03/06    #</span></span><br><span class="line"><span class="comment"># Adagrad demo  #</span></span><br><span class="line"><span class="comment">#################</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"></span><br><span class="line"><span class="comment"># data</span></span><br><span class="line">x_data = [[<span class="number">338.</span>], [<span class="number">333.</span>], [<span class="number">328.</span>], [<span class="number">207.</span>], [<span class="number">226.</span>], [<span class="number">25.</span>], [<span class="number">179.</span>], [<span class="number">60.</span>], [<span class="number">208.</span>], [<span class="number">606.</span>]]</span><br><span class="line"></span><br><span class="line">y_data = [<span class="number">640.</span>, <span class="number">633.</span>, <span class="number">619.</span>, <span class="number">393.</span>, <span class="number">428.</span>, <span class="number">27.</span>, <span class="number">193.</span>, <span class="number">66.</span>, <span class="number">226.</span>, <span class="number">1591.</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># coordinate</span></span><br><span class="line">x = np.arange(<span class="number">-200</span>, <span class="number">-100</span>, <span class="number">1</span>)</span><br><span class="line">y = np.arange(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">0.1</span>)</span><br><span class="line">Z = np.zeros((len(y), len(x)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># cal the Loss of every point(function)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(y)):</span><br><span class="line">        b = x[i]</span><br><span class="line">        w = y[j]</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(x_data)):</span><br><span class="line">            Z[j][i] += (y_data[k] - b - w * x_data[k][<span class="number">0</span>])**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># initial</span></span><br><span class="line">b = <span class="number">-120</span></span><br><span class="line">w = <span class="number">-4</span></span><br><span class="line">lr = <span class="number">1</span> <span class="comment"># learning rate</span></span><br><span class="line">iteration = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># record the iteration</span></span><br><span class="line">b_his = [b]</span><br><span class="line">w_his = [w]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Adagrad</span></span><br><span class="line">b_grad_sum2 = <span class="number">0.0</span></span><br><span class="line">w_grad_sum2 = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(iteration):</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(len(x_data)):</span><br><span class="line">        b_grad = <span class="number">2</span> * (y_data[k] - b - w * x_data[k][<span class="number">0</span>]) * (<span class="number">-1</span>)</span><br><span class="line">        w_grad = <span class="number">2</span> * (y_data[k] - b - w * x_data[k][<span class="number">0</span>]) * (-x_data[k][<span class="number">0</span>])</span><br><span class="line">        b_grad_sum2 += b_grad**<span class="number">2</span></span><br><span class="line">        w_grad_sum2 += w_grad**<span class="number">2</span></span><br><span class="line">        b = b - lr / np.sqrt(b_grad_sum2) * b_grad</span><br><span class="line">        w = w - lr / np.sqrt(w_grad_sum2) * w_grad</span><br><span class="line">        b_his.append(b)</span><br><span class="line">        w_his.append(w)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sklearn linear model</span></span><br><span class="line">reg = linear_model.LinearRegression()</span><br><span class="line">print(reg.fit(x_data, y_data))</span><br><span class="line">print(reg.coef_[<span class="number">0</span>])</span><br><span class="line">print(reg.intercept_)</span><br><span class="line"></span><br><span class="line"><span class="comment"># display the figure</span></span><br><span class="line">plt.contourf(x, y, Z, <span class="number">50</span>, alpha=<span class="number">0.5</span>, cmap=plt.get_cmap(<span class="string">'jet'</span>))</span><br><span class="line">plt.plot(reg.intercept_, reg.coef_, <span class="string">'x'</span>, ms=<span class="number">13</span>, lw=<span class="number">1.5</span>, color=<span class="string">'orange'</span>)</span><br><span class="line">plt.plot(b_his, w_his, <span class="string">'o-'</span>, ms=<span class="number">3</span>, lw=<span class="number">1.5</span>, color=<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line">plt.xlim(<span class="number">-200</span>, <span class="number">-100</span>)</span><br><span class="line">plt.ylim(<span class="number">-5</span>, <span class="number">5</span>)</span><br><span class="line">plt.xlabel(<span class="string">'$b$'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'$w$'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line"><span class="comment"># plt.show()</span></span><br><span class="line">plt.savefig(<span class="string">"Loss.png"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Loss-迭代图"><a href="#Loss-迭代图" class="headerlink" title="Loss 迭代图"></a>Loss 迭代图</h3><p>画出的图片很直观</p>
-<p><a href="https://imgchr.com/i/89aAf0"><img src="https://s2.ax1x.com/2020/03/09/89aAf0.png" alt="89aAf0.png"></a></p>
+<h1 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h1><p>在中的<a href="/2020/02/29/Regression/" title="2.4节">2.4节</a>，我们比较了不同的Model。下图为不同Model下，testing data error的变化。</p>
+<p><a href="https://imgchr.com/i/88gavT"><img src="https://s1.ax1x.com/2020/03/15/88gavT.md.png" alt="88gavT.md.png"></a> </p>
+<p>可以发现，随着模型越来越复杂，testing data的error变小一些后，爆炸增大。</p>
+<p>越复杂的模型在testing data上不一定能得到好的performance。</p>
+<p>所以，where dose the error come from?</p>
+<p>：<strong>bias</strong> and <strong>variance</strong> </p>
+<h2 id="Bias-and-Variance-of-Estimator"><a href="#Bias-and-Variance-of-Estimator" class="headerlink" title="Bias and Variance of Estimator"></a>Bias and Variance of Estimator</h2><p>用打靶作比，如果你的准心，没有对准靶心，那打出的很多发子弹的中心应该离靶心有一段距离，这就是bias。</p>
+<p>但把准心对准靶心，你也不一定能打中靶心，可能会有风速等一系列原因，让子弹落在靶心周围，这就是variance。</p>
+<p><a href="https://imgchr.com/i/88gN80"><img src="https://s1.ax1x.com/2020/03/15/88gN80.md.png" alt="88gN80.md.png"></a> </p>
+<p>上图中，可以直观体现出bias 和 variance的影响。</p>
+<p><strong>概率论中</strong> ：</p>
+<blockquote>
+<p>一个通过样本值得到了估计量，有三个评判准则：无偏性、有效性和相和性。</p>
+</blockquote>
+<p>这里的无偏性的偏也就是bias。</p>
+<blockquote>
+<p>概率论中定义：设 $\hat{\theta}(X_1,X_2,…,X_n)$ 是未知参数 $\theta$ 的估计量，若 $E(\hat{\theta})=\theta$ ，则称 $\hat{\theta}$ 是 $\theta$ 的无偏估计。</p>
+</blockquote>
+<p>变量 $x$  ，假设他的期望是 $\mu$ ，他的方差是 $\sigma^2$.</p>
+<p> 对于样本： $x^1,x^2,…,x^N$ ，估计他的期望和方差。</p>
+<p>概率论的知识：  $m=\frac{1}{N} \sum_{n} x^{n} \quad s^{2}=\frac{1}{N} \sum_{n}\left(x^{n}-m\right)^{2}$ </p>
+<p>$E(m)=\mu$ ，所以用 $m$ 是 $\mu$ 的无偏估计。(unbiased)</p>
+<p>但是  $E\left[s^{2}\right]=\frac{N-1}{N} \sigma^{2} \quad \neq \sigma^{2}$  ，所以这样的估计是有偏差的。(biased)</p>
+<p>因此统计学中用样本估算总体方差都进行了修正。</p>
+<hr>
+<p>而在机器学习中，Bias和Variance通常与模型相关。</p>
+<p><a href="https://imgchr.com/i/88gJ5n"><img src="https://s1.ax1x.com/2020/03/15/88gJ5n.md.png" alt="88gJ5n.md.png"></a> </p>
+<p>上图中，假设黑色的线是 true function，红色的线是训练得到的函数，蓝色的线是，训练函数的平均函数。</p>
+<p>可见，随着函数模型越来越复杂，bias在变小，但variance也在增大。</p>
+<p>右下角图中，红色的线接近铺满了，variance已经很大了，模型过拟合了。</p>
+<hr>
+<p><strong>对机器学习中模型对bias影响的直观解释</strong></p>
+<p><a href="https://imgchr.com/i/88gtCq"><img src="https://s1.ax1x.com/2020/03/15/88gtCq.md.png" alt="88gtCq.md.png"></a> </p>
+<p>左图的model简单，右图的model复杂。</p>
+<p>简单的model，包含的函数集较小，可能集合圈根本没有包括target（true function），因此在这个model下，无论怎么训练，得到的函数都有 large bias。</p>
+<p>而右图中，因为函数非常复杂，所以大概率包含了target，因此训练出的函数可能variacne很大，但有 small bias。</p>
+<h1 id="what-to-do-with-large-bias-variance"><a href="#what-to-do-with-large-bias-variance" class="headerlink" title="what to do with large bias/variance"></a>what to do with large bias/variance</h1><p><a href="https://imgchr.com/i/88gQKS"><img src="https://s1.ax1x.com/2020/03/15/88gQKS.md.png" alt="88gQKS.md.png"></a> </p>
+<p>上图中，红色的线表示bias的误差，绿色的线表示variance的误差，蓝色的线表示观测的误差。</p>
+<p>当模型过于简单时：来自bias的误差会较大，来自vaiance的误差较小，也就是 <strong>Large Bias Small Variance</strong> </p>
+<p>当模型过雨复杂时：来自bias的误差会较小，来自variance的误差会很大，也就是 <strong>Small Bias Large Variance</strong></p>
+<p><strong>2 case</strong> :</p>
+<ul>
+<li><strong>Underfitting</strong> ：If your model <strong>cannot even fit the training examples</strong>, then you have large bias.</li>
+<li><strong>Overfitting</strong> : If you can fit the traning data, but <strong>large error on testing data</strong> , then you probably have large variance.</li>
+</ul>
+<h2 id="With-Large-Bias"><a href="#With-Large-Bias" class="headerlink" title="With Large Bias"></a>With Large Bias</h2><p>For bias, redesign your model.</p>
+<ul>
+<li><u>Add more features as input.</u></li>
+<li><u>A more complex model.</u></li>
+</ul>
+<p>考虑更多的feature；使用稍微复杂些的模型。</p>
+<h2 id="With-Large-Variance"><a href="#With-Large-Variance" class="headerlink" title="With Large Variance"></a>With Large Variance</h2><ul>
+<li><u>More data</u></li>
+<li><u>Regularization</u> (在<a href="/2020/02/29/Regression/" title="这篇2.5.2">这篇2.5.2</a>文章中有叙述什么是regularization)</li>
+</ul>
+<h2 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h2><ul>
+<li>There is usually a trade-off beween bias and variance.</li>
+<li>Select a model that balances two kinds of error to minimize total error.</li>
+</ul>
+<p>选择模型需要在bias和variance中平衡，尽量使得总error最小。</p>
+<p><font color=#f00>What you should NOT do: </font></p>
+<p><a href="https://imgchr.com/i/88gugf"><img src="https://s1.ax1x.com/2020/03/15/88gugf.md.png" alt="88gugf.md.png"></a> </p>
+<p>以上，描述的是这样的一个情形：在traning data中，得到了三个自认不错的模型，kaggle的公开的testing data测试，分别得到三个模型的error，认为第三个模型最好！</p>
+<p>但是，当把kaggle用private的testing data 进行测试时，error肯定是大于0.5的，最好的model也不一定是第三个。</p>
+<p>同理，当把我们训练出的model拿来实际应用时，可能会发现情况很糟，并且，这个model可能选的是测试中最好的，但在应用中并不是最好的。</p>
+<h3 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross Validation"></a>Cross Validation</h3><p>什么是Cross Validation(交叉验证)？</p>
+<p>在机器学习中，就是下图过程：</p>
+<p><a href="https://imgchr.com/i/88g8Ej"><img src="https://s1.ax1x.com/2020/03/15/88g8Ej.md.png" alt="88g8Ej.md.png"></a> </p>
+<ol>
+<li><p>把Traning Set 分成两个部分：Training Set和Validation Set。</p>
+</li>
+<li><p>在Training Set部分选出模型。</p>
+</li>
+<li><p>用Validation Set来判断哪个模型好：计算模型在Validate Set的error。</p>
+</li>
+<li><p>再用模型预测Testing Set(public)，得到的error一定是比Validation Set中大的。</p>
+</li>
+<li><p><font color=#f00>Not recommend</font> : </p>
+<p><strong>Not用public testing data的误差结果去调整你的模型。</strong></p>
+<p>这样会让模型在public的performance比private的好。</p>
+<p>但模型在private testing data的performance才是我们真正关注的。</p>
+</li>
+<li><p>那么当模型预测private testing set时（投入应用时），能尽最大可能的保证模型和在预测public testing data相近。</p>
+</li>
+</ol>
+<h3 id="N-fold-Cross-Validation"><a href="#N-fold-Cross-Validation" class="headerlink" title="N-fold Cross Validation"></a>N-fold Cross Validation</h3><p>N-fold Cross Validation（N-折交叉验证）的过程如下：</p>
+<p><a href="https://imgchr.com/i/88R9mD"><img src="https://s1.ax1x.com/2020/03/15/88R9mD.md.png" alt="88R9mD.md.png"></a> </p>
+<ul>
+<li>把Training Set 分为3（3-fold）份，每一次拿其中一份当Validation Set，另外两份当作Training Set。</li>
+<li>每一次用Train Set来训练。得到了三个Model。</li>
+<li>要判断哪一个Model好？<ul>
+<li>每一个Model都计算出不同Validation Set的error。</li>
+<li>得到一个Average Error。</li>
+</ul>
+</li>
+<li>最后选这个average error最小的model。</li>
+<li>最后应用在public traning set，来评估模型应用在private training set的performance。</li>
+</ul>
 
         </div>
     
         <ul class="post-copyright">
-        <li><strong>本文标题：</strong><a href="https://f1ed.github.io/2020/03/09/Adagrad-demo/">Adagrag-demo</a></li>
+        <li><strong>本文标题：</strong><a href="https://f1ed.github.io/2020/03/15/error/">「机器学习-李宏毅」：Error</a></li>
         <li><strong>本文作者：</strong><a href="https://f1ed.github.io">f1ed</a></li>
-        <li><strong>本文链接：</strong><a href="https://f1ed.github.io/2020/03/09/Adagrad-demo/">https://f1ed.github.io/2020/03/09/Adagrad-demo/</a></li>
-        <li><strong>发布时间：</strong>2020-03-09</li>
+        <li><strong>本文链接：</strong><a href="https://f1ed.github.io/2020/03/15/error/">https://f1ed.github.io/2020/03/15/error/</a></li>
+        <li><strong>发布时间：</strong>2020-03-15</li>
         <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
         </ul>
@@ -215,7 +308,7 @@
             <div class="level-start">
                 <div class="level-item">
                 <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
+                    <a class="has-link-grey -link" href="/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/" rel="tag">公开课</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
                 </div>
             </div>
         </div>
@@ -266,16 +359,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/15/error/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/15/StreamCipher1/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">「机器学习-李宏毅」：Error</span>
+                <span class="level-item">「Cryptography-Dan」:Stream Cipher(part 1)</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/07/python/">
-                <span class="level-item">「Python」：Module &amp; Method</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/09/Adagrad-demo/">
+                <span class="level-item">Adagrag-demo</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -421,14 +514,38 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#demo代码">
+        <a class="is-flex" href="#Error">
         <span class="has-mr-6">1</span>
-        <span>demo代码</span>
-        </a></li><li>
-        <a class="is-flex" href="#Loss-迭代图">
+        <span>Error</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Bias-and-Variance-of-Estimator">
+        <span class="has-mr-6">1.1</span>
+        <span>Bias and Variance of Estimator</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#what-to-do-with-large-bias-variance">
         <span class="has-mr-6">2</span>
-        <span>Loss 迭代图</span>
-        </a></li></ul>
+        <span>what to do with large bias/variance</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#With-Large-Bias">
+        <span class="has-mr-6">2.1</span>
+        <span>With Large Bias</span>
+        </a></li><li>
+        <a class="is-flex" href="#With-Large-Variance">
+        <span class="has-mr-6">2.2</span>
+        <span>With Large Variance</span>
+        </a></li><li>
+        <a class="is-flex" href="#Model-Selection">
+        <span class="has-mr-6">2.3</span>
+        <span>Model Selection</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Cross-Validation">
+        <span class="has-mr-6">2.3.1</span>
+        <span>Cross Validation</span>
+        </a></li><li>
+        <a class="is-flex" href="#N-fold-Cross-Validation">
+        <span class="has-mr-6">2.3.2</span>
+        <span>N-fold Cross Validation</span>
+        </a></li></ul></li></ul></li></ul>
             </div>
         </div>
     </div>
@@ -454,7 +571,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/f1ed_logo.png" alt="Adagrag-demo" height="28">
+                    <img src="/images/f1ed_logo.png" alt="「机器学习-李宏毅」：Error" height="28">
                 
                 </a>
                 <p class="is-size-7">
