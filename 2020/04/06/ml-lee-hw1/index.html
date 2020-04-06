@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="9ce18CEmjH" />
+<meta name="google-site-verification" content="GSUThrU_AtZE-dgdz1QWWouv0L2teKqHWrZg7DfHbXo" />
+<meta charset="utf-8" />
+<link rel="alternate" type="application/atom+xml" 
+  title="RSS Feed for f1ed.github.io" 
+  href="/atom/" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>「机器学习-李宏毅」:HW1-Predict PM2.5 - fred&#39;s blog</title>
+
+
+    <meta name="description" content="在本篇文章中，用手刻Adagrad完成了「机器学习-李宏毅」的HW1-预测PM2.5的作业。其中包括对数据的处理，训练模型，预测，并使用sklearn toolkit的结果进行比较。有关HW1的相关数据、源代码、预测结果等，欢迎光临小透明的GitHub">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「机器学习-李宏毅」:HW1-Predict PM2.5">
+<meta property="og:url" content="https://f1ed.github.io/2020/04/06/ml-lee-hw1/index.html">
+<meta property="og:site_name" content="fred&#39;s blog">
+<meta property="og:description" content="在本篇文章中，用手刻Adagrad完成了「机器学习-李宏毅」的HW1-预测PM2.5的作业。其中包括对数据的处理，训练模型，预测，并使用sklearn toolkit的结果进行比较。有关HW1的相关数据、源代码、预测结果等，欢迎光临小透明的GitHub">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/80544935_p0_master1200.jpg">
+<meta property="article:published_time" content="2020-04-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-06T12:49:10.827Z">
+<meta property="article:author" content="f1ed">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="Regression">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://f1ed.github.io/gallery/thumbnails/80544935_p0_master1200.jpg">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="「机器学习-李宏毅」:HW1-Predict PM2.5" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/heart.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/f1ed_logo.png" alt="「机器学习-李宏毅」:HW1-Predict PM2.5" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/atom.xml">RSS</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/80544935_p0_master1200.jpg" alt="「机器学习-李宏毅」:HW1-Predict PM2.5">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bars"></i>「机器学习-李宏毅」:HW1-Predict PM2.5
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-05T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-06</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-04-06T12:49:10.827Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-06</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/">机器学习-李宏毅</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    12 分钟 读完 (大约 1746 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <p>在本篇文章中，用手刻Adagrad完成了「机器学习-李宏毅」的HW1-预测PM2.5的作业。其中包括对数据的处理，训练模型，预测，并使用sklearn toolkit的结果进行比较。<br>有关HW1的相关数据、源代码、预测结果等，欢迎光临小透明的<a href="https://github.com/f1ed/ML-HW1">GitHub</a>  </p>
+<a id="more"></a>
+<h1 id="Task-Description"><a href="#Task-Description" class="headerlink" title="Task Description"></a>Task Description</h1><p><a href="https://www.kaggle.com/c/ml2020spring-hw1">kaggle link</a> </p>
+<p>从中央气象局网站下载的真实观测资料，必须利用linear regression或其他方法预测PM2.5的值。</p>
+<p>观测记录被分为train set 和 test set, 前者是每个月前20天所有资料；后者是从剩下的资料中随机取样出来的。</p>
+<p>train.csv: 每个月前20天的完整资料。</p>
+<p>test.csv: 从剩下的10天资料中取出240笔资料，每一笔资料都有连续9小时的观测数据，必须以此观测出第十小时的PM2.5.</p>
+<h1 id="Process-Data"><a href="#Process-Data" class="headerlink" title="Process Data"></a>Process Data</h1><p>train data如下图，每18行是一天24小时的数据，每个月取了前20天（时间上是连续的小时）。</p>
+<p><a href="https://imgchr.com/i/GyqsyR"><img src="https://s1.ax1x.com/2020/04/06/GyqsyR.md.png" alt="GyqsyR.md.png"></a> </p>
+<p>test data 如下图，每18行是一笔连续9小时的数据，共240笔数据。</p>
+<p><a href="https://imgchr.com/i/Gyqcex"><img src="https://s1.ax1x.com/2020/04/06/Gyqcex.md.png" alt="Gyqcex.md.png"></a> </p>
+<hr>
+<ol>
+<li><p><strong>最大化training data size</strong></p>
+<p>每连续10小时的数据都是train set的data。为了得到更多的data，应该把每一天连起来。即下图这种效果：</p>
+<p><a href="https://imgchr.com/i/GyqyO1"><img src="https://s1.ax1x.com/2020/04/06/GyqyO1.md.png" alt="GyqyO1.md.png"></a> </p>
+<p>每个月就有： $20*24-9=471$ 笔data</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Dictionary: key:month value:month data</span></span><br><span class="line">month_data = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># make data timeline continuous</span></span><br><span class="line"><span class="keyword">for</span> month <span class="keyword">in</span> range(<span class="number">12</span>):</span><br><span class="line">    temp = np.empty(shape=(<span class="number">18</span>, <span class="number">20</span>*<span class="number">24</span>))</span><br><span class="line">    <span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        temp[:, day*<span class="number">24</span>: (day+<span class="number">1</span>)*<span class="number">24</span>] = data[(month*<span class="number">20</span>+day)*<span class="number">18</span>: (month*<span class="number">20</span>+day+<span class="number">1</span>)*<span class="number">18</span>, :]</span><br><span class="line">    month_data[month] = temp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>筛选需要的Features</strong> :</p>
+<p>这里，我就只考虑前9小时的PM2.5，当然还可以考虑和PM2.5等相关的氮氧化物等feature。</p>
+<p><strong>training data</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># x_data v1: only consider PM2.5</span><br><span class="line">x_data &#x3D; np.empty(shape&#x3D;(12*471, 9))</span><br><span class="line">y_data &#x3D; np.empty(shape&#x3D;(12*471, 1))</span><br><span class="line">for month in range(12):</span><br><span class="line">    for i in range(471):</span><br><span class="line">        x_data[month*471+i][:] &#x3D; month_data[month][9][i: i+9]</span><br><span class="line">        y_data[month*471+i] &#x3D; month_data[month][9][i+9]</span><br></pre></td></tr></table></figure>
+
+<p><strong>testing data</strong> </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Testing data features</span></span><br><span class="line">test_x = np.empty(shape=(<span class="number">240</span>, <span class="number">9</span>))</span><br><span class="line"><span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">240</span>):</span><br><span class="line">    test_x[day, :] = test_data[<span class="number">18</span>*day+<span class="number">9</span>, :]</span><br><span class="line">test_x = np.concatenate((np.ones(shape=(<span class="number">240</span>, <span class="number">1</span>)), test_x), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Normalization</strong> </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># feature scale: normalization</span></span><br><span class="line">mean = np.mean(x_data, axis=<span class="number">0</span>)</span><br><span class="line">std = np.std(x_data, axis=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(x_data.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(x_data.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> std[j] != <span class="number">0</span>:</span><br><span class="line">            x_data[i][j] = (x_data[i][j] - mean[j]) / std[j]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(test_data.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(test_data.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> std[j] != <span class="number">0</span>:</span><br><span class="line">            test_data[i][j] = (test_data[i][j] - mean[j])/std[j]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h1 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h1><p>手刻Adagrad 进行training。（挖坑：RMSprop、Adam[1]</p>
+<p><strong>Linear Pseudo code</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Declare weight vector, initial lr ,and # of iteration</span><br><span class="line">for i_th iteration :</span><br><span class="line">	 y’ &#x3D; the product of train_x  and weight vector</span><br><span class="line">	 Loss &#x3D; y’ - train_y</span><br><span class="line">	 gradient &#x3D; 2*np.dot((train_x)’, Loss )</span><br><span class="line">   weight vector -&#x3D; learning rate * gradient</span><br></pre></td></tr></table></figure>
+
+<p>其中的矩阵操作时，注意求gradient时矩阵的维度。可参考下图。</p>
+<p><a href="https://imgchr.com/i/Gyqgw6"><img src="https://s1.ax1x.com/2020/04/06/Gyqgw6.md.png" alt="Gyqgw6.md.png"></a> </p>
+<p><strong>Adagrad Pseudo code</strong></p>
+<figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Declare weight vector, initial lr ,and <span class="comment"># of iteration</span></span><br><span class="line">Declare prev_gra storing gradients <span class="keyword">in</span> every previous iterations</span><br><span class="line"> <span class="keyword">for</span> i_th iteration :</span><br><span class="line"> 	 y’ = the inner product of train_x  and weight vector</span><br><span class="line"> 	 Loss = y’ - train_y</span><br><span class="line"> 	 gradient = <span class="number">2</span>*np.dot((train_x)’, Loss )</span><br><span class="line">        prev_gra += gra**<span class="number">2</span></span><br><span class="line">	 	ada = np.sqrt(prev_gra)</span><br><span class="line">    weight vector -= learning rate * gradient / ada</span><br></pre></td></tr></table></figure>
+
+<p>注：代码实现时，将bias存在w[0]处，x_data的第0列全1。因为w和b可以一同更新。（当然，也可以分开更新）</p>
+<p><strong>Adagrad training</strong> </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># train-adagrad</span></span><br><span class="line"></span><br><span class="line">batch = x_data.shape[<span class="number">0</span>]  <span class="comment"># full batch</span></span><br><span class="line">epoch = <span class="number">400</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># some parameters for training</span></span><br><span class="line">dim = x_data.shape[<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">w = np.zeros(shape=(dim, <span class="number">1</span>))  <span class="comment"># concatenate bias = w[0]</span></span><br><span class="line">lr = np.full((dim, <span class="number">1</span>), <span class="number">0.8</span>)  <span class="comment"># learning rate</span></span><br><span class="line">grad = np.empty(shape=(dim, <span class="number">1</span>))  <span class="comment"># gradient of loss to every para</span></span><br><span class="line">gradsum = np.zeros(shape=(dim, <span class="number">1</span>))  <span class="comment"># sum of gradient**2</span></span><br><span class="line"></span><br><span class="line">x_data = np.concatenate((np.ones(shape=(x_data.shape[<span class="number">0</span>], <span class="number">1</span>)), x_data), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">loss_his = np.empty(shape=(epoch, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> T <span class="keyword">in</span> range(epoch):</span><br><span class="line">    L = y_data - np.dot(x_data, w)</span><br><span class="line">    loss_his[T] = np.sum(L**<span class="number">2</span>) / x_data.shape[<span class="number">0</span>]</span><br><span class="line">    grad = (<span class="number">-2</span>)*np.dot(np.transpose(x_data), L)</span><br><span class="line">    gradsum = gradsum + grad**<span class="number">2</span></span><br><span class="line">    w = w - lr*grad/(gradsum**<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">answer = np.dot(test_x, w)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Draw-and-Analysis"><a href="#Draw-and-Analysis" class="headerlink" title="Draw and Analysis"></a>Draw and Analysis</h1><p>在每次迭代更新时，我将Loss的值存了下来，以便可视化Loss的变化和更新速度。</p>
+<p>Loss的变化如下图：(红色的是sklearn toolkit的loss结果)</p>
+<p><a href="https://imgchr.com/i/Gyqrl9"><img src="https://s1.ax1x.com/2020/04/06/Gyqrl9.png" alt="Gyqrl9.png"></a> </p>
+<p>此外，在源代码中，使用sklearn toolkit来比较结果。</p>
+<p>结果如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">v1: only consider PM2<span class="number">.5</span></span><br><span class="line"></span><br><span class="line">Using sklearn</span><br><span class="line">LinearRegression(copy_X=<span class="literal">True</span>, fit_intercept=<span class="literal">True</span>, n_jobs=<span class="literal">None</span>, normalize=<span class="literal">False</span>)</span><br><span class="line">bias= [<span class="number">21.37402689</span>]</span><br><span class="line">w= [[ <span class="number">0.00000000e+00</span>]</span><br><span class="line"> [<span class="number">-5.54801503e-01</span>]</span><br><span class="line"> [<span class="number">-4.32873874e-01</span>]</span><br><span class="line"> [ <span class="number">3.63669814e+00</span>]</span><br><span class="line"> [<span class="number">-3.99037687e+00</span>]</span><br><span class="line"> [<span class="number">-9.07364636e-01</span>]</span><br><span class="line"> [ <span class="number">8.83495803e+00</span>]</span><br><span class="line"> [<span class="number">-9.51785135e+00</span>]</span><br><span class="line"> [ <span class="number">1.32734655e-02</span>]</span><br><span class="line"> [ <span class="number">1.81886444e+01</span>]]</span><br><span class="line"></span><br><span class="line">In our model</span><br><span class="line">bias= [<span class="number">19.59387132</span>]</span><br><span class="line">w= [[<span class="number">-0.14448468</span>]</span><br><span class="line"> [ <span class="number">0.39205748</span>]</span><br><span class="line"> [ <span class="number">0.26897134</span>]</span><br><span class="line"> [<span class="number">-1.02415371</span>]</span><br><span class="line"> [ <span class="number">1.21151411</span>]</span><br><span class="line"> [ <span class="number">2.21925424</span>]</span><br><span class="line"> [<span class="number">-5.48242478</span>]</span><br><span class="line"> [ <span class="number">4.01080346</span>]</span><br><span class="line"> [<span class="number">13.56369122</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>发现参数有一定差异，于是我在testing时，也把sklearn的结果进行预测比较。</p>
+<p>一部分结果如下：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'id'</span>, <span class="string">'value'</span>, <span class="string">'sk_value'</span>]</span><br><span class="line">[<span class="string">'id_0'</span>, <span class="number">3.551092352912313</span>, <span class="number">5.37766865368331</span>]</span><br><span class="line">[<span class="string">'id_1'</span>, <span class="number">13.916795471648756</span>, <span class="number">16.559245678900034</span>]</span><br><span class="line">[<span class="string">'id_2'</span>, <span class="number">24.811333478647043</span>, <span class="number">23.5085950470451</span>]</span><br><span class="line">[<span class="string">'id_3'</span>, <span class="number">5.101440436158914</span>, <span class="number">6.478306159981166</span>]</span><br><span class="line">[<span class="string">'id_4'</span>, <span class="number">26.7374726797937</span>, <span class="number">27.207516152986663</span>]</span><br><span class="line">[<span class="string">'id_5'</span>, <span class="number">19.43735346531517</span>, <span class="number">21.916809502961648</span>]</span><br><span class="line">[<span class="string">'id_6'</span>, <span class="number">22.20460696285646</span>, <span class="number">24.751295357256392</span>]</span><br><span class="line">[<span class="string">'id_7'</span>, <span class="number">29.660872382552682</span>, <span class="number">30.24344042612033</span>]</span><br><span class="line">[<span class="string">'id_8'</span>, <span class="number">17.5964527734513</span>, <span class="number">16.64242443764712</span>]</span><br><span class="line">[<span class="string">'id_9'</span>, <span class="number">56.58017426943178</span>, <span class="number">59.760988216575115</span>]</span><br><span class="line">[<span class="string">'id_10'</span>, <span class="number">13.767504260132299</span>, <span class="number">10.808372404511037</span>]</span><br><span class="line">[<span class="string">'id_11'</span>, <span class="number">11.743000466164233</span>, <span class="number">11.526958393801682</span>]</span><br><span class="line">[<span class="string">'id_12'</span>, <span class="number">59.509878887026105</span>, <span class="number">64.201008247897</span>]</span><br><span class="line">[<span class="string">'id_13'</span>, <span class="number">53.19824337746267</span>, <span class="number">54.3856368053018</span>]</span><br><span class="line">[<span class="string">'id_14'</span>, <span class="number">21.97191108867921</span>, <span class="number">24.530720709840974</span>]</span><br><span class="line">[<span class="string">'id_15'</span>, <span class="number">10.833283625735444</span>, <span class="number">14.350345549104446</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>有关HW1的相关数据、源代码、预测结果等，欢迎光临小透明的<a href="https://github.com/f1ed/ML-HW1">GitHub</a> </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#########################</span></span><br><span class="line"><span class="comment"># Date: 2020-4-4</span></span><br><span class="line"><span class="comment"># Author: FredLau</span></span><br><span class="line"><span class="comment"># HW1: predict the PM2.5</span></span><br><span class="line"><span class="comment">##########################</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment">#####################</span></span><br><span class="line"><span class="comment"># process data</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># process train data</span></span><br><span class="line">raw_data = np.genfromtxt(<span class="string">'data/train.csv'</span>, delimiter=<span class="string">','</span>)</span><br><span class="line">data = raw_data[<span class="number">1</span>:, <span class="number">3</span>:]</span><br><span class="line">data[np.isnan(data)] = <span class="number">0</span>  <span class="comment"># process nan</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dictionary: key:month value:month data</span></span><br><span class="line">month_data = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># make data timeline continuous</span></span><br><span class="line"><span class="keyword">for</span> month <span class="keyword">in</span> range(<span class="number">12</span>):</span><br><span class="line">    temp = np.empty(shape=(<span class="number">18</span>, <span class="number">20</span>*<span class="number">24</span>))</span><br><span class="line">    <span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        temp[:, day*<span class="number">24</span>: (day+<span class="number">1</span>)*<span class="number">24</span>] = data[(month*<span class="number">20</span>+day)*<span class="number">18</span>: (month*<span class="number">20</span>+day+<span class="number">1</span>)*<span class="number">18</span>, :]</span><br><span class="line">    month_data[month] = temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># x_data v1: only consider PM2.5</span></span><br><span class="line">x_data = np.empty(shape=(<span class="number">12</span>*<span class="number">471</span>, <span class="number">9</span>))</span><br><span class="line">y_data = np.empty(shape=(<span class="number">12</span>*<span class="number">471</span>, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> month <span class="keyword">in</span> range(<span class="number">12</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">471</span>):</span><br><span class="line">        x_data[month*<span class="number">471</span>+i][:] = month_data[month][<span class="number">9</span>][i: i+<span class="number">9</span>]</span><br><span class="line">        y_data[month*<span class="number">471</span>+i] = month_data[month][<span class="number">9</span>][i+<span class="number">9</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># process test data</span></span><br><span class="line">test_raw_data = np.genfromtxt(<span class="string">'data/test.csv'</span>, delimiter=<span class="string">','</span>)</span><br><span class="line">test_data = test_raw_data[:, <span class="number">2</span>:]</span><br><span class="line">test_data[np.isnan(test_data)] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># feature scale: normalization</span></span><br><span class="line">mean = np.mean(x_data, axis=<span class="number">0</span>)</span><br><span class="line">std = np.std(x_data, axis=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(x_data.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(x_data.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> std[j] != <span class="number">0</span>:</span><br><span class="line">            x_data[i][j] = (x_data[i][j] - mean[j]) / std[j]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(test_data.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(test_data.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> std[j] != <span class="number">0</span>:</span><br><span class="line">            test_data[i][j] = (test_data[i][j] - mean[j])/std[j]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Testing data features</span></span><br><span class="line">test_x = np.empty(shape=(<span class="number">240</span>, <span class="number">9</span>))</span><br><span class="line"><span class="keyword">for</span> day <span class="keyword">in</span> range(<span class="number">240</span>):</span><br><span class="line">    test_x[day, :] = test_data[<span class="number">18</span>*day+<span class="number">9</span>, :]</span><br><span class="line">test_x = np.concatenate((np.ones(shape=(<span class="number">240</span>, <span class="number">1</span>)), test_x), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">################################</span></span><br><span class="line"><span class="comment"># train-adagrad</span></span><br><span class="line"></span><br><span class="line">batch = x_data.shape[<span class="number">0</span>]  <span class="comment"># full batch</span></span><br><span class="line">epoch = <span class="number">400</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># some parameters for training</span></span><br><span class="line">dim = x_data.shape[<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">w = np.zeros(shape=(dim, <span class="number">1</span>))  <span class="comment"># concatenate bias = w[0]</span></span><br><span class="line">lr = np.full((dim, <span class="number">1</span>), <span class="number">0.8</span>)  <span class="comment"># learning rate</span></span><br><span class="line">grad = np.empty(shape=(dim, <span class="number">1</span>))  <span class="comment"># gradient of loss to every para</span></span><br><span class="line">gradsum = np.zeros(shape=(dim, <span class="number">1</span>))  <span class="comment"># sum of gradient**2</span></span><br><span class="line"></span><br><span class="line">x_data = np.concatenate((np.ones(shape=(x_data.shape[<span class="number">0</span>], <span class="number">1</span>)), x_data), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">loss_his = np.empty(shape=(epoch, <span class="number">1</span>))</span><br><span class="line"><span class="keyword">for</span> T <span class="keyword">in</span> range(epoch):</span><br><span class="line">    L = y_data - np.dot(x_data, w)</span><br><span class="line">    loss_his[T] = np.sum(L**<span class="number">2</span>) / x_data.shape[<span class="number">0</span>]</span><br><span class="line">    grad = (<span class="number">-2</span>)*np.dot(np.transpose(x_data), L)</span><br><span class="line">    gradsum = gradsum + grad**<span class="number">2</span></span><br><span class="line">    w = w - lr*grad/(gradsum**<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'output/v1.csv'</span>, <span class="string">'w'</span>)</span><br><span class="line">sys.stdout = f</span><br><span class="line">print(<span class="string">'v1: only consider PM2.5\n'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">###############################</span></span><br><span class="line"><span class="comment"># train by sklearn linear model</span></span><br><span class="line">print(<span class="string">'Using sklearn'</span>)</span><br><span class="line">reg = linear_model.LinearRegression()</span><br><span class="line">print(reg.fit(x_data, y_data))</span><br><span class="line">print(<span class="string">'bias='</span>, reg.intercept_)</span><br><span class="line">print(<span class="string">'w='</span>, reg.coef_.transpose())</span><br><span class="line">print(<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># In our model</span></span><br><span class="line">print(<span class="string">'In our model'</span>)</span><br><span class="line">print(<span class="string">'bias='</span>, w[<span class="number">0</span>])</span><br><span class="line">print(<span class="string">'w='</span>, w[<span class="number">1</span>:])</span><br><span class="line"></span><br><span class="line"><span class="comment">###########################</span></span><br><span class="line"><span class="comment"># draw change of loss</span></span><br><span class="line">plt.xlim(<span class="number">0</span>, epoch)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">plt.xlabel(<span class="string">'$iteration$'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">'$Loss$'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">iteration = np.arange(<span class="number">0</span>, epoch)</span><br><span class="line">plt.plot(iteration, loss_his/<span class="number">100</span>, <span class="string">'-'</span>, ms=<span class="number">3</span>, lw=<span class="number">2</span>, color=<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sk_w = reg.coef_.transpose()</span><br><span class="line">sk_w[<span class="number">0</span>] = reg.intercept_</span><br><span class="line">sk_loss = np.sum((y_data - np.dot(x_data, sk_w))**<span class="number">2</span>) / x_data.shape[<span class="number">0</span>]</span><br><span class="line">plt.hlines(sk_loss/<span class="number">100</span>, <span class="number">0</span>, epoch, colors=<span class="string">'red'</span>, linestyles=<span class="string">'solid'</span>)</span><br><span class="line">plt.legend([<span class="string">'adagrad'</span>, <span class="string">'sklearn'</span>])</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># plt.savefig('output/v1.png')</span></span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">##############</span></span><br><span class="line"><span class="comment"># test (sklearn vs our adagrad</span></span><br><span class="line">f = open(<span class="string">'output/v1test.csv'</span>, <span class="string">'w'</span>)</span><br><span class="line">sys.stdout = f</span><br><span class="line"></span><br><span class="line">title = [<span class="string">'id'</span>, <span class="string">'value'</span>, <span class="string">'sk_value'</span>]</span><br><span class="line">answer = np.dot(test_x, w)</span><br><span class="line">sk_answer = np.dot(test_x, sk_w)</span><br><span class="line">print(title)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(test_x.shape[<span class="number">0</span>]):</span><br><span class="line">    content = [<span class="string">'id_'</span>+str(i), answer[i][<span class="number">0</span>], sk_answer[i][<span class="number">0</span>]]</span><br><span class="line">    print(content)</span><br><span class="line"></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>待完成</li>
+</ol>
+
+        </div>
+    
+        <ul class="post-copyright">
+        <li><strong>本文标题：</strong><a href="https://f1ed.github.io/2020/04/06/ml-lee-hw1/">「机器学习-李宏毅」:HW1-Predict PM2.5</a></li>
+        <li><strong>本文作者：</strong><a href="https://f1ed.github.io">f1ed</a></li>
+        <li><strong>本文链接：</strong><a href="https://f1ed.github.io/2020/04/06/ml-lee-hw1/">https://f1ed.github.io/2020/04/06/ml-lee-hw1/</a></li>
+        <li><strong>发布时间：</strong>2020-04-06</li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+        </ul>
+    
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Regression/" rel="tag">Regression</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/qrcode_alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/qrcode_wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/01/Classification2/">
+                <span class="level-item">「机器学习-李宏毅」:Classification-Logistic Regression</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: false,
+        app_id: 'U7ITnhsJjngmAcJUpFYdrq5m-gzGzoHsz',
+        app_key: 'cSRtvM6PbCOJBTVBAUURyFfO',
+        placeholder: 'xxxxxxxx'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/profile.png" alt="f1ed">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        f1ed
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        网络安全（本科）
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>成都</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+    <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+		<div>
+                <a href="/archives/">
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            11
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            10
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/f1ed" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/f1ed">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+
+   <div class="card widget column-left is-sticky" id="toc">
+       <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Task-Description">
+        <span class="has-mr-6">1</span>
+        <span>Task Description</span>
+        </a></li><li>
+        <a class="is-flex" href="#Process-Data">
+        <span class="has-mr-6">2</span>
+        <span>Process Data</span>
+        </a></li><li>
+        <a class="is-flex" href="#Training">
+        <span class="has-mr-6">3</span>
+        <span>Training</span>
+        </a></li><li>
+        <a class="is-flex" href="#Testing">
+        <span class="has-mr-6">4</span>
+        <span>Testing</span>
+        </a></li><li>
+        <a class="is-flex" href="#Draw-and-Analysis">
+        <span class="has-mr-6">5</span>
+        <span>Draw and Analysis</span>
+        </a></li><li>
+        <a class="is-flex" href="#Code">
+        <span class="has-mr-6">6</span>
+        <span>Code</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">7</span>
+        <span>Reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+
+                
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/f1ed_logo.png" alt="「机器学习-李宏毅」:HW1-Predict PM2.5" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 f1ed&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="f1ed&#39;s GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://f1ed.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>
