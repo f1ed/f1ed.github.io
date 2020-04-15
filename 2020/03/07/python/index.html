@@ -24,7 +24,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/77538838_p0_master1200.jpg">
 <meta property="article:published_time" content="2020-03-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-11T15:03:35.400Z">
+<meta property="article:modified_time" content="2020-04-12T03:13:37.974Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -162,7 +162,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-06T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-07</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-11T15:03:35.400Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-11</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-04-12T03:13:37.974Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-12</time>
                 
                 
                 <div class="level-item">
@@ -175,7 +175,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    10 分钟 读完 (大约 1431 个字)
+                    18 分钟 读完 (大约 2625 个字)
                 </span>
                 
                 
@@ -191,10 +191,176 @@
             <p>长期记录帖：关于遇到过的那些Python 的Packets &amp; Module &amp; Method &amp; Attribute。中英记录。</p>
 <a id="more"></a>
 
-<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><ul>
+<h1 id="Tricky"><a href="#Tricky" class="headerlink" title="Tricky"></a>Tricky</h1><h2 id="list-comprehension"><a href="#list-comprehension" class="headerlink" title="list comprehension"></a>list comprehension</h2><ul>
+<li><p>List comprehension provides a concise way to create lists. </p>
+<ul>
+<li>e.g. : squares = [x**2 for x in range(10)]</li>
+</ul>
+</li>
+<li><p>A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more <em>for</em> or <em>if</em> clauses. The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it.</p>
+<ul>
+<li>e.g. : Double loop: [(x,y) for x in [1,2,3] for y in [3,1,4] if x != y]<ul>
+<li>输出7个</li>
+</ul>
+</li>
+<li>e.g. : (Using zip() to loop together): [(x, y) for x,y in zip([1,2,3], [3,1,4]) if x!=y]<ul>
+<li>输出2个</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Python-Build-function"><a href="#Python-Build-function" class="headerlink" title="Python-Build function"></a>Python-Build function</h1><h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><ul>
 <li>print(*objects, sep=’ ‘, end=’\n’, file=sys.stdout)</li>
 </ul>
-<h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h2 id="numpy-zeros"><a href="#numpy-zeros" class="headerlink" title="numpy.zeros"></a>numpy.zeros</h2><ul>
+<h2 id="len"><a href="#len" class="headerlink" title="len"></a>len</h2><ul>
+<li>Return the length(the number of items) of an object.</li>
+</ul>
+<h2 id="str-format"><a href="#str-format" class="headerlink" title="str.format()"></a>str.format()</h2><ul>
+<li>字符串格式化</li>
+<li>eg:<ul>
+<li>“{} {}”.format(“Hello”,”World)</li>
+<li>‘Hello World’</li>
+</ul>
+</li>
+</ul>
+<h2 id="zip-iterables"><a href="#zip-iterables" class="headerlink" title="zip(*iterables)"></a>zip(*iterables)</h2><ul>
+<li><p>Make an iterator that aggregates【聚集】 elements from each of the iterales.</p>
+</li>
+<li><p>Returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables. The iterator stops when the shortest input iterable is exhausted. </p>
+<p>【返回一个元组的迭代器】</p>
+</li>
+<li><p>使用zip可以同时对多个迭代器进行迭代</p>
+</li>
+</ul>
+<h2 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate"></a>enumerate</h2><ul>
+<li><p>Enumerate is a built-in funciton of Python. It allows us to loop over something and have an automatic counter.</p>
+</li>
+<li><p>e.g. </p>
+<ul>
+<li><p>for counter, value in enumerate(some_list):</p>
+<p>print(counter, value)</p>
+</li>
+</ul>
+</li>
+<li><p>e.g. : an optional argument: tell enumerate from where to start the index.</p>
+<ul>
+<li><p>for c, value in enumerate(my_list, 1):</p>
+<p>print(c, value)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="with-open-path-as-f"><a href="#with-open-path-as-f" class="headerlink" title="with open(path) as f:"></a>with open(path) as f:</h2><ul>
+<li><p>由于读写文件都可能产生IOError，一旦出错，后面的f.close()就不会调用。</p>
+</li>
+<li><p>用try……finally来实现，比较麻烦。</p>
+<p>try:</p>
+<p>​    f = open(path, ‘r’)</p>
+<p>​    print(f.read())</p>
+<p>finally:</p>
+<p>​    if f:</p>
+<p>​        f.close()</p>
+</li>
+<li><p>用with as 简化</p>
+<p>with open(path, ‘r’) as f:</p>
+<p>​    print(f.read())</p>
+</li>
+</ul>
+<h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h2 id="numpy-argsort"><a href="#numpy-argsort" class="headerlink" title="numpy.argsort"></a>numpy.argsort</h2><ul>
+<li><p>numpy.argsort(a, axis=-1, kind=None, order=None)</p>
+</li>
+<li><p>Returns the indices that would sort an array.</p>
+<p>Perform an indirect sort along the given axis using the algorithm specified by the kind keyword. It returns an array of indices of the same shape as a that index data along the given axis in sorted order.</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><p><strong>a</strong> :array_like.</p>
+</li>
+<li><p><strong>axis</strong> : int or None, optional</p>
+<p>Axis along which to sort. The default is -1(the last axis). 【默认按照最后一个维度】</p>
+<ul>
+<li>2-D: axis = 0按列排序</li>
+<li>2-D: axis = 1 按行排序</li>
+</ul>
+</li>
+<li><p><strong>kind</strong> :{‘quicksort’, ‘mergesort’, ‘heapsort’, ‘stable’}, optional</p>
+<p>The default is ‘quicksort’</p>
+</li>
+</ul>
+</li>
+<li><p>Return: index_array: ndarray, int.【返回的是降序排列的索引数组】</p>
+<ul>
+<li><p>e.g.:</p>
+<p>x = np.array([5, 1, 2])</p>
+<p>np.argsort(x)  # 降序</p>
+<p>array([1,2,0])</p>
+<p>np.argsort(-x) # 升序</p>
+<p>array([0,2,1])</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linear-algebra-numpy-linalg"><a href="#Linear-algebra-numpy-linalg" class="headerlink" title="Linear algebra(numpy.linalg)"></a>Linear algebra(numpy.linalg)</h2><h3 id="numpy-dot"><a href="#numpy-dot" class="headerlink" title="numpy.dot"></a>numpy.dot</h3><ul>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html">numpy.dot(a,b)</a> </li>
+<li>Dot product of two arrays.<ul>
+<li>If both a and b are 1-D arrays, it is inner porduct of vectors.</li>
+<li>If both a and b are 2-D arrays, it is matrix multiplication, but using matmul is preferred.</li>
+<li>Id either a or b is 0-D(scalar), it is equivalent to multiply and using numpy.multiply(a, b) or a*b is preferred.</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+<h3 id="numpy-matmul"><a href="#numpy-matmul" class="headerlink" title="numpy.matmul"></a>numpy.matmul</h3><ul>
+<li>Matrix product of two arrays.</li>
+<li>numpy.matmul(x1, x2)</li>
+</ul>
+<h3 id="numpy-linalg-inv-a"><a href="#numpy-linalg-inv-a" class="headerlink" title="numpy.linalg.inv(a)"></a>numpy.linalg.inv(a)</h3><ul>
+<li><p>Compute the inverse of a matrix.</p>
+<p>Given a square matrix a, return the matrix ainv satisfying dot(a, ainv) = dot(ainv, a) = eye(a.shape[0])/</p>
+</li>
+<li><p>numpy.linalg.inv(a)</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><strong>a</strong> :(…, M, M) array_like. Matrix to e inverted.</li>
+</ul>
+</li>
+<li><p>Return: ainv.</p>
+</li>
+</ul>
+<h3 id="numpy-linalg-svd"><a href="#numpy-linalg-svd" class="headerlink" title="numpy.linalg.svd"></a>numpy.linalg.svd</h3><ul>
+<li><p>numpy.linalg.svd(a, full_matrices=True,  compute_uv=True, hermitian=False)</p>
+</li>
+<li><p>Singular Value Decomposition</p>
+</li>
+<li><p>矩阵的奇异值分解</p>
+<p>A = u @ s @ vh</p>
+<p>u, vh是标准正交矩阵, inv(u) = uh</p>
+<p>s是对角矩阵</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><p><strong>a</strong> :array_like, a real or complex array with a.ndim &gt;=2</p>
+</li>
+<li><p><strong>full_matrices</strong> :bool, optional. True(default)</p>
+<p>If True, u and vh have the shapes(…, M, M) and (…, N, N), respectively.</p>
+<p>Otherwise, the shapes are(…, M, K) and (…, K, N), respectively, where K = min(M,N)</p>
+</li>
+<li><p><strong>compute_uv</strong> : bool, optional.True(default)</p>
+<p>Whether or not to compute u and vh in addition to s.【注，vh就是v的转置】</p>
+</li>
+</ul>
+</li>
+<li><p>Return：</p>
+<ul>
+<li>u: array</li>
+<li>s: array</li>
+<li>vh:array</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-zeros"><a href="#numpy-zeros" class="headerlink" title="numpy.zeros"></a>numpy.zeros</h2><ul>
 <li><p>numpy.zeros(shape, dtype=float, order=’C’)</p>
 </li>
 <li><p>Return a new array of given shape and type, filled with zeros.</p>
@@ -207,6 +373,19 @@
 </ul>
 </li>
 <li><p>Returns: out ndarray</p>
+</li>
+</ul>
+<h2 id="numpy-full"><a href="#numpy-full" class="headerlink" title="numpy.full"></a>numpy.full</h2><ul>
+<li>numpy.full(shape, fill_value, dtype=None)</li>
+<li>Return a new array of given shape and type, filled with fill_value.</li>
+<li>parameters:<ul>
+<li><strong>shape</strong> :int or sequence of ints<ul>
+<li>(2,3) or 2</li>
+</ul>
+</li>
+<li><strong>fill_value</strong> :scalar</li>
+<li><strong>dtype</strong> :data-type, optional</li>
+</ul>
 </li>
 </ul>
 <h2 id="numpy-arange"><a href="#numpy-arange" class="headerlink" title="numpy.arange"></a>numpy.arange</h2><ul>
@@ -360,13 +539,23 @@
 </ul>
 </li>
 </ul>
+<h2 id="numpy-array"><a href="#numpy-array" class="headerlink" title="numpy.array"></a>numpy.array</h2><ul>
+<li><p>numpy.array(object, dtype = none)</p>
+</li>
+<li><p>Create an array</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><p><strong>object</strong> :array_like</p>
+<p>An array, any object exposing the array interface, an object whose <em>array</em> method returns an array, or any(nested) sequence.</p>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="numpy-ndarray-运算"><a href="#numpy-ndarray-运算" class="headerlink" title="numpy ndarray 运算"></a>numpy ndarray 运算</h2><ul>
 <li>[[1]]*3 = [[1],[1],[1]]</li>
 <li>A * B 元素相乘</li>
 <li>numpy.dot(A, B) 矩阵相乘</li>
-</ul>
-<h2 id="numpy-dot"><a href="#numpy-dot" class="headerlink" title="numpy.dot"></a>numpy.dot</h2><ul>
-<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html">numpy.dot(a,b)</a> </li>
 </ul>
 <h2 id="numpy-power"><a href="#numpy-power" class="headerlink" title="numpy.power"></a>numpy.power</h2><ul>
 <li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.power.html">numpy.power(x1, x2)</a> </li>
@@ -438,6 +627,63 @@
 </ul>
 </li>
 </ul>
+<h2 id="numpy-clip"><a href="#numpy-clip" class="headerlink" title="numpy.clip"></a>numpy.clip</h2><ul>
+<li>Clip(limit) the values in an array</li>
+<li>numpy.clip(a, a_min, a_max)</li>
+<li>Parameters:<ul>
+<li><strong>a</strong> :array_like</li>
+<li><strong>a_min</strong> : scalar or array_like</li>
+<li><strong>a_max</strong> :scalar or array_like</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-around"><a href="#numpy-around" class="headerlink" title="numpy.around"></a>numpy.around</h2><ul>
+<li><p>Evenly round to the given number of decimals(十进制)</p>
+</li>
+<li><p>numpy.around(a)</p>
+</li>
+<li><p>Parameters：</p>
+<ul>
+<li><strong>a</strong> :array_like</li>
+</ul>
+</li>
+<li><p>Notes: For values exactly halfway between rounded decimal values, Numpy rounds to the nearest even values.</p>
+<p>【这什么意思呢？ 就是说对于0.5的这种，为了统计上平衡，不会全部向上取整或者向下取整，会向最近的偶数取整，around（2.5）=2】</p>
+</li>
+</ul>
+<h2 id="numpy-log"><a href="#numpy-log" class="headerlink" title="numpy.log"></a>numpy.log</h2><ul>
+<li>The natural logarithm log is the inverse of exponential functions, so that log(exp(x))=x.</li>
+<li>numpy.log(x)</li>
+<li>Parameters:<ul>
+<li><strong>x</strong> : array_like</li>
+</ul>
+</li>
+</ul>
+<h2 id="numpy-ndarray-T"><a href="#numpy-ndarray-T" class="headerlink" title="numpy.ndarray.T"></a>numpy.ndarray.T</h2><ul>
+<li>attribute, the transpose array.</li>
+<li>ndarray.T</li>
+</ul>
+<h2 id="numpy-random-shuffle"><a href="#numpy-random-shuffle" class="headerlink" title="numpy.random.shuffle"></a>numpy.random.shuffle</h2><ul>
+<li><p>Modify a sequence in-space by shufflng its contents.</p>
+<p>This function only shuffles the array along the first axis of a multi-diensional array. The order of sub-arrays is changed but their contents remains the same.</p>
+</li>
+<li><p>numpy.random.shuffle(x)</p>
+</li>
+<li><p>Parameters:</p>
+<ul>
+<li><strong>x</strong> : array_like</li>
+</ul>
+</li>
+<li><p><strong>e.g. shuffle two list, X and Y, together.</strong> <strong>【以相同的顺序打乱两个array】</strong></p>
+<ul>
+<li><p>np.random.seed(0)</p>
+<p>randomize = np.arrange(len(X))</p>
+<p>np.random.shuffle(randomize)</p>
+<p>return X[randomize], Y[randomize]</p>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h1><h2 id="skelearn-linear-model-LinearRegression"><a href="#skelearn-linear-model-LinearRegression" class="headerlink" title="skelearn.linear_model.LinearRegression"></a>skelearn.linear_model.LinearRegression</h2><ul>
 <li>class sklearn.linear_model.LinearRegression(fit_intercept=True, normalize=False, copy_X=True, n_jobs=None)</li>
 <li>Ordinary least squares Linear Regress(最小二乘法回归运算)</li>
@@ -471,7 +717,7 @@
 </li>
 <li><p><strong>Z</strong> ：array-like(N,M)</p>
 </li>
-<li><p><strong>levels</strong> : int or array-like, optional. Determines the number and positions of contour lines / religions.【划分多少块登高区域】</p>
+<li><p><strong>levels</strong> : int or array-like, optional. Determines the number and positions of contour lines / religions.【划分多少块等高区域】</p>
 </li>
 <li><p><strong>alpha</strong> :float, optional. Between 0(transparent) and 1(opaque).【透明度】</p>
 </li>
@@ -510,10 +756,52 @@
 <li>show(<em>args, *</em>kwargs)</li>
 <li>display a figure.</li>
 </ul>
+<h2 id="matplotlib-pyplot-vlines"><a href="#matplotlib-pyplot-vlines" class="headerlink" title="matplotlib.pyplot.vlines"></a>matplotlib.pyplot.vlines</h2><ul>
+<li>Plot vertical lines.</li>
+<li>vlines(x, ymin, ymax, color=’k’, linestyles=’solid’)</li>
+<li>Parameters:<ul>
+<li><strong>x</strong> :scalar or 1D array_like</li>
+<li><strong>ymin, ymax</strong> :scalar or 1D array_like</li>
+</ul>
+</li>
+</ul>
+<h2 id="matplotlib-pyplot-hlines"><a href="#matplotlib-pyplot-hlines" class="headerlink" title="matplotlib.pyplot.hlines"></a>matplotlib.pyplot.hlines</h2><ul>
+<li>Plot horizontal lines.</li>
+<li>vlines(y, xmin, xmax, color=’k’, linestyles=’solid’)</li>
+<li>Parameters:<ul>
+<li><strong>y</strong> :scalar or 1D array_like</li>
+<li><strong>xmin, xmax</strong> :scalar or 1D array_like</li>
+</ul>
+</li>
+</ul>
+<h2 id="matplotlib-pyplot-savefig"><a href="#matplotlib-pyplot-savefig" class="headerlink" title="matplotlib.pyplot.savefig"></a>matplotlib.pyplot.savefig</h2><ul>
+<li>Save the current figure.</li>
+<li>savefig(fname)</li>
+<li>Parameters:<ul>
+<li><strong>fname</strong> :str ot Pathlike</li>
+</ul>
+</li>
+</ul>
+<h2 id="matplotlib-pyplot-legend"><a href="#matplotlib-pyplot-legend" class="headerlink" title="matplotlib.pyplot.legend"></a>matplotlib.pyplot.legend</h2><ul>
+<li>Place a lengend on the axes.</li>
+<li>e.g. : legend() Labeling exisiting plot elements<ul>
+<li>plt.plot(train_loss)</li>
+<li>plt.plot(dev_loss)</li>
+<li>plt.legend([‘train’, ‘dev’])</li>
+</ul>
+</li>
+<li>e.g. : le</li>
+</ul>
 <h1 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h1><h2 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv[]"></a>sys.argv[]</h2><ul>
 <li>python a.py data.csv<ul>
 <li>sys.argv = [‘a.py’, ‘data.csv’]</li>
 </ul>
+</li>
+</ul>
+<h2 id="重定向到文件"><a href="#重定向到文件" class="headerlink" title="重定向到文件"></a>重定向到文件</h2><ul>
+<li><p>f = open(‘out.csv’, ‘w’)</p>
+<p>sys.stdout = f</p>
+<p>print(‘此时print掉用的就是文件对象的write方法’)</p>
 </li>
 </ul>
 
@@ -740,129 +1028,225 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#Python">
+        <a class="is-flex" href="#Tricky">
         <span class="has-mr-6">1</span>
-        <span>Python</span>
+        <span>Tricky</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#list-comprehension">
+        <span class="has-mr-6">1.1</span>
+        <span>list comprehension</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Python-Build-function">
+        <span class="has-mr-6">2</span>
+        <span>Python-Build function</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#print">
-        <span class="has-mr-6">1.1</span>
+        <span class="has-mr-6">2.1</span>
         <span>print</span>
+        </a></li><li>
+        <a class="is-flex" href="#len">
+        <span class="has-mr-6">2.2</span>
+        <span>len</span>
+        </a></li><li>
+        <a class="is-flex" href="#str-format">
+        <span class="has-mr-6">2.3</span>
+        <span>str.format()</span>
+        </a></li><li>
+        <a class="is-flex" href="#zip-iterables">
+        <span class="has-mr-6">2.4</span>
+        <span>zip(*iterables)</span>
+        </a></li><li>
+        <a class="is-flex" href="#enumerate">
+        <span class="has-mr-6">2.5</span>
+        <span>enumerate</span>
+        </a></li><li>
+        <a class="is-flex" href="#with-open-path-as-f">
+        <span class="has-mr-6">2.6</span>
+        <span>with open(path) as f:</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#numpy">
-        <span class="has-mr-6">2</span>
+        <span class="has-mr-6">3</span>
         <span>numpy</span>
         </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#numpy-argsort">
+        <span class="has-mr-6">3.1</span>
+        <span>numpy.argsort</span>
+        </a></li><li>
+        <a class="is-flex" href="#Linear-algebra-numpy-linalg">
+        <span class="has-mr-6">3.2</span>
+        <span>Linear algebra(numpy.linalg)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#numpy-dot">
+        <span class="has-mr-6">3.2.1</span>
+        <span>numpy.dot</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-matmul">
+        <span class="has-mr-6">3.2.2</span>
+        <span>numpy.matmul</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-linalg-inv-a">
+        <span class="has-mr-6">3.2.3</span>
+        <span>numpy.linalg.inv(a)</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-linalg-svd">
+        <span class="has-mr-6">3.2.4</span>
+        <span>numpy.linalg.svd</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#numpy-zeros">
-        <span class="has-mr-6">2.1</span>
+        <span class="has-mr-6">3.3</span>
         <span>numpy.zeros</span>
         </a></li><li>
+        <a class="is-flex" href="#numpy-full">
+        <span class="has-mr-6">3.4</span>
+        <span>numpy.full</span>
+        </a></li><li>
         <a class="is-flex" href="#numpy-arange">
-        <span class="has-mr-6">2.2</span>
+        <span class="has-mr-6">3.5</span>
         <span>numpy.arange</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-meshgrid">
-        <span class="has-mr-6">2.3</span>
+        <span class="has-mr-6">3.6</span>
         <span>numpy.meshgrid</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-genfromtext">
-        <span class="has-mr-6">2.4</span>
+        <span class="has-mr-6">3.7</span>
         <span>numpy.genfromtext</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-isnan">
-        <span class="has-mr-6">2.5</span>
+        <span class="has-mr-6">3.8</span>
         <span>numpy.isnan</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-empty">
-        <span class="has-mr-6">2.6</span>
+        <span class="has-mr-6">3.9</span>
         <span>numpy.empty</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-reshape">
-        <span class="has-mr-6">2.7</span>
+        <span class="has-mr-6">3.10</span>
         <span>numpy.reshape</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-mean">
-        <span class="has-mr-6">2.8</span>
+        <span class="has-mr-6">3.11</span>
         <span>numpy.mean</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-std">
-        <span class="has-mr-6">2.9</span>
+        <span class="has-mr-6">3.12</span>
         <span>numpy.std</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-shape">
-        <span class="has-mr-6">2.10</span>
+        <span class="has-mr-6">3.13</span>
         <span>numpy.shape</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-concatenate">
-        <span class="has-mr-6">2.11</span>
+        <span class="has-mr-6">3.14</span>
         <span>numpy.concatenate</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-ndarray-astype">
-        <span class="has-mr-6">2.12</span>
+        <span class="has-mr-6">3.15</span>
         <span>numpy.ndarray.astype</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-ones">
-        <span class="has-mr-6">2.13</span>
+        <span class="has-mr-6">3.16</span>
         <span>numpy.ones</span>
         </a></li><li>
+        <a class="is-flex" href="#numpy-array">
+        <span class="has-mr-6">3.17</span>
+        <span>numpy.array</span>
+        </a></li><li>
         <a class="is-flex" href="#numpy-ndarray-运算">
-        <span class="has-mr-6">2.14</span>
+        <span class="has-mr-6">3.18</span>
         <span>numpy ndarray 运算</span>
         </a></li><li>
-        <a class="is-flex" href="#numpy-dot">
-        <span class="has-mr-6">2.15</span>
-        <span>numpy.dot</span>
-        </a></li><li>
         <a class="is-flex" href="#numpy-power">
-        <span class="has-mr-6">2.16</span>
+        <span class="has-mr-6">3.19</span>
         <span>numpy.power</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-sum">
-        <span class="has-mr-6">2.17</span>
+        <span class="has-mr-6">3.20</span>
         <span>numpy.sum</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-transpose">
-        <span class="has-mr-6">2.18</span>
+        <span class="has-mr-6">3.21</span>
         <span>numpy.transpose</span>
         </a></li><li>
         <a class="is-flex" href="#numpy-save">
-        <span class="has-mr-6">2.19</span>
+        <span class="has-mr-6">3.22</span>
         <span>numpy.save</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-clip">
+        <span class="has-mr-6">3.23</span>
+        <span>numpy.clip</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-around">
+        <span class="has-mr-6">3.24</span>
+        <span>numpy.around</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-log">
+        <span class="has-mr-6">3.25</span>
+        <span>numpy.log</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-ndarray-T">
+        <span class="has-mr-6">3.26</span>
+        <span>numpy.ndarray.T</span>
+        </a></li><li>
+        <a class="is-flex" href="#numpy-random-shuffle">
+        <span class="has-mr-6">3.27</span>
+        <span>numpy.random.shuffle</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#sklearn">
-        <span class="has-mr-6">3</span>
+        <span class="has-mr-6">4</span>
         <span>sklearn</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#skelearn-linear-model-LinearRegression">
-        <span class="has-mr-6">3.1</span>
+        <span class="has-mr-6">4.1</span>
         <span>skelearn.linear_model.LinearRegression</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#matplotlib-pyplot">
-        <span class="has-mr-6">4</span>
+        <span class="has-mr-6">5</span>
         <span>matplotlib.pyplot</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#matplotlib-pyplot-contourf">
-        <span class="has-mr-6">4.1</span>
+        <span class="has-mr-6">5.1</span>
         <span>matplotlib.pyplot.contourf</span>
         </a></li><li>
         <a class="is-flex" href="#matplotlib-pyplot-plot">
-        <span class="has-mr-6">4.2</span>
+        <span class="has-mr-6">5.2</span>
         <span>matplotlib.pyplot.plot</span>
         </a></li><li>
         <a class="is-flex" href="#matplotlib-pyplot-xlim">
-        <span class="has-mr-6">4.3</span>
+        <span class="has-mr-6">5.3</span>
         <span>matplotlib.pyplot.xlim</span>
         </a></li><li>
         <a class="is-flex" href="#matplotlib-pyplot-show">
-        <span class="has-mr-6">4.4</span>
+        <span class="has-mr-6">5.4</span>
         <span>matplotlib.pyplot.show</span>
+        </a></li><li>
+        <a class="is-flex" href="#matplotlib-pyplot-vlines">
+        <span class="has-mr-6">5.5</span>
+        <span>matplotlib.pyplot.vlines</span>
+        </a></li><li>
+        <a class="is-flex" href="#matplotlib-pyplot-hlines">
+        <span class="has-mr-6">5.6</span>
+        <span>matplotlib.pyplot.hlines</span>
+        </a></li><li>
+        <a class="is-flex" href="#matplotlib-pyplot-savefig">
+        <span class="has-mr-6">5.7</span>
+        <span>matplotlib.pyplot.savefig</span>
+        </a></li><li>
+        <a class="is-flex" href="#matplotlib-pyplot-legend">
+        <span class="has-mr-6">5.8</span>
+        <span>matplotlib.pyplot.legend</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#sys">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">6</span>
         <span>sys</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#sys-argv">
-        <span class="has-mr-6">5.1</span>
+        <span class="has-mr-6">6.1</span>
         <span>sys.argv[]</span>
+        </a></li><li>
+        <a class="is-flex" href="#重定向到文件">
+        <span class="has-mr-6">6.2</span>
+        <span>重定向到文件</span>
         </a></li></ul></li></ul>
             </div>
         </div>
