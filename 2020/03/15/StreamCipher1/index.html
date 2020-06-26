@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/0315.png">
 <meta property="article:published_time" content="2020-03-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-19T14:12:47.794Z">
+<meta property="article:modified_time" content="2020-06-26T10:10:31.346Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="公开课">
 <meta property="article:tag" content="Cryptography">
@@ -161,7 +161,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-14T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-15</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-19T14:12:47.794Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-19</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-06-26T10:10:31.346Z"><i class="far fa-calendar-check">&nbsp;</i>2020-06-26</time>
                 
                 
                 <div class="level-item">
@@ -235,7 +235,7 @@ $$
 <p>如果已知明文(m)和他的OTP密文(c)，可以算出用来加密m的OTP key吗？</p>
 <p>：当然，根据异或的性质，key $k=m\oplus c$ </p>
 <p>所以什么是安全呢？</p>
-<h3 id="Information-Theoretic-Security"><a href="#Information-Theoretic-Security" class="headerlink" title="Information Theoretic Security"></a>Information Theoretic Security</h3><p>根据Shannon 1949发表的论文，<strong>Shannon’s basic idea: CT(Ciphertext) should reveal no “info” about PT(Plaintext)</strong>，即密文不应该泄露明文的任何信息。</p>
+<h3 id="Perfect-Security-Definition"><a href="#Perfect-Security-Definition" class="headerlink" title="Perfect Security Definition"></a>Perfect Security Definition</h3><p>根据Shannon 1949发表的论文，<strong>Shannon’s basic idea: CT(Ciphertext) should reveal no “info” about PT(Plaintext)</strong>，即密文不应该泄露明文的任何信息。</p>
 <h4 id="Perfect-Security-Def"><a href="#Perfect-Security-Def" class="headerlink" title="Perfect Security Def:"></a><strong><u>Perfect Security Def:</u></strong></h4><p>A cipher $(E,D)$ over  $\mathcal{(K,M,C)}$ has <strong>perfect security</strong> if $\forall m_0,m_1 \in \mathcal{M}\ (|m_0|=|m_1|) \quad \text{and} \quad \forall c\in \mathcal{C} $<br>$$<br>Pr[E(k,m_0)=c]=Pr[E(k,m_1)=c] \qquad \text{where} \ k\overset{R}{\longleftarrow}\mathcal{K}<br>$$</p>
 <hr>
 <blockquote>
@@ -735,9 +735,9 @@ $G_{\operatorname{lcg}}(s):=(\lfloor s / w\rfloor, \quad a s+b \bmod q)$
         <span class="has-mr-6">1.2.1</span>
         <span>Definition of OTP</span>
         </a></li><li>
-        <a class="is-flex" href="#Information-Theoretic-Security">
+        <a class="is-flex" href="#Perfect-Security-Definition">
         <span class="has-mr-6">1.2.2</span>
-        <span>Information Theoretic Security</span>
+        <span>Perfect Security Definition</span>
         </a></li><li>
         <a class="is-flex" href="#OTP-has-perfect-secrecy">
         <span class="has-mr-6">1.2.3</span>
