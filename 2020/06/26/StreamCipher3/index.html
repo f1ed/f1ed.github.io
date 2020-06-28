@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="9ce18CEmjH" />
+<meta name="google-site-verification" content="GSUThrU_AtZE-dgdz1QWWouv0L2teKqHWrZg7DfHbXo" />
+<meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>「Cryptography-Dan」:Stream Cipher 3 - fred&#39;s blog</title>
+
+
+    <meta name="description" content="Stream Cipher的第三篇文章。 文章主要分为两部分，前部分逐步定义Secure PRG的定义，通过引入statistical test（统计测试）和Advantage（优势）得出当且仅当PRG is unpredictable,PRG is secure的结论。 后部分介绍了密码学中的一个重要概念Semantic Security的定义，通过引入 computationally indi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Cryptography-Dan」:Stream Cipher 3">
+<meta property="og:url" content="https://f1ed.github.io/2020/06/26/StreamCipher3/index.html">
+<meta property="og:site_name" content="fred&#39;s blog">
+<meta property="og:description" content="Stream Cipher的第三篇文章。 文章主要分为两部分，前部分逐步定义Secure PRG的定义，通过引入statistical test（统计测试）和Advantage（优势）得出当且仅当PRG is unpredictable,PRG is secure的结论。 后部分介绍了密码学中的一个重要概念Semantic Security的定义，通过引入 computationally indi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://f1ed.github.io/gallery/thumbnails/82028453_p0_master1200.jpg">
+<meta property="article:published_time" content="2020-06-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-26T10:47:03.820Z">
+<meta property="article:author" content="f1ed">
+<meta property="article:tag" content="公开课">
+<meta property="article:tag" content="Cryptography">
+<meta property="article:tag" content="StreamCipher">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://f1ed.github.io/gallery/thumbnails/82028453_p0_master1200.jpg">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="「Cryptography-Dan」:Stream Cipher 3" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/heart.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/f1ed_logo.png" alt="「Cryptography-Dan」:Stream Cipher 3" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/atom.xml">RSS</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/82028453_p0_master1200.jpg" alt="「Cryptography-Dan」:Stream Cipher 3">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bars"></i>「Cryptography-Dan」:Stream Cipher 3
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-25T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-06-26</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-06-26T10:47:03.820Z"><i class="far fa-calendar-check">&nbsp;</i>2020-06-26</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/Cryptography-Dan/">Cryptography-Dan</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    31 分钟 读完 (大约 4655 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <p>Stream Cipher的第三篇文章。</p>
+<p>文章主要分为两部分，前部分逐步定义Secure PRG的定义，通过引入statistical test（统计测试）和Advantage（优势）得出当且仅当PRG is unpredictable,PRG is secure的结论。</p>
+<p>后部分介绍了密码学中的一个重要概念Semantic Security的定义，通过引入 computationally indistinguishable(计算上不可区分)的概念给出定义，并证明了OTP的语意安全和在安全PRG条件下的流密码的语意安全，得出如果流密码中使用的PRG is secure,那么流密码就具备semantic security。</p>
+<p>文章开头，也简单介绍了密码学中negligible和non-negligible的含义。</p>
+<a id="more"></a>
+
+<h1 id="Negligible-and-non-negligible"><a href="#Negligible-and-non-negligible" class="headerlink" title="Negligible and non-negligible"></a>Negligible and non-negligible</h1><p><strong>In practice:</strong> $\epsilon$ is a scalar and </p>
+<ul>
+<li>$\epsilon$ non-neg: $\epsilon \geq 1/2^{30}$ (likely to happen over 1GB of data)</li>
+<li>$\epsilon$ negligible: $\epsilon \leq 1/2^{80}$ (won’t happen over life of key)</li>
+</ul>
+<p>在实践中，$\epsilon$ 是一个数值，如果是non-neg不可忽略的话，大约在1GB的数据下就会发生，如果是可忽略的值，在密钥的生存周期内基本不会发生。</p>
+<p><strong>In theory:</strong> $\epsilon$ is a function  $\varepsilon: Z^{\geq 0} \rightarrow R^{\geq 0}$  and</p>
+<ul>
+<li>$\epsilon$ non-neg:  $\exists d: \epsilon(\lambda)\geq 1/\lambda^d$ ($\epsilon \geq 1/\text{poly} $, for many $\lambda$ )</li>
+<li>$\epsilon$ negligible:  $\forall d, \lambda \geq \lambda_{d}:  \varepsilon(\lambda) \leq 1 / \lambda^{d}$  ( $\epsilon \leq 1/\text{poly}$, for large $\lambda$ )</li>
+</ul>
+<p>[0]（理论中，这个还不太理解，待补充。）</p>
+<h1 id="PRG-Security-Defs"><a href="#PRG-Security-Defs" class="headerlink" title="PRG Security Defs"></a>PRG Security Defs</h1><p>Let  $G:K\longrightarrow \{0,1\}^n$  be a PRG.</p>
+<p><u>Goal:</u> define what it means that </p>
+<p>[  $k\stackrel{R}{\longleftarrow} \mathcal{K}$   , output G(k) ] is “indistinguishable” from [  $r\stackrel{R}{\longleftarrow} \{0,1\}^n$   , output r] .</p>
+<p>【使得PGR的输出和真随机是不可区分的】（ $\stackrel{R}{\longleftarrow}$ 的意思是在均匀分布中随机取）</p>
+<p>下图中，红色的圈是全部的 ${0,1}^n$ 串，按照定义是均匀分布。而粉色G()是PRG的输出，由于seed很小，相对于全部的 ${0,1}^n$ ，所以G()的输出范围也很小。</p>
+<p><a href="https://imgchr.com/i/NsuU4s"><img src="https://s1.ax1x.com/2020/06/26/NsuU4s.png" alt="NsuU4s.png"></a> </p>
+<p>因此，attacker观测G(k)的输出，是不能和uniform distribution（均匀分布）的输出区分开。</p>
+<p>这也就是我们所想构造的安全PGR的目标。</p>
+<h2 id="Statistical-Tests"><a href="#Statistical-Tests" class="headerlink" title="Statistical Tests"></a>Statistical Tests</h2><p>Statistical test on ${0,1}^n$ ：有一个算法A，$x\in{0,1}^n$ ,A(x) 根据算法定义输出”0”或”1”.</p>
+<p>统计测试是自定义的。</p>
+<p>Example：</p>
+<ol>
+<li><p>A(x)=1 if  $| \#0(x)-\#1(x)|\leq 10\cdot\sqrt{n}$   </p>
+<p>【期望串中0、1的数目差不多，这样look random】</p>
+</li>
+<li><p>A(x)=1 if  $|\#00(x)-\frac{n}{4}\leq10\cdot\sqrt{n}$   </p>
+<p>【期望Pr(00)=1/4 ,串中00出现的概率为1/4，认为是look random】</p>
+</li>
+<li><p>A(x)=1if max-run-of-0(x) &lt; 10·log(n)</p>
+<p>【期望串中0的最大游程不要超过规定值】</p>
+</li>
+</ol>
+<p>上面的第三个例子，如果输出为全1，满足上述的统计条件输出1，但全1串看起来并不random。</p>
+<p>统计测试也由于是自定义的，所以通过统计测试的也不一定是random，其PRG也不一定是安全的。</p>
+<p>所以，如何评估一个统计测试的好坏？</p>
+<p>下面引入一个重要的定义advantage，优势。</p>
+<h2 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h2><p>引入Advantage（优势）来评估一个统计测试的好坏。</p>
+<p>Let G: $k \rightarrow \{0,1\}^n$  be a PRG and A a stat. test on ${0,1}^n$ </p>
+<p>【G是一个PRG，A是一个对01串的统计测试】</p>
+<p>Define: the advantage of statisticaltest A relative to PRG G Adv$_\text{PRG}[A,G]$ </p>
+  $\text{Adv}_\text{PRG}[A,G]=|Pr[A(G(k))=1]-Pr[A(r)=1]|\in[0,1]$   ,  $k\stackrel{R}{\longleftarrow} \mathcal{K}, r\stackrel{R}{\longleftarrow}\{0,1\}^n$  
+
+<p>【定义：Adv$_\text{PRG}[A,G]$ 为统计测试A对于PRG G的优势为统计测试以PRG作为输入输出为1的概率 减去 统计测试以truly random string 作为输入输出为1的概率】</p>
+<ul>
+<li>Adv close to 1 : 统计测试能区分PRG的输出和truly random string，即adversary可以利用区分PRG的输出和random的这一点从而破解系统。</li>
+<li>Adv close to 0 : 统计测试不能区分PRG的输出和truly random string, 即adversary认为PRG的输出和random别无二致。</li>
+</ul>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Advantage_(cryptography)">Advantage</a> 优势[1]</p>
+<p>In cryptography, an adversary’s advantage is a measure of how successfully it can attack a cryptographic algorithm, by distinguishing it from an idealized version of that type of algorithm.Note that in this context, the “adversary” is itself an algorithm and not a person. A cryptographic algorithm is considered secure if no adversary has a non-negligible advantage, subject to specified bounds on the adversary’s computational resources (see concrete security). </p>
+<p>在密码学中，adversary的优势是评估它通过某种理想算法破解一个加密算法的成功尺度。</p>
+<p>这里的adversary是一种破解算法而不是指攻击者这个人。</p>
+<p>当没有 adversary对该加密算法有不可忽略的优势时，该加密算法被认为是安全的，因为adversary只有有限的计算资源。</p>
+</blockquote>
+<p>e.g.1 : A(x) = 0，统计测试A对PRG的任何输出都输出0，则Adv[A,G] = 0.</p>
+<p>e.g.2 : </p>
+<p>G: $k \rightarrow {0,1}^n$ satisfies msb(G(k))=1 for 2/3 of keys in K.</p>
+<p>Define statistical test A(x) as : if[ msb(x)=1 ] output “1” else output “0”</p>
+<p>【PRG G(k)的2/3的输出的最高有效位是1，定义统计测试A(x),输入的最高有效位为1输出1，否则输出0】</p>
+<blockquote>
+<p>msb: most significant bit,最高有效位。</p>
+</blockquote>
+<p>则 Adv[A,G] = | Pr[A(G(k))] - Pr[A(r)] | = 2/3 - 1/2 = 1/6</p>
+<p>即 A can break the generator G with advantage 1/6, PRG G is not good. </p>
+<h2 id="Secure-PRGs-crypto-definition"><a href="#Secure-PRGs-crypto-definition" class="headerlink" title="Secure PRGs: crypto definition"></a>Secure PRGs: crypto definition</h2><p><u>Def:</u> We say that G: $k \rightarrow {0,1}^n$ is <strong>secure PRG</strong></p>
+<p> if $\forall$ “eff” stat. tests A : Adv$_\text{PRG}$ [A,G]  is “negligible”.</p>
+<p>这里的”eff”,指多项式时间内。</p>
+<p>这个定义，“所有的统计测试”，这一点难以达到，因此没有provably secure PRGs。</p>
+<p>但我们有heuristic candidates.（有限的stat. test 能满足）</p>
+<h3 id="Easy-fact-a-secure-PRG-is-unpredictable"><a href="#Easy-fact-a-secure-PRG-is-unpredictable" class="headerlink" title="Easy fact: a secure PRG is unpredictable"></a>Easy fact: a secure PRG is unpredictable</h3><p>证明命题： a secure PRG is unpredictable.</p>
+<p>即证明其逆否命题： PRG is predictable is insecure。</p>
+<p>suppose A is an eddicient algorithm s.t. $\text{Pr}_{k\stackrel{R}{\longleftarrow}\mathcal{K}}[A(G(k))|_{1,...,i}=G(k)|_{i+1}]>\frac{1}{2} + \epsilon$    for non-negligible $\epsilon$ .</p>
+<p>【 算法A是一个有效的预测算法， $\text{Pr}_{k\stackrel{R}{\longleftarrow}\mathcal{K}}[A(G(k))|_{1,...,i}=G(k)|_{i+1}]>\frac{1}{2} + \epsilon$   , $\epsilon$ 是不可忽略的值，即A能以大于1/2的概率推测下一位。】</p>
+<p>Adversary能利用算法A来区分这个PRG和random依次来破解系统。</p>
+<p>Define statistical test B as: B(x)=1 if $A(x|<em>{1,…,i})=x</em>{i+1}$ , else B(x)=0.</p>
+<p>【定义一个统计测试B，如果预测算法A预测下一位正确输出1，否则输出0】</p>
+<hr>
+<p>计算Adv$_\text{PRG}$ :</p>
+<ul>
+<li> $r\stackrel{R}{\longleftarrow}\{0,1\}^n$ : Pr[B(r) = 1] = 1/2</li>
+<li> $r\stackrel{R}{\longleftarrow}\{0,1\}^n$  : Pr[B(G(k)) = 1] = 1/2+ $\epsilon$ </li>
+<li>Adv$_\text{PRG}$[B,G] = |Pr[B(r)=1] - Pr[B(G(k))=1] | &gt; $\epsilon$ </li>
+</ul>
+<p>Adversary 能以 $\epsilon$ 的优势区分PRG和random，因此PRG 不安全。</p>
+<p>所以，如果A是一个好的预测算法，那么B就是一个好的统计算法，Adversary就能通过B以 $\epsilon$ 的优势破解系统。</p>
+<p>在此，证明了 if A can predict PRG, PRG is insecure $\Rightarrow$ <strong>A secure PRG is unpredictable.</strong> </p>
+<h3 id="Thm-Yao’82-an-unpredictable-PRG-is-secure"><a href="#Thm-Yao’82-an-unpredictable-PRG-is-secure" class="headerlink" title="Thm(Yao’82): an unpredictable PRG is secure"></a>Thm(Yao’82): an unpredictable PRG is secure</h3><p>上节证明了A secure PRG is unpredictable.</p>
+<p>在1982 Yao 的论文[2]中证明了其逆命题： an unpredictable PRG is secure.</p>
+<p>G: $k \rightarrow {0,1}^n$ be PRG</p>
+<p><strong>“Thm</strong>“ : <strong>if $\forall i \in$ {0,…, n-1} PRG G is unpredictable at pos. i then G is a secure PRG.</strong></p>
+<p>【定理：如果在任何位置PRG都是不可预测的，那么PRG就是安全的】</p>
+<p><strong>Proof：</strong> </p>
+<ul>
+<li>A: 预测算法： $\forall i \quad\text{Pr}_{k\stackrel{R}{\longleftarrow}\mathcal{K}}[A(G(k))|_{1,...,i}=G(k)|_{i+1}]=\frac{1}{2} $  </li>
+<li>B:统计测试： B(x)=1 if $A(x|<em>{1,…,i})=x</em>{i+1}$ , else B(x)=0.</li>
+<li>Adv$_\text{PRG}$[B,G] = |Pr[B(r)=1] - Pr[B(G(k))=1] | = 0 </li>
+</ul>
+<p>If next-bit predictors cannot distinguish G from random then no statistial test can!</p>
+<p>【next-bit predictor指用预测算法的统计测试】</p>
+<p>e.g.</p>
+<p> Let G: $k \rightarrow {0,1}^n$ be PRG such that from the last n/2 bits of G(k) it is easy to compute the first n/2 bits.</p>
+<p>Is G predictable for som i $\in$ {0, …, n-1} ?</p>
+<p>: Yes.当n=2时，可以预测出第一位。 </p>
+<p><strong>在此，可以得出结论：</strong></p>
+<p><strong>Adversary不可区分PRG的输出和truly random string时被认为是安全的。</strong></p>
+<p><strong>当且仅当PRG在任意位置不可预测时，PRG是安全的。</strong> </p>
+<h2 id="More-generally-computationally-indistinguishable"><a href="#More-generally-computationally-indistinguishable" class="headerlink" title="More generally: computationally indistinguishable"></a>More generally: computationally indistinguishable</h2><p>Let P1 and P2 be two distributions over ${0,1}^n$ </p>
+<p><u>Def</u> : We say that P1 and P2 are <strong>computationally indistinguishable</strong> (denoted $P_1\approx_p P_2$) </p>
+<p>If $\forall$ “eff” stat. tests A  $\left|\text{Pr}_{x\leftarrow_{P_1}}[A(x)=1]-\text{Pr}_{x\leftarrow_{P_2}}[A(x)=1]\right|<\text{negligible}$   .</p>
+<p>【P1,P2都是01串上的两个分布，且对任意的有效统计测试满足上式，则认为P1和P2两个分布在计算上不可区分，记做$P_1\approx_p P_2$】</p>
+<p>所以，安全的PRG等价于G(k)的分布和均匀分布计算上不可区分，即 $\{\mathrm{k} \stackrel{\mathrm{R}}{\longleftarrow}{\mathrm{K}}: \mathrm{G}(\mathrm{k})\} \approx_{\mathrm{p}} \text { uniform }\left(\{0,1\}^{\mathrm{n}}\right)$  </p>
+<h1 id="Semantic-Security"><a href="#Semantic-Security" class="headerlink" title="Semantic Security"></a>Semantic Security</h1><p>上文详细了定义secure PRGs 的过程，本节的目标是定义”secure” stream cipher,安全流密码。</p>
+<p><strong>What is a secure cipher?</strong></p>
+<p>attacker abilities: obtains one ciphertext(唯密文攻击)</p>
+<p>下面这些可能的安全需求是否能定义是安全的加密解密算法？</p>
+<p>Possible security requirements：</p>
+<ol>
+<li><p>attacker cannot recover secret key.</p>
+<p>attacker不能恢复密钥。</p>
+<p>E(k,m)=m直接输出明文，这个算法满足条件，但显然不安全。</p>
+</li>
+<li><p>attacker cannot recover all of plaintext.</p>
+<p>attacker不能恢复所有的明文。</p>
+<p>E(k, m0||m1) = m0||k $\oplus$ m1,该算法泄漏了一半的明文，不安全。</p>
+</li>
+<li><p>Shannon’s idea: CT should reveal no “info” about PT.</p>
+</li>
+</ol>
+<h2 id="Recall-Shannon‘s-perfect-secrecy"><a href="#Recall-Shannon‘s-perfect-secrecy" class="headerlink" title="Recall Shannon‘s perfect secrecy"></a>Recall Shannon‘s perfect secrecy</h2><p>在<a href="/2020/03/15/StreamCipher1/" title="这篇文章1.2.2">这篇文章1.2.2</a> 定义了perfect secrecy。</p>
+<p>A cipher $(E,D)$ over  $\mathcal{(K,M,C)}$ has <strong>perfect security</strong> if  $\forall m_0,m_1 \in \mathcal{M}\ (|m_0|=|m_1|) \quad \text{and} \quad \forall c\in \mathcal{C} $ </p>
+
+$$
+Pr[E(k,m_0)=c]=Pr[E(k,m_1)=c] \qquad \text{where} \ k\overset{R}{\longleftarrow}\mathcal{K}
+$$
+
+<p>下面根据perfect security的定义逐步放宽条件定义：</p>
+<p>Let (E,D) be a cipher over (K,M,C)</p>
+<ul>
+<li><p><a href="https://imgchr.com/i/NsutEQ"><img src="https://s1.ax1x.com/2020/06/26/NsutEQ.md.png" alt="NsutEQ.md.png"></a> </p>
+<p>上图中的定义就是perfect security的定义，密钥加密m0和m1的分布完全相同。</p>
+<p>引入上文中的computationally indistinguishable（计算不可区分）的概率放宽条件，得到下面的定义。</p>
+</li>
+<li><p><a href="https://imgchr.com/i/NsuGDS"><img src="https://s1.ax1x.com/2020/06/26/NsuGDS.md.png" alt="NsuGDS.md.png"></a></p>
+<p>密钥加密m0和m1的分布计算上不可区分。</p>
+</li>
+<li><p>但枚举所有的m0和m1的定义也太强了，因此希望能让adversary列举计算上可列举的m0和m1.</p>
+</li>
+</ul>
+<h2 id="Semantic-Security-for-OTP"><a href="#Semantic-Security-for-OTP" class="headerlink" title="Semantic Security for OTP"></a>Semantic Security for OTP</h2><h3 id="attack-game"><a href="#attack-game" class="headerlink" title="attack game"></a>attack game</h3><p>在定义OTP的semantic security （语意安全）之前，定义一个attack game。</p>
+<p><strong>Attack Game</strong>[3]: For a given cipher $\mathcal{E}$ = (E, D), deﬁned over (K, M , C), and for a given adversary $\mathcal{A}$ , we deﬁne two experiments, Experiment 0 and Experiment 1. For b = 0, 1, we deﬁne</p>
+<p>【定义一个adversary $\mathcal{A}$，两个实验也对应两个challenger，实验定义如下】</p>
+<p><strong>Experiment b:</strong></p>
+<ul>
+<li><p>The adversary computes m0 , m1 ∈ M , of the same length, and sends them to the challenger.</p>
+<p>【adversary向challenger发m0和m1，他们长度相同】</p>
+</li>
+<li><p>The challenger computes $k\stackrel{R}{\leftarrow}\mathcal{K}$, $c\stackrel{R}{\leftarrow}E(k,m_b)$, and sends c to the adversary.</p>
+<p>【实验b中challenger随机选取一个密钥k,用密钥加密mb,再将结果c返回给adversary】</p>
+</li>
+<li><p>The adversary outputs a bit $\hat{b}\in$  { 0, 1 } .</p>
+<p>【adversary收到c，猜测c是加密m0还是m1的，输出 $\hat{b}$ 】</p>
+</li>
+</ul>
+<p>过程如下图所示，对于adversary $\mathcal{A}$ 来说，就像只有一个challenger，没有EXP(0)和EXP(1)的区别，因为它本来就是猜测challenger发送的c是加密m0所的还是m1所的。而对于challenger来说，才有EXP(0)和EXP(1)，在EXP(0)中，加密算法随机选择密钥加密m0返回，在EXP(1)中，加密算法随机选择密钥加密m1返回。</p>
+<p><a href="https://imgchr.com/i/Nsuu4A"><img src="https://s1.ax1x.com/2020/06/26/Nsuu4A.md.png" alt="Nsuu4A.md.png"></a> </p>
+<p>for b=0,1 $W_b$ = [event that $\mathcal{A}$  output 1 in experiment b].</p>
+<p>【定义事件 $W_b$ 为在实验EXP(b)中$\mathcal{A}$ 输出1】</p>
+<p><u>Def</u>： $\mathcal{A}$‘s <strong>semantic security advantage</strong> with respect to $\mathcal{E}$ as </p>
+
+$$
+\operatorname{Adv_{SS}}[\mathcal{A}, \mathcal{E}]:=\left|\operatorname{Pr}\left[W_{0}\right]-\operatorname{Pr}\left[W_{1}\right]\right|
+$$
+
+<p>【定义adversary $\mathcal{A}$ 对于cipher $\mathcal{E}$ 的语意安全优势为上式】</p>
+<p>Note that in the above game, the events W0 and W1 are deﬁned with respect to the probability space determined by the random choice of k, the random choices made (if any) by the encryption algorithm, and the random choices made (if any) by the adversary. The value Advss[ A , E] is a number between 0 and 1.</p>
+<p>【注意：上面的游戏中，W0和W1的概率空间分布是与密钥的随机选择，加密算法的随机选择（<strong>该加密算法选择的是challenger0加密的m0还是challenger1加密的m1，adversary并不知道</strong>）和adversary的”随机”输出（按照adversary的判断方式的)有关的】</p>
+<p>当challenger用随机密钥加密m0/m1时，观测adversary的行为是否相同，如果   $\left|\operatorname{Pr}\left[W_{0}\right]-\operatorname{Pr}\left[W_{1}\right]\right|$   等于0，说明adversary无法区分这两个实验，如果  $\left|\operatorname{Pr}\left[W_{0}\right]-\operatorname{Pr}\left[W_{1}\right]\right|$   等于1，则adversary可以区分这两个实验。</p>
+<h3 id="semantic-security"><a href="#semantic-security" class="headerlink" title="semantic security"></a>semantic security</h3><p><u>Def</u>：<strong>semantic security</strong>：A cipher $\mathcal{E}$ is semantially secure if for all efficient $\mathcal{A}$ , the value  $\operatorname{Adv_{SS}}[\mathcal{A}, \mathcal{E}]$  is negligible.</p>
+<p>当所有的有效的攻击算法 $\mathcal{A}$ 对于加密算法 $\mathcal{E}$ 的语意安全优势是可忽略的，则认为加密算法 $\mathcal{E}$ 是语意安全的。</p>
+<p>即没有有效的攻击算法能区分对m0和m1对加密结果。</p>
+<p>即任意密钥加密m0 m1的分布是计算上不可区分的，for all explicit m0, m1 $\in M:$   $\left\{\mathrm{E}\left(\mathrm{k}, \mathrm{m}_{0}\right)\right\} \approx_{\mathrm{p}}\left\{\mathrm{E}\left(\mathrm{k}, \mathrm{m}_{1}\right)\right\}$ .</p>
+<h3 id="example-1"><a href="#example-1" class="headerlink" title="example 1"></a>example 1</h3><p>Suppose efficient A can always deduce LSB of PT from CT.</p>
+<p>【假设算法A总能从CT中推断出PT的最低有效位】</p>
+<p>在下图cipher系统中，Adversary B算法向challenger发送的m0和m1，其发送的m0 m1特点是LSB(m0)=0,LSB(m1)=1。</p>
+<p><a href="https://imgchr.com/i/NsuJHg"><img src="https://s1.ax1x.com/2020/06/26/NsuJHg.md.png" alt="NsuJHg.md.png"></a> </p>
+<p>当adversary B收到密文c时，利用有效的算法A推断出对应明文的最低有效位LSB，如果是0，则输出0，即认为是实验0中challenger加密的m0，反之输出1。</p>
+<p>adversary B对于cipher $\mathcal{E}$ 的优势是：  $\operatorname{Adv_{SS}}[\mathcal{B}, \mathcal{E}]:=\left|\operatorname{Pr}\left[\text{EXP}(0)=1\right]-\operatorname{Pr}\left[\text{EXP}(1)=1\right]\right|=|0-1|=1$ </p>
+<p> 所以该cipher $\mathcal{E}$ 不具有语意安全。</p>
+<p>不仅是LSB，<strong>如果adversary能从密文中学到明文的任何一位，则该cipher都不具有semantic security。</strong></p>
+<h3 id="example-2-OTP"><a href="#example-2-OTP" class="headerlink" title="example 2: OTP"></a>example 2: OTP</h3><p>OTP虽然不实用，但是具备perfect security，下面来证明OTP也具有semantic security。</p>
+<p><a href="https://imgchr.com/i/NsunNd"><img src="https://s1.ax1x.com/2020/06/26/NsunNd.md.png" alt="NsunNd.md.png"></a> </p>
+<p>OTP的perfect security的性质是  $Pr[E(k,m_0)=c]=Pr[E(k,m_1)=c] \qquad \text{where} \ k\overset{R}{\longleftarrow}\mathcal{K}$  ，k和任意m异或都是均匀分布，因此上图中的  $\left\{\mathrm{E}\left(\mathrm{k}, \mathrm{m}_{0}\right)\right\} =\left\{\mathrm{E}\left(\mathrm{k}, \mathrm{m}_{1}\right)\right\}$  是同分布。</p>
+<p>For all A :  $\operatorname{Adv}_{\operatorname{ss}}[A, \text { OTP }]=\mid \operatorname{Pr}\left[A\left(\mathbf{k} \oplus m_{0}\right)=1\right]-\operatorname{Pr}\left[A\left(\mathbf{k} \oplus m_{1}\right)=1\right]|=0$   </p>
+<h2 id="Stream-Ciphers-are-semantically-secure"><a href="#Stream-Ciphers-are-semantically-secure" class="headerlink" title="Stream Ciphers are semantically  secure"></a>Stream Ciphers are semantically  secure</h2><p>前面介绍了什么是安全的PRG，什么是语意安全，而流密码是否具有语意安全呢？</p>
+<p><strong>Thm:  Let G: $k \rightarrow {0,1}^n$ is a secure PRG $\Rightarrow$ stream cipher E derived from G is semantic secure.</strong></p>
+<p> 要证明以上定理：即要证明 $\forall$ sem. sec. adversary A $\operatorname{Adv}_{\operatorname{SS}}[A,E]$  is negligible.</p>
+<p>如果 $\forall$ sem. sec. adversary A, $\exist$ a PRG adversay B s.t.  $A d v_{s s}[A, E] \leq 2 \cdot A d v_{P R G}[B, G]$ 不等式成立，则定理得证。</p>
+<p>因为G is a secure PRG, 根据定义，Adv$<em>\text{PRG}$ [A,G]  is negligible，所以左边$\operatorname{Adv}</em>{\operatorname{SS}}[A,E]$  is negligible.</p>
+<h3 id="Proof-intuition"><a href="#Proof-intuition" class="headerlink" title="Proof: intuition"></a>Proof: intuition</h3><p>如果直观上证明Adv$_\text{PRG}$ [A,G]  is negligible，如下图：</p>
+<p><a href="https://imgchr.com/i/Nsu1jf"><img src="https://s1.ax1x.com/2020/06/26/Nsu1jf.md.png" alt="Nsu1jf.md.png"></a> </p>
+<p>（上左上右下左下右：图1234，G(k):PRG 的输出， r: truly random string）</p>
+<p>图1和图2中，由于G is a secure PRG，因此A计算上无法区分用G(k)和 random对m0加密的结果， 即$\ E(m_0,\mathrm{G}(\mathrm{k}))\} \approx_{\mathrm{p}} \{E(m_0,r)\}$  。同理图三图四中，A计算上也无法区分用G(k)和random 对m1加密的结果，即  $\ E(m_1,\mathrm{G}(\mathrm{k}))\} \approx_{\mathrm{p}} \{E(m_1,r)\}$  。</p>
+<p>而图2图4中，是OPT的，即r和任意m异或都是均匀分布，满足 $\left\{\mathrm{E}\left(\mathrm{r}, \mathrm{m}_{0}\right)\right\} =\left\{\mathrm{E}\left(\mathrm{r}, \mathrm{m}_{1}\right)\right\}$  是同分布.(图中应该可以写严格的等号)</p>
+<p>所以可以直观得到  $\ E(m_0,\mathrm{G}(\mathrm{k}))\} \approx_{\mathrm{p}} E(m_1,\mathrm{G}(\mathrm{k}))\}$ ，即$\forall$ sem. sec. adversary A $\operatorname{Adv}_{\operatorname{SS}}[A,E]$  is negligible.</p>
+<h3 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h3><p>Let A be a sem. sec. adversary.</p>
+<p>使用PRG，即$E(m,k) = m\oplus G(k)$ 时，如下图：</p>
+<p><a href="https://imgchr.com/i/NsuEnO"><img src="https://s1.ax1x.com/2020/06/26/NsuEnO.md.png" alt="NsuEnO.md.png"></a> </p>
+<p> for b = 0,1 Wb = [event that b’=1]</p>
+<p>$\operatorname{Adv}_{\operatorname{SS}}[A,E]=|\text{Pr}[W_0]-\text{Pr}[W_1]|$  </p>
+<hr>
+<p>使用OTP时，即 $E(m,r)=m\oplus r$ 时，如下图：</p>
+<p><a href="https://imgchr.com/i/NsuVBD"><img src="https://s1.ax1x.com/2020/06/26/NsuVBD.md.png" alt="NsuVBD.md.png"></a> </p>
+<p>for b = 0,1 Rb = [event that b’=1]</p>
+<p>$\operatorname{Adv}_{\operatorname{SS}}[A,OTP]=|\text{Pr}[R_0]-\text{Pr}[R_1]|=0$ </p>
+<hr>
+<p>如果把Pr[]的关系画在数轴上，如下图：</p>
+<p><a href="https://imgchr.com/i/NsuZHe"><img src="https://s1.ax1x.com/2020/06/26/NsuZHe.md.png" alt="NsuZHe.md.png"></a> </p>
+<ol>
+<li><p>根据OTP的semantic security ，已经得到 $|\text{Pr}[R_0]-\text{Pr}[R_1]|=\operatorname{Adv}_{\operatorname{SS}}[A,OTP]=0$ ，所以Pr[R0]=Pr[R1]。</p>
+</li>
+<li><p>因为G是secure PRG，所以 $\exists$ adversary B满足 $|\text{Pr}[W_b]-\text{Pr}[R_b]|=\operatorname{Adv}_{\operatorname{PRG}}[B,G]$ ,如下图：</p>
+<p><a href="https://imgchr.com/i/Nsu8u8"><img src="https://s1.ax1x.com/2020/06/26/Nsu8u8.md.png" alt="Nsu8u8.md.png"></a> </p>
+</li>
+</ol>
+<p>所以根据数轴的关系，Pr[W0]和Pr[W1]的距离最大为 $2 \cdot \mathrm{Adv}_{\mathrm{PRG}}[\mathrm{B}, \mathrm{G}]$ .</p>
+<p>即  $\Rightarrow\mathrm{Adv}<em>{\mathrm{SS}}[\mathrm{A}, \mathrm{E}]=\left|\operatorname{Pr}\left[\mathrm{W}</em>{0}\right]-\operatorname{Pr}\left[\mathrm{W}<em>{1}\right]\right| \leq 2 \cdot \mathrm{Adv}</em>{\mathrm{PRG}}[\mathrm{B}, \mathrm{G}]$  </p>
+<p>证毕。</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>secure PRG 就是计算上无法区分G(k)的输出和truly random string。</p>
+<p>semantic secure 就是计算上无法区分m0和m1的加密结果。</p>
+<p>而使用secure PRG的流密码是具有semantic security的。</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><ol start="0">
+<li><p>Negligible, super-poly, and poly-bounded functions.(Book p28)</p>
+</li>
+<li><p>Advantage Wiki定义：<a href="https://en.wikipedia.org/wiki/Advantage_(cryptography)">https://en.wikipedia.org/wiki/Advantage_(cryptography)</a></p>
+</li>
+<li><p>Yao’82: Theory and application of trapdoor functions:<a href="https://ieeexplore.ieee.org/document/4568378">https://ieeexplore.ieee.org/document/4568378</a></p>
+</li>
+<li><p>Dan Boneh and Victor Shoup: A Graduate Course in Applied Cryptography</p>
+</li>
+</ol>
+
+        </div>
+    
+        <ul class="post-copyright">
+        <li><strong>本文标题：</strong><a href="https://f1ed.github.io/2020/06/26/StreamCipher3/">「Cryptography-Dan」:Stream Cipher 3</a></li>
+        <li><strong>本文作者：</strong><a href="https://f1ed.github.io">f1ed</a></li>
+        <li><strong>本文链接：</strong><a href="https://f1ed.github.io/2020/06/26/StreamCipher3/">https://f1ed.github.io/2020/06/26/StreamCipher3/</a></li>
+        <li><strong>发布时间：</strong>2020-06-26</li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+        </ul>
+    
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Cryptography/" rel="tag">Cryptography</a>,&nbsp;<a class="has-link-grey -link" href="/tags/StreamCipher/" rel="tag">StreamCipher</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/" rel="tag">公开课</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/qrcode_alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/qrcode_wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/06/11/rnn/">
+                <span class="level-item">「机器学习-李宏毅」：Recurrent Neural Network（RNN）</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: false,
+        app_id: 'U7ITnhsJjngmAcJUpFYdrq5m-gzGzoHsz',
+        app_key: 'cSRtvM6PbCOJBTVBAUURyFfO',
+        placeholder: 'xxxxxxxx'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/profile.png" alt="f1ed">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        f1ed
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        网络安全（本科）
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>成都</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+    <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+		<div>
+                <a href="/archives/">
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            18
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            16
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/f1ed" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/f1ed">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+
+   <div class="card widget column-left is-sticky" id="toc">
+       <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Negligible-and-non-negligible">
+        <span class="has-mr-6">1</span>
+        <span>Negligible and non-negligible</span>
+        </a></li><li>
+        <a class="is-flex" href="#PRG-Security-Defs">
+        <span class="has-mr-6">2</span>
+        <span>PRG Security Defs</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Statistical-Tests">
+        <span class="has-mr-6">2.1</span>
+        <span>Statistical Tests</span>
+        </a></li><li>
+        <a class="is-flex" href="#Advantage">
+        <span class="has-mr-6">2.2</span>
+        <span>Advantage</span>
+        </a></li><li>
+        <a class="is-flex" href="#Secure-PRGs-crypto-definition">
+        <span class="has-mr-6">2.3</span>
+        <span>Secure PRGs: crypto definition</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Easy-fact-a-secure-PRG-is-unpredictable">
+        <span class="has-mr-6">2.3.1</span>
+        <span>Easy fact: a secure PRG is unpredictable</span>
+        </a></li><li>
+        <a class="is-flex" href="#Thm-Yao’82-an-unpredictable-PRG-is-secure">
+        <span class="has-mr-6">2.3.2</span>
+        <span>Thm(Yao’82): an unpredictable PRG is secure</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#More-generally-computationally-indistinguishable">
+        <span class="has-mr-6">2.4</span>
+        <span>More generally: computationally indistinguishable</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Semantic-Security">
+        <span class="has-mr-6">3</span>
+        <span>Semantic Security</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Recall-Shannon‘s-perfect-secrecy">
+        <span class="has-mr-6">3.1</span>
+        <span>Recall Shannon‘s perfect secrecy</span>
+        </a></li><li>
+        <a class="is-flex" href="#Semantic-Security-for-OTP">
+        <span class="has-mr-6">3.2</span>
+        <span>Semantic Security for OTP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#attack-game">
+        <span class="has-mr-6">3.2.1</span>
+        <span>attack game</span>
+        </a></li><li>
+        <a class="is-flex" href="#semantic-security">
+        <span class="has-mr-6">3.2.2</span>
+        <span>semantic security</span>
+        </a></li><li>
+        <a class="is-flex" href="#example-1">
+        <span class="has-mr-6">3.2.3</span>
+        <span>example 1</span>
+        </a></li><li>
+        <a class="is-flex" href="#example-2-OTP">
+        <span class="has-mr-6">3.2.4</span>
+        <span>example 2: OTP</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Stream-Ciphers-are-semantically-secure">
+        <span class="has-mr-6">3.3</span>
+        <span>Stream Ciphers are semantically  secure</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Proof-intuition">
+        <span class="has-mr-6">3.3.1</span>
+        <span>Proof: intuition</span>
+        </a></li><li>
+        <a class="is-flex" href="#Proof">
+        <span class="has-mr-6">3.3.2</span>
+        <span>Proof</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#Summary">
+        <span class="has-mr-6">4</span>
+        <span>Summary</span>
+        </a></li><li>
+        <a class="is-flex" href="#reference">
+        <span class="has-mr-6">5</span>
+        <span>reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+
+                
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/f1ed_logo.png" alt="「Cryptography-Dan」:Stream Cipher 3" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 f1ed&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="f1ed&#39;s GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://f1ed.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>
