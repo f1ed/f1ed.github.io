@@ -229,7 +229,7 @@ img.thumbnail {
 }
 .article .content blockquote.pullquote {
   float: right;
-  max-width: 50%;
+  max-width: 70%;
   font-size: 1.15rem;
   position: relative;
 }
