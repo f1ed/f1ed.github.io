@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://f1ed.github.io/"/>
-  <updated>2020-07-03T09:55:39.148Z</updated>
+  <updated>2020-07-03T11:32:00.705Z</updated>
   <id>https://f1ed.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://f1ed.github.io/2020/07/03/semi-supervised/"/>
     <id>https://f1ed.github.io/2020/07/03/semi-supervised/</id>
     <published>2020-07-02T16:00:00.000Z</published>
-    <updated>2020-07-03T09:55:39.148Z</updated>
+    <updated>2020-07-03T11:32:00.705Z</updated>
     
     <content type="html"><![CDATA[<p>这篇文章开篇讲述了什么是Semi-supervised Learning（半监督学习）？</p><p>再次，文章具体阐述了四种Semi-supervised Learning，包括Generative Model，Low-density，Smoothness Assumption和Better Representation。</p><p>对于Generative Model，文章重点讲述了如何用EM算法来训练模型。</p><p>对于Low-density，文章重点讲述了如何让模型进行Self-training，并且在训练中引入Entropy-based Regularization term来尽可能low-density的假设。</p><p>对于Smoothness Assumption，文章重点讲述了Graph-based Approach（基于图的方法），并且在训练中引入Smoothness Regularization term来尽可能满足Smoothness Assumption的假设。</p><p>对于Better Representation，本篇文章只是简单阐述了其思想，具体介绍见这篇博客。</p><a id="more"></a><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>什么是Semi-supervised learning(半监督学习)？和Supervised learning（监督式学习）的区别在哪？</p><p><strong>Supervised learning（监督式学习）</strong>：</p><p>用来训练的数据集 $R$  中的数据labeled data，即 ${(x^r,\hat{y}^r)}_{r=1}^R$ .</p><p>比如在图像分类数据集中： $x^r$ 是image，对应的target output $y^r$ 是分类的label。</p><p>而<strong>Semi-supervised learning（半监督式学习）</strong>：</p><p>用来的训练的数据集由两部分组成 $\{(x^r,\hat{y}^r)\}_{r=1}^R$   ,    $\{x^u\}_{u=R}^{R+U}$   ，即labeled data和unlabeled data，而且通常情况下，unlabeled data的数量远远高于labeled data是数量，即 $U&gt;&gt;R$ .</p><p>Semi-supervised learning 又分为两种，Transductive learning （转导/推论推导）和 Inductive learning（归纳推理）</p><ul><li>Transductive learing: unlabeled data is the testing data. 即测试数据在训练中用过。</li><li>Inductive learning: unlabeled data is not the testing data.测试数据是训练中没有用过的数据。</li><li>这里的使用testing data是指用testing data的feature，而不是使用testing data的label。</li></ul><hr><p>为什么会有semi-supervised learning？</p><ul><li><p>Collecting data is easy, but collecting “labelled” data is expensive.</p><p>【收集数据很简单，但收集有label的数据很难】</p></li><li><p>We do semi-supervised learning in our lives</p><p>【在生活中，更多的也是半监督式学习，我们能明白少量看到的事物，但看到了更多我们不懂的，即unlabeled data】</p></li></ul><h2 id="Why-Semi-supervised-learning-helps"><a href="#Why-Semi-supervised-learning-helps" class="headerlink" title="Why Semi-supervised learning helps"></a>Why Semi-supervised learning helps</h2><p>为什么半监督学习能帮助解决一些问题？</p><p>如上图所示，如果只有labeled data，分类所画的boundary可能是一条竖线。</p><img src="https://s1.ax1x.com/2020/07/03/NXRNz6.md.png" alt="NXRNz6.md.png" style="zoom:75%;" /><p>但如果有一些unlabeled data（如灰色的点），分类所画的boundary可能是一条斜线。</p><p>The distribution of the unlabeled data tell us something.</p><p>半监督式学习之所以有用，是因为这些unlabeled data的分布能告诉我们一些东西。</p><p>通常这也伴随着一些假设，所以半监督式学习是否有用往往取决于这些假设是否合理。</p><h1 id="Semi-supervised-Learning-for-Generative-Model"><a href="#Semi-supervised-Learning-for-Generative-Model" class="headerlink" title="Semi-supervised Learning for Generative Model"></a>Semi-supervised Learning for Generative Model</h1><h2 id="Supervised-Generative-Model"><a href="#Supervised-Generative-Model" class="headerlink" title="Supervised Generative Model"></a>Supervised Generative Model</h2><p>在<a href="/2020/03/21/Classification1/" title="这篇">这篇</a>文章中，有详细讲述分类问题中的generative model。</p><p>给定一个labelled training data $x^r\in C_1,C_2$ 训练集。</p><p>prior probability（先验概率）有 $P(C_i)$ 和 $P(x|C_i)$ ，假设是Gaussian模型，则 $P(x|C_i)$ 由Gaussian模型中的 $\mu^i,\Sigma$ 参数决定。</p><p>根据已有的labeled data，计算出假设的Gaussian模型的参数（如下图），从而得出prior probability。</p><img src="https://s1.ax1x.com/2020/07/03/NXonAS.md.png" alt="NXonAS.md.png" style="zoom:75%;" /><p>即可算出posterior probability  $P\left(C_{1} \mid x\right)=\frac{P\left(x \mid C_{1}\right) P\left(C_{1}\right)}{P\left(x \mid C_{1}\right) P\left(C_{1}\right)+P\left(x \mid C_{2}\right) P\left(C_{2}\right)}$ </p><h2 id="Semi-supervised-Generative-Model"><a href="#Semi-supervised-Generative-Model" class="headerlink" title="Semi-supervised Generative Model"></a>Semi-supervised Generative Model</h2><p>在只有labeled data的图中，算出来的 $\mu,\Sigma$ 参数如下图所示：</p><img src="https://s1.ax1x.com/2020/07/03/NXonAS.md.png" alt="NXonAS.md.png" style="zoom:75%;" /><p>但如果有unlabeled data（绿色点），会发现分布的模型参数更可能是是下图：</p><img src="https://s1.ax1x.com/2020/07/03/NXRtRx.md.png" alt="NXRtRx.md.png" style="zoom:75%;" /><p>The unlabeled data $x^u$ help re-estimate $P(C_1),P(C_2),\mu^1,\mu^2,\Sigma$ .</p><p>因此，unlabeled data会影响分布，从而影响prior probability，posterior probability，最终影响 boundary。</p><h3 id="EM"><a href="#EM" class="headerlink" title="EM"></a>EM</h3><p>所以有unlabeled data, 这个Semi-supervised 的算法怎么做呢？</p><p>其实就是<strong>EM</strong>（Expected-maximization algorithm，期望最大化算法。）</p><ol><li><p>Initialization : $\theta={P(C_1),P(C_2),\mu^1,\mu^2,\Sigma}$ .</p><p>初始化Gaussian模型参数，可以随机初始，也可以通过labeled data得出。</p><p>虽然这个算法最终会收敛，但是初始化的参数影响收敛结果，就像gradient descent一样。</p></li><li><p>E：Step 1: compute the posterior probability of unlabeled data $P_\theta(C_1|x^u)$ (depending on model $\theta$ )</p><p>根据当前model的参数，计算出unlabeled data的posterior probability $P(C_1|x^u)$ .(以$P(C_1|x^u)$ 为例) </p></li><li><p>M：Step 2: update model. Back to step1 until the algorithm converges enventually.</p><p>用E步得到unlabeled data的posterior probability来最大化极大似然函数，更新得到新的模型参数，公式很直觉。(以 $C_1$ 为例)</p><p>（$N$ ：data 的总数，包括unlabeled data; $N_1$ :label= $C_1$ 的data数）</p><ul><li><p>$P(C_1)=\frac{N_1+\Sigma_{x^u}P(C_1|x^u)}{N}$  </p><p>对比没有unlabeled data之前的式子， $P(C_1)=\frac{N_1}{N}$ ，除了已有label= $C_1$ ，还多了一部分，即unlabeled data中属于 $C_1$ 的概率和。</p></li><li>$\mu^{1}=\frac{1}{N_{1}} \sum_{x^{r} \in C_{1}} x^{r}+\frac{1}{\sum_{x^{u}} P\left(C_{1} \mid x^{u}\right)} \sum_{x^{u}} P\left(C_{1} \mid x^{u}\right) x^{u}$  <p>对比没有unlabeled data的式子 ，$\mu^{1}=\frac{1}{N_{1}} \sum_{x^{r} \in C_{1}} x^{r}$ ，除了已有的label= $C_1$ ，还多了一部分，即unlabeled data的 $x^u$ 的加权平均（权重为 $P(C_1\mid x^u)$ ，即属于 $C_1$ 的概率）。</p></li><li><p>$\Sigma$ 公式也包括了unlabeled data.</p></li></ul></li></ol><p>所以这个算法的Step 1就是EM算法的Expected期望部分，根据已有的labeled data得出极大似然函数的估计值；</p><p>Step 2就是EM算法的Maximum部分，利用unlabeled data（通过已有模型的参数）最大化E步的极大似然函数，更新模型参数。</p><p>最后反复迭代Step 1和Step 2，直至收敛。</p><h3 id="Why-EM"><a href="#Why-EM" class="headerlink" title="Why EM"></a>Why EM</h3><p>[1]挖坑EM详解。</p><p>为什么可以用EM算法来解决Semi-supervised?</p><ul><li><p>只有labeled data</p><p>极大似然函数 $\log{L(\theta)}=\sum_{x^r}\log{P_\theta(x^r,\hat{y}^r)}$ , 其中 $P_\theta(x^r,\hat{y}^r)=P_\theta(x^r\mid \hat{y}^r)P(\hat{y}^r)$ .</p><p>对上式子求导是有closed-form solution的。</p></li><li><p>有labeled data和unlabeled data</p><p>极大似然函数增加了一部分  $\log L(\theta)=\sum_{x^{r}} \log P_{\theta}\left(x^{r}, \hat{y}^{r}\right)+\sum_{x^{u}} \log P_{\theta}\left(x^{u}\right)$ .</p><p>将后部分用全概率展开， $P_{\theta}\left(x^{u}\right)=P_{\theta}\left(x^{u} \mid C_{1}\right) P\left(C_{1}\right)+P_{\theta}\left(x^{u} \mid C_{2}\right) P\left(C_{2}\right)$  .</p><p>如果要求后部分，因为是unlabeled data, 所以模型 $\theta$ 需要得知unlabeled data的label，即 $P(C_1\mid x^u)$ ,而求这个式子，也需要得到 prior probability $P(x^u\mid C_1)$ ,但这个式子需要事先得知模型 $\theta$ ，因此陷入了死循环。</p><p>因此这个极大似然函数不是convex（凸），不能直接求解，因此用迭代的EM算法逐步maximum极大似然函数。</p></li></ul><h1 id="Low-density-Separation-Assumption"><a href="#Low-density-Separation-Assumption" class="headerlink" title="Low-density Separation Assumption"></a>Low-density Separation Assumption</h1><p>另一种假设是Low-density Separation的假设，即这个世界是非黑即白的”Black-or-white”。</p><p>两种类别之间是low-density，交界处有明显的鸿沟，因此要么是类别1，要么是类别2，没有第三种情况。</p><h2 id="Self-training"><a href="#Self-training" class="headerlink" title="Self-training"></a>Self-training</h2><p>对于Low-density Separation Assumption的假设，使用Self-training的方法。</p><p>Given：labeled data set $={(x^r,\hat{y}^r}<em>{r=1}^R$ ,unlabeled data set $={x^u}</em>{u=l}^R+U$ .</p><p><strong>Repeat：</strong> </p><ol><li><p>Train model $f^<em>$ from labeled data set. ($f^</em>$ is independent to the model)</p><p>从labeled data set中训练出一个模型</p></li><li><p>Apply $f^*$ to the unlabeled data set. Obtain pseudo-label ${(x^u,y^u}_{u=l}^{R+U}$ .</p><p>用这个模型 $f^*$ 来预测unlabeled data set， 获得伪label</p></li><li><p>Remove a set of data from unlabeled data set, and add them into the labeled data set.</p><p>拿出一些unlabeled data(pseudo-label)，放到labeled data set中，回到步骤1，再训练。</p><ul><li><p>how to choose the data set remains open</p><p>如何选择unlabeled data 是自设计的</p></li><li><p>you can also provide a weight to each data.</p><p>训练中可以对unlabeled data(pseudo-label)和labeled data 赋予不同的权重.</p></li></ul></li></ol><p><strong>注意：</strong> Regression模型是不能self-training的，因为unlabeled data和其pseudo-label放在模型中的loss为0，无法再minimize。</p><h2 id="Hard-Label"><a href="#Hard-Label" class="headerlink" title="Hard Label"></a>Hard Label</h2><p><strong>V.S.  semi-supervised learning for generative model</strong> </p><p>Semi-supervised learning for generative model和Low-density Separation的区别其实是soft label 和soft label的区别。</p><p>generative model是利用来unlabeled data的 $P(C_1|x^u)$ posterior probability来计算新的prior probability，迭代更新模型。</p><p>而low-density是计算出unlabeled data的pseudo-label，选择性扩大labeled data set(即加入部分由pseudo-label的unlabeled data)来迭代训练模型。</p><p>因此，如果考虑Neural Network：</p><p>($\theta^*$ 是labeled data计算所得的network parameters)</p><p>如下图，unlabeled data $x^u$ 放入模型中预测，得到 $\begin{bmatrix} 0.7 \ 0.3\end{bmatrix}$ .</p><img src="https://s1.ax1x.com/2020/07/03/NXRYJ1.md.png" alt="NXRYJ1.md.png" style="zoom:75%;" /><p>如果是使用hard label，则 $x^u$ 的target是 $\begin{bmatrix} 1 \ 0\end{bmatrix}$ .</p><p>如果是使用soft label，则 $x^u$ 的target是 $\begin{bmatrix} 0.7 \ 0.3\end{bmatrix}$ .</p><p>如果是使用soft label，则self-training不会有效，因为新的data加进去，不会增大模型的loss，也就无法再minimize.</p><p><strong>所以基于Low-density Separation的假设，是非黑即白的，需要使用hard label来self-training。</strong> </p><h2 id="Entropy-based-Regularization"><a href="#Entropy-based-Regularization" class="headerlink" title="Entropy-based Regularization"></a>Entropy-based Regularization</h2><p>在训练模型中，我们需要尽量保证unlabeled data在模型中的分布是low-density separation。</p><p>即下图中，unlabeled data得到的pseudo-label的分布应该尽量集中，而不应该太分散。</p><img src="https://s1.ax1x.com/2020/07/03/NXRJiR.md.png" alt="NXRJiR.md.png" style="zoom:50%;" /> <p>所以，在训练中，<strong>如何评估 $y^u$ 的分布的集中度？</strong></p><p>根据信息学，使用 $y^u$ 的entropy，即  $E\left(y^{u}\right)=-\sum_{m=1}^{5} y_{m}^{u} \ln \left(y_{m}^{u}\right)$ </p><p>(注：这里的 $y^u_m$ 应该是  $y^u=m$ 的概率)</p><p>当 $E(y^u)$ 越小，说明 $y^u$ 分布越集中，如下图。</p><img src="https://s1.ax1x.com/2020/07/03/NXR3dJ.md.png" alt="NXR3dJ.md.png" style="zoom:50%;" /><hr><p>因此，在self-training中：</p><p>$L=\sum_{y^r} C(x^r,\hat{y}^r)+\lambda\sum_{x^u}E(y^u)$ </p><p>Loss function的前一项（cross entropy）minimize保证分类的正确性，后一项（entropy of  $y^u$ ) minimize保证 unlabeled data分布尽量集中，最大可能满足low-density separation的假设。</p><p>training：gradient decent.</p><p>因为这样的形式很像之前提到过的regularization(具体见<a href="/2020/04/21/tips-for-DL/" title="这篇文章的3.2">这篇文章的3.2</a>)，所以又叫entropy-based regularization.</p><h2 id="Outlook-Semi-supervised-SVM"><a href="#Outlook-Semi-supervised-SVM" class="headerlink" title="Outlook: Semi-supervised SVM"></a>Outlook: Semi-supervised SVM</h2><p>SVM也是解决semi-supervised learning的方法.</p><img src="https://s1.ax1x.com/2020/07/03/NXRaQK.md.png" alt="NXRaQK.md.png" style="zoom:50%;" /><p>上图中，在有unlabeled data的情况下，希望boundary 分的越开越好（largest margin）和有更小的error.</p><p>因此枚举unlabeled data所有可能的情况，但枚举在计算量上是巨大的，因此SVM（Support Vector Machines）可以实现枚举的目标，但不需要这么大的枚举量。</p><h1 id="Smoothness-Assumption"><a href="#Smoothness-Assumption" class="headerlink" title="Smoothness Assumption"></a>Smoothness Assumption</h1><p>Smoothness Assumption的思想可以用以下话归纳：</p><p>“You are known by the company you keep”</p><p>近朱者赤，近墨者黑。</p><p>蓬生麻中，不扶而直。白沙在涅，与之俱黑。</p><p>Assumption：“similar” $x$ has the same $\hat{y}$ .</p><p>【意思就是说：相近的 $x$ 有相同的label $\hat{y}$ .】</p><p><strong>More precise assumption：</strong></p><ul><li>x is not uniform</li><li>if $x^1$ and $x^2$ are close in a hign density region, $\hat{y}^1$ and $\hat{y}^2$ are the same.</li></ul><p>Smoothness Assumption假设更准确的表述是：</p><p> x不是均匀分布，如果 $x^1$ 和 $x^2$ 通过一个high density region的区域连在一起，且离得很近，则 $\hat{y}^1$ 和 $\hat{y}^2$ 相同。</p><p>如下图， $x^1$ 和 $x^2$ 通过high density region连接在一起，有相同的label，而 $x^2$ 和 $x^3$ 有不同的label.</p><img src="https://s1.ax1x.com/2020/07/03/NXR1Z4.md.png" alt="NXR1Z4.md.png" style="zoom:50%;" /><hr><p>Smoothness Assumption通过观察大量unlabeled data，可以得到一些信息。</p><p>比如下图中的两张人的左脸和右脸图片，都是unlabeled，但如果给大量的过渡形态（左脸转向右脸）unlabeled data，可以得出这两张图片是相似的结论.</p><p><a href="https://imgchr.com/i/NXoQpj"><img src="https://s1.ax1x.com/2020/07/03/NXoQpj.md.png" alt="NXoQpj.md.png"></a> </p><p>Smoothness Assumption还可以用在文章分类中，比如分类天文学和旅游学的文章。</p><p>如下图， 文章 d1和d3有overlap word（重叠单词），所以d1和d3是同一类，同理 d4和d2是一类。</p><img src="https://s1.ax1x.com/2020/07/03/NXoutg.md.png" alt="NXoutg.md.png" style="zoom:50%;" /><p>如果，下图中，d1和d3没有overlap word，就无法说明d1和d3是同一类。</p><img src="https://s1.ax1x.com/2020/07/03/NXoKhQ.md.png" alt="NXoKhQ.md.png" style="zoom:50%;" /><p>但是，如果我们收集到足够多但unlabeled data，如下图，通过high density region的连接和传递，也可以得出d1和d3一类，d2和d4一类。</p><img src="https://s1.ax1x.com/2020/07/03/NXol1s.md.png" alt="NXol1s.md.png" style="zoom:80%;" /><h2 id="Cluster-and-then-Label"><a href="#Cluster-and-then-Label" class="headerlink" title="Cluster and then Label"></a>Cluster and then Label</h2><p>在Smoothness Assumption假设下，直观的可以用cluster and then label，先用所有的data训练一个classifier。</p><p>直接聚类标记(比较难训练）。</p><h2 id="Graph-based-Approach"><a href="#Graph-based-Approach" class="headerlink" title="Graph-based Approach"></a>Graph-based Approach</h2><p>另一种方法是利用图的结构（Graph structure）来得知 $x^1$ and $x^2$ are close in a high density region (connected by a high density path).</p><p>Represent the data points as a graph.</p><p>【把这些数据点看作一个图】</p><img src="https://s1.ax1x.com/2020/07/03/NXRKMT.md.png" alt="NXRKMT.md.png" style="zoom:50%;" /><p>建图有些时候是很直观的，比如网页中的超链接，论文中的引用。</p><p>但有的时候也需要自己建图。</p><p>注意：</p><p>如果是影像类，base on pixel，performance就不太好，一般会base on autoencoder，将feature抽象出来，效果更好。</p><h3 id="Graph-Construction"><a href="#Graph-Construction" class="headerlink" title="Graph Construction"></a>Graph Construction</h3><p>建图过程如下：</p><ol><li><p>Define the similarity $s(x^i, x^j)$ between $x^i$ and $x^j$ .</p><p>【定义data $x^i$ 和 $x^j$ 的相似度】</p></li><li><p>Add edge【定义数据点中加边（连通）的条件】</p><ul><li><p>K Nearest Neighbor【和该点最近的k个点相连接】</p><img src="https://s1.ax1x.com/2020/07/03/NXReGq.png" alt="NXReGq.png" style="zoom:50%;" /></li><li><p>e-Neighborhood【与离该点距离小于等于e的点相连接】</p><img src="https://s1.ax1x.com/2020/07/03/NXRZin.png" alt="NXRZin.png" style="zoom:50%;" /></li></ul></li><li><p>Edge weight is proportional to $s(x^i, x^j)$ 【边点权重就是步骤1定义的连接两点的相似度】</p><p>Gaussian Radial Basis Function： $s\left(x^{i}, x^{j}\right)=\exp \left(-\gamma\left\|x^{i}-x^{j}\right\|^{2}\right)$ </p><p>一般采用如上公式（经验上取得较好的performance）。</p><p>因为利用指数化后（指数内是两点的Euclidean distance），函数下降的很快，只有当两点离的很近时，该相似度 $s(x^i,x^j)$  才大，其他时候都趋近于0.</p></li></ol><h3 id="Graph-based-Approach-1"><a href="#Graph-based-Approach-1" class="headerlink" title="Graph-based Approach"></a>Graph-based Approach</h3><p>图建好后：</p><p>The labeled data influence their neighbors.</p><p>Propagate through the graph.</p><p>【label data 不仅会影响他们的邻居，还会一直传播下去】</p><img src="https://s1.ax1x.com/2020/07/03/NXRmR0.md.png" alt="NXRmR0.md.png" style="zoom:50%;" /><p>如果data points够多，图建的好，就会像下图这样：</p><img src="https://s1.ax1x.com/2020/07/03/NXREIs.png" alt="NXREIs.png" style="zoom:50%;" /><p>但是，如果data较少，就可能出现下图这种label传不到unlabeled data的情况：</p><img src="https://s1.ax1x.com/2020/07/03/NXRPsS.png" alt="NXRPsS.png" style="zoom:50%;" /><h3 id="Smoothness-Definition"><a href="#Smoothness-Definition" class="headerlink" title="Smoothness Definition"></a>Smoothness Definition</h3><p>因为是基于Smoothness Assumption，所以最后训练出的模型应让得到的图尽可能满足smoothness的假设。</p><p><strong>注意：</strong> 这里的因果关系是，unlabeled data作为NN的输入，得到label $y$ ，该label $y$ 和labeled data的 label $\hat{y}$  一起得到的图是尽最大可能满足Smoothness Assumption的。</p><p>（<strong>而不是</strong>建好图，然后unlabeled data的label $y$ 是labeled data原有的 $\hat{y}$ 直接传播过来的，不然训练NN干嘛）</p><p>把unlabeled data作为NN的输入，得到label ，对labeled data和”unlabeled data” 建图。</p><p>为了在训练中使得最后的图尽可能满足假设，定义<strong>smoothness of the labels on the graph</strong>.</p>$S=\frac{1}{2} \sum_{i,j} w_{i, j}\left(y^{i}-y^{j}\right)^{2}$  <p>（对于所有的labeled data 和 “unlabeled data”（作为NN输入后，有label））</p><p>按照上式计算，得到的Smoothness如下图所示：</p><p><a href="https://imgchr.com/i/NXRiqg"><img src="https://s1.ax1x.com/2020/07/03/NXRiqg.md.png" alt="NXRiqg.md.png"></a> </p><p><strong>Smaller means smoother.</strong> </p><p>【Smoothness $S$ 越小，表示图越满足这个假设】</p><hr><p>计算smoothness $S$ 有一种简便的方法：</p>$S=\frac{1}{2} \sum_{i, j} w_{i, j}\left(y^{i}-y^{j}\right)^{2}=y^{T} L y$  (这里的1/2只是为了计算方便)<ul><li><p>$y$ : (R+U)-dim vector，是所有label data和”unlabeled data” 的label，所以是R+U维。</p><p>$y=\begin{bmatrix}…y^i…y^j…\end{bmatrix}^T$ </p></li><li><p>$L$ :(R+U) $\times$ (R+U) matrix，也叫Graph Laplacian（调和矩阵，拉普拉斯矩阵）</p><p>$L$ 的计算方法：$L=D-W$ </p><p>其中 $W$ 矩阵算是图的邻接矩阵（区别是无直接可达边的值是0）</p><p>$D$ 矩阵是一个对角矩阵，对角元素的值等于 $W$ 矩阵对应行的元素和</p><p>矩阵表示如下图所示：</p><img src="https://s1.ax1x.com/2020/07/03/NXRkZQ.md.png" alt="NXRkZQ.md.png" style="zoom:50%;" /></li></ul><p>（证明据说很枯燥，暂时略[2])</p><h3 id="Smoothness-Regularization"><a href="#Smoothness-Regularization" class="headerlink" title="Smoothness Regularization"></a>Smoothness Regularization</h3>$S=\frac{1}{2} \sum_{i, j} w_{i, j}\left(y^{i}-y^{j}\right)^{2}=y^{T} L y$  <p> $S$ 中的 $y$ 其实是和network parameters有关的（unlabeled data的label），所以把 $S$ 也放进损失函数中minimize，以求尽可能满足smoothness assumption.</p><p>以满足smoothness assumption的损失函数： $L=\sum_{x^r} C\left(y^{r}, \hat{y}^{r}\right)+\lambda S$ </p><p>损失函数的前部分使labeled data的输出更贴近其label，后部分 $\lambda S$ 作为regularization term，使得labeled data和unlabeled data尽可能满足smoothness assumption.</p><p>除了让NN的output满足smoothness的假设，还可以让NN的任何一层的输出满足smoothness assumption，或者让某层外接一层embedding layer，使其满足smoothness assumption，如下图：</p><img src="https://s1.ax1x.com/2020/07/03/NXRAaj.png" alt="NXRAaj.png" style="zoom:50%;" /><h1 id="Better-Representation"><a href="#Better-Representation" class="headerlink" title="Better Representation"></a>Better Representation</h1><p>Better Presentation的思想就是：去芜存菁，化繁为简。</p><ul><li>Find the latent(潜在的) factors behind the observation.</li><li>The latent factors (usually simpler) are better representation.</li></ul><p>【找到所观察事物的潜在特征，即该事物的better representation】</p><p>该部分后续见这篇博客。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><p>挖坑：EM算法详解</p></li><li><p>挖坑：Graph Laplacian in smoothness.</p></li><li><p>Olivier Chapelle：Semi-Supervised Learning </p></li></ol>]]></content>
     
@@ -68,11 +68,11 @@
       <category term="算法导论" scheme="https://f1ed.github.io/categories/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
     
     
-      <category term="Algorithms" scheme="https://f1ed.github.io/tags/Algorithms/"/>
+      <category term="Intro-to-Algorithms" scheme="https://f1ed.github.io/tags/Intro-to-Algorithms/"/>
     
       <category term="Sort" scheme="https://f1ed.github.io/tags/Sort/"/>
     
-      <category term="Intro-to-Algorithms" scheme="https://f1ed.github.io/tags/Intro-to-Algorithms/"/>
+      <category term="Algorithms" scheme="https://f1ed.github.io/tags/Algorithms/"/>
     
   </entry>
   
@@ -98,11 +98,11 @@
       <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
     
     
+      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
       <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
     
       <category term="StreamCipher" scheme="https://f1ed.github.io/tags/StreamCipher/"/>
-    
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
     
   </entry>
   
@@ -125,15 +125,15 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
+      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+    
+      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
       <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
     
       <category term="RNN" scheme="https://f1ed.github.io/tags/RNN/"/>
     
       <category term="LSTM" scheme="https://f1ed.github.io/tags/LSTM/"/>
-    
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
-    
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
     
   </entry>
   
@@ -156,13 +156,13 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
-    
-      <category term="CNN" scheme="https://f1ed.github.io/tags/CNN/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+    
+      <category term="CNN" scheme="https://f1ed.github.io/tags/CNN/"/>
     
   </entry>
   
@@ -185,13 +185,13 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
-    
-      <category term="DNN" scheme="https://f1ed.github.io/tags/DNN/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+    
+      <category term="DNN" scheme="https://f1ed.github.io/tags/DNN/"/>
     
   </entry>
   
@@ -214,13 +214,13 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
-    
-      <category term="Backpropagation" scheme="https://f1ed.github.io/tags/Backpropagation/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+    
+      <category term="Backpropagation" scheme="https://f1ed.github.io/tags/Backpropagation/"/>
     
   </entry>
   
@@ -243,11 +243,11 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
     
   </entry>
   
@@ -270,9 +270,9 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+    
+      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
     
   </entry>
   
@@ -295,9 +295,9 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Regression" scheme="https://f1ed.github.io/tags/Regression/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+    
+      <category term="Regression" scheme="https://f1ed.github.io/tags/Regression/"/>
     
   </entry>
   
@@ -320,15 +320,15 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
+      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+    
+      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
       <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
     
       <category term="Logistic Regression" scheme="https://f1ed.github.io/tags/Logistic-Regression/"/>
     
       <category term="Softmax" scheme="https://f1ed.github.io/tags/Softmax/"/>
-    
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
-    
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
     
   </entry>
   
@@ -351,11 +351,11 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
     
   </entry>
   
@@ -378,11 +378,11 @@
       <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
     
     
+      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
       <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
     
       <category term="StreamCipher" scheme="https://f1ed.github.io/tags/StreamCipher/"/>
-    
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
     
   </entry>
   
@@ -405,11 +405,11 @@
       <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
     
     
+      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
       <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
     
       <category term="StreamCipher" scheme="https://f1ed.github.io/tags/StreamCipher/"/>
-    
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
     
   </entry>
   
@@ -470,7 +470,7 @@
     <link href="https://f1ed.github.io/2020/03/07/python/"/>
     <id>https://f1ed.github.io/2020/03/07/python/</id>
     <published>2020-03-06T16:00:00.000Z</published>
-    <updated>2020-04-12T03:13:37.974Z</updated>
+    <updated>2020-07-03T08:42:56.875Z</updated>
     
     <content type="html"><![CDATA[<p>长期记录帖：关于遇到过的那些Python 的Packets &amp; Module &amp; Method &amp; Attribute。中英记录。</p><a id="more"></a><h1 id="Tricky"><a href="#Tricky" class="headerlink" title="Tricky"></a>Tricky</h1><h2 id="list-comprehension"><a href="#list-comprehension" class="headerlink" title="list comprehension"></a>list comprehension</h2><ul><li><p>List comprehension provides a concise way to create lists. </p><ul><li>e.g. : squares = [x**2 for x in range(10)]</li></ul></li><li><p>A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more <em>for</em> or <em>if</em> clauses. The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it.</p><ul><li>e.g. : Double loop: [(x,y) for x in [1,2,3] for y in [3,1,4] if x != y]<ul><li>输出7个</li></ul></li><li>e.g. : (Using zip() to loop together): [(x, y) for x,y in zip([1,2,3], [3,1,4]) if x!=y]<ul><li>输出2个</li></ul></li></ul></li></ul><h1 id="Python-Build-function"><a href="#Python-Build-function" class="headerlink" title="Python-Build function"></a>Python-Build function</h1><h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><ul><li>print(*objects, sep=’ ‘, end=’\n’, file=sys.stdout)</li></ul><h2 id="len"><a href="#len" class="headerlink" title="len"></a>len</h2><ul><li>Return the length(the number of items) of an object.</li></ul><h2 id="str-format"><a href="#str-format" class="headerlink" title="str.format()"></a>str.format()</h2><ul><li>字符串格式化</li><li>eg:<ul><li>“{} {}”.format(“Hello”,”World)</li><li>‘Hello World’</li></ul></li></ul><h2 id="zip-iterables"><a href="#zip-iterables" class="headerlink" title="zip(*iterables)"></a>zip(*iterables)</h2><ul><li><p>Make an iterator that aggregates【聚集】 elements from each of the iterales.</p></li><li><p>Returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables. The iterator stops when the shortest input iterable is exhausted. </p><p>【返回一个元组的迭代器】</p></li><li><p>使用zip可以同时对多个迭代器进行迭代</p></li></ul><h2 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate"></a>enumerate</h2><ul><li><p>Enumerate is a built-in funciton of Python. It allows us to loop over something and have an automatic counter.</p></li><li><p>e.g. </p><ul><li><p>for counter, value in enumerate(some_list):</p><p>print(counter, value)</p></li></ul></li><li><p>e.g. : an optional argument: tell enumerate from where to start the index.</p><ul><li><p>for c, value in enumerate(my_list, 1):</p><p>print(c, value)</p></li></ul></li></ul><h2 id="with-open-path-as-f"><a href="#with-open-path-as-f" class="headerlink" title="with open(path) as f:"></a>with open(path) as f:</h2><ul><li><p>由于读写文件都可能产生IOError，一旦出错，后面的f.close()就不会调用。</p></li><li><p>用try……finally来实现，比较麻烦。</p><p>try:</p><p>​    f = open(path, ‘r’)</p><p>​    print(f.read())</p><p>finally:</p><p>​    if f:</p><p>​        f.close()</p></li><li><p>用with as 简化</p><p>with open(path, ‘r’) as f:</p><p>​    print(f.read())</p></li></ul><h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h2 id="numpy-argsort"><a href="#numpy-argsort" class="headerlink" title="numpy.argsort"></a>numpy.argsort</h2><ul><li><p>numpy.argsort(a, axis=-1, kind=None, order=None)</p></li><li><p>Returns the indices that would sort an array.</p><p>Perform an indirect sort along the given axis using the algorithm specified by the kind keyword. It returns an array of indices of the same shape as a that index data along the given axis in sorted order.</p></li><li><p>Parameters:</p><ul><li><p><strong>a</strong> :array_like.</p></li><li><p><strong>axis</strong> : int or None, optional</p><p>Axis along which to sort. The default is -1(the last axis). 【默认按照最后一个维度】</p><ul><li>2-D: axis = 0按列排序</li><li>2-D: axis = 1 按行排序</li></ul></li><li><p><strong>kind</strong> :{‘quicksort’, ‘mergesort’, ‘heapsort’, ‘stable’}, optional</p><p>The default is ‘quicksort’</p></li></ul></li><li><p>Return: index_array: ndarray, int.【返回的是降序排列的索引数组】</p><ul><li><p>e.g.:</p><p>x = np.array([5, 1, 2])</p><p>np.argsort(x)  # 降序</p><p>array([1,2,0])</p><p>np.argsort(-x) # 升序</p><p>array([0,2,1])</p></li></ul></li></ul><h2 id="Linear-algebra-numpy-linalg"><a href="#Linear-algebra-numpy-linalg" class="headerlink" title="Linear algebra(numpy.linalg)"></a>Linear algebra(numpy.linalg)</h2><h3 id="numpy-dot"><a href="#numpy-dot" class="headerlink" title="numpy.dot"></a>numpy.dot</h3><ul><li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html">numpy.dot(a,b)</a> </li><li>Dot product of two arrays.<ul><li>If both a and b are 1-D arrays, it is inner porduct of vectors.</li><li>If both a and b are 2-D arrays, it is matrix multiplication, but using matmul is preferred.</li><li>Id either a or b is 0-D(scalar), it is equivalent to multiply and using numpy.multiply(a, b) or a*b is preferred.</li><li>……</li></ul></li></ul><h3 id="numpy-matmul"><a href="#numpy-matmul" class="headerlink" title="numpy.matmul"></a>numpy.matmul</h3><ul><li>Matrix product of two arrays.</li><li>numpy.matmul(x1, x2)</li></ul><h3 id="numpy-linalg-inv-a"><a href="#numpy-linalg-inv-a" class="headerlink" title="numpy.linalg.inv(a)"></a>numpy.linalg.inv(a)</h3><ul><li><p>Compute the inverse of a matrix.</p><p>Given a square matrix a, return the matrix ainv satisfying dot(a, ainv) = dot(ainv, a) = eye(a.shape[0])/</p></li><li><p>numpy.linalg.inv(a)</p></li><li><p>Parameters:</p><ul><li><strong>a</strong> :(…, M, M) array_like. Matrix to e inverted.</li></ul></li><li><p>Return: ainv.</p></li></ul><h3 id="numpy-linalg-svd"><a href="#numpy-linalg-svd" class="headerlink" title="numpy.linalg.svd"></a>numpy.linalg.svd</h3><ul><li><p>numpy.linalg.svd(a, full_matrices=True,  compute_uv=True, hermitian=False)</p></li><li><p>Singular Value Decomposition</p></li><li><p>矩阵的奇异值分解</p><p>A = u @ s @ vh</p><p>u, vh是标准正交矩阵, inv(u) = uh</p><p>s是对角矩阵</p></li><li><p>Parameters:</p><ul><li><p><strong>a</strong> :array_like, a real or complex array with a.ndim &gt;=2</p></li><li><p><strong>full_matrices</strong> :bool, optional. True(default)</p><p>If True, u and vh have the shapes(…, M, M) and (…, N, N), respectively.</p><p>Otherwise, the shapes are(…, M, K) and (…, K, N), respectively, where K = min(M,N)</p></li><li><p><strong>compute_uv</strong> : bool, optional.True(default)</p><p>Whether or not to compute u and vh in addition to s.【注，vh就是v的转置】</p></li></ul></li><li><p>Return：</p><ul><li>u: array</li><li>s: array</li><li>vh:array</li></ul></li></ul><h2 id="numpy-zeros"><a href="#numpy-zeros" class="headerlink" title="numpy.zeros"></a>numpy.zeros</h2><ul><li><p>numpy.zeros(shape, dtype=float, order=’C’)</p></li><li><p>Return a new array of given shape and type, filled with zeros.</p></li><li><p>parameters:</p><ul><li><strong>shape</strong>:  int or truple of ints. e.g.,(2,3) or 2</li><li><strong>dtype</strong>: data-type, optional.(Defaults is numpy.float64)</li><li><strong>oder</strong>: optional</li></ul></li><li><p>Returns: out ndarray</p></li></ul><h2 id="numpy-full"><a href="#numpy-full" class="headerlink" title="numpy.full"></a>numpy.full</h2><ul><li>numpy.full(shape, fill_value, dtype=None)</li><li>Return a new array of given shape and type, filled with fill_value.</li><li>parameters:<ul><li><strong>shape</strong> :int or sequence of ints<ul><li>(2,3) or 2</li></ul></li><li><strong>fill_value</strong> :scalar</li><li><strong>dtype</strong> :data-type, optional</li></ul></li></ul><h2 id="numpy-arange"><a href="#numpy-arange" class="headerlink" title="numpy.arange"></a>numpy.arange</h2><ul><li><p>numpy.arange([start, ]stop, [step, ]dtype=None)</p></li><li><p>Return evenly spaced values within a given interval.</p></li><li><p>parameters:</p><ul><li><strong>start</strong>: number, optional. (Defaults is 0)</li><li><strong>stop</strong> :number. <strong>[start,stop)</strong></li><li><strong>step</strong> :number, optional(Defaults is 1)</li><li><strong>dtype</strong> :</li></ul></li><li><p>Returns :ndarray </p></li><li><p>differ with built-in range function</p><ul><li>numpy.arange returnan ndarray rathan than a list.</li><li>numpy.arange’s step can be float.</li></ul></li></ul><h2 id="numpy-meshgrid"><a href="#numpy-meshgrid" class="headerlink" title="numpy.meshgrid"></a>numpy.meshgrid</h2><ul><li>numpy.meshgrid(x, y)</li><li>生成用x向量为行，y向量为列的矩阵（坐标系）</li><li>返回 X矩阵和Y矩阵<ul><li>X矩阵：网格上所有点的x值</li><li>Y矩阵：网格上所有点的y值</li></ul></li><li>e.g., X, Y = np.meshgrid(x, y) 【X,Y 都是网格点坐标矩阵】</li></ul><h2 id="numpy-genfromtext"><a href="#numpy-genfromtext" class="headerlink" title="numpy.genfromtext"></a>numpy.genfromtext</h2><ul><li><p>numpy.genfromtxt (fname, delimiter=None)</p></li><li><p>Load data from a text file, with missing values handled as specified. </p><p>Each line past the first <em>skip_header</em> lines is split at the delimiter character, and characters following the <em>comments</em> characters are discarded.</p></li><li><p>Parameters:</p><ul><li><strong>fname</strong> :file, str, list of str, generator.</li><li><strong>dtype</strong> :dtype, optional. </li><li><strong>delimiter</strong> :str, int, or sequence, optional. <ul><li>(default = whitespace)</li><li>The strin used to separate values. </li></ul></li></ul></li><li><p>Python的列表读取处理数据很慢，numpy.genfromtext就很棒。</p></li></ul><h2 id="numpy-isnan"><a href="#numpy-isnan" class="headerlink" title="numpy.isnan"></a>numpy.isnan</h2><ul><li>numpy.isnan(x)</li><li>Test element-wise for NaN(Not a number) and return result as a boolean array.</li><li>Parameters:<ul><li><strong>x</strong> :array_like</li></ul></li><li>Returns:  y:ndarray or bool.<ul><li>True where x is NaN, false otherwise.</li></ul></li></ul><h2 id="numpy-empty"><a href="#numpy-empty" class="headerlink" title="numpy.empty"></a>numpy.empty</h2><ul><li>nmpy.empty(shape, dtype=float, order=’C’)</li><li>Return a new arry of given shape and type, without initializing entries.</li><li>Parameters:<ul><li><strong>shape</strong> :int or tuple of int</li><li><strong>dtype</strong> :data-type,optional<ul><li>Default is numpy.float64.</li></ul></li></ul></li><li>Returns: <ul><li>out: ndarray</li></ul></li></ul><h2 id="numpy-reshape"><a href="#numpy-reshape" class="headerlink" title="numpy.reshape"></a>numpy.reshape</h2><ul><li>numpy.reshape(a, newshape, order=’C’)</li><li>Gives a new shape to an array without changing its data.【改变张量的shape，不改变张量的数据】</li><li>Parameters:<ul><li><strong>a</strong> : array-like</li><li><strong>newshape</strong> : int or tuple of ints<ul><li>One shape dimension can be -1. The value is inferred from the length of the array and remaning dimensions.</li></ul></li></ul></li><li>Returns: reshaped_array:ndarray</li></ul><h2 id="numpy-mean"><a href="#numpy-mean" class="headerlink" title="numpy.mean"></a>numpy.mean</h2><ul><li>numpy.mean(a, axis=None)</li><li>Compute the arithmetic mean along the specifiied axis.(the average of the array elements)</li><li>Parameters:<ul><li><strong>a</strong> : array_like</li><li><strong>axis</strong> ：None or int or tuple of ints, optional<ul><li>Axis or axes along which the means are computed.</li><li>axis=0 ：沿行的垂直往下（列）</li><li>axis=1 ：沿列的方向水平向右（行）</li></ul></li></ul></li></ul><h2 id="numpy-std"><a href="#numpy-std" class="headerlink" title="numpy.std"></a>numpy.std</h2><ul><li>numpy.std(a, axis=None,)</li><li>Compute the standard deviation along the specified axis.【标准差】</li><li>Parameters:<ul><li><strong>a</strong> :array_like</li><li><strong>axis</strong> :Axis or axes along which the means are computed.</li></ul></li></ul><h2 id="numpy-shape"><a href="#numpy-shape" class="headerlink" title="numpy.shape"></a>numpy.shape</h2><ul><li>attribute</li><li>Tuple of array dimensions.</li></ul><h2 id="numpy-concatenate"><a href="#numpy-concatenate" class="headerlink" title="numpy.concatenate"></a>numpy.concatenate</h2><ul><li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html">numpy.concatenate((a1, a2, …), axis=0)</a> </li><li>Join a sequence of arrays along an existing axis.</li><li>Parameters: <ul><li><strong>a1, a2, …</strong> :sequence of array_like<ul><li>The arrays must have the same shape, excepting in the dimension corresponding to axis.【除了axia方向，其他维度的shape要相同】</li><li>If axis is None, arrays are flattened before use.【值为None，就先将向量变成一维的】</li><li>Default=0</li></ul></li></ul></li></ul><h2 id="numpy-ndarray-astype"><a href="#numpy-ndarray-astype" class="headerlink" title="numpy.ndarray.astype"></a>numpy.ndarray.astype</h2><ul><li>method</li><li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html">numpy.ndarray.astype(dtype)</a></li><li>Copy of the array cast to a specified type.【强制转换数据类型】</li><li>Parameters:<ul><li><strong>dtype</strong> : str or dtype</li></ul></li></ul><h2 id="numpy-ones"><a href="#numpy-ones" class="headerlink" title="numpy.ones"></a>numpy.ones</h2><ul><li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ones.html">numpy.ones(shape, dtype=None)</a></li><li>Return a new array of given shape and type, filled with ones.</li><li>Parameters:<ul><li><strong>shape</strong> : int or sequence of ints.</li><li><strong>dtype</strong> : data-type, optional</li></ul></li></ul><h2 id="numpy-array"><a href="#numpy-array" class="headerlink" title="numpy.array"></a>numpy.array</h2><ul><li><p>numpy.array(object, dtype = none)</p></li><li><p>Create an array</p></li><li><p>Parameters:</p><ul><li><p><strong>object</strong> :array_like</p><p>An array, any object exposing the array interface, an object whose <em>array</em> method returns an array, or any(nested) sequence.</p></li></ul></li></ul><h2 id="numpy-ndarray-运算"><a href="#numpy-ndarray-运算" class="headerlink" title="numpy ndarray 运算"></a>numpy ndarray 运算</h2><ul><li>[[1]]*3 = [[1],[1],[1]]</li><li>A * B 元素相乘</li><li>numpy.dot(A, B) 矩阵相乘</li></ul><h2 id="numpy-power"><a href="#numpy-power" class="headerlink" title="numpy.power"></a>numpy.power</h2><ul><li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.power.html">numpy.power(x1, x2)</a> </li><li>First array elements raised to powers from second array.</li><li>Parameters:<ul><li><strong>x1</strong> :array_like .<ul><li>The bases.</li></ul></li><li><strong>x2</strong> :array_like<ul><li>The exponents. </li></ul></li></ul></li></ul><h2 id="numpy-sum"><a href="#numpy-sum" class="headerlink" title="numpy.sum"></a>numpy.sum</h2><ul><li>numpy.sum(a, axis=None, dtype=None)</li><li>Sum of arrays elements over a given axis.</li><li>Parameters:<ul><li><strong>a</strong> :array_like<ul><li>Elements to sum.</li></ul></li><li><strong>axis</strong> :None or int or tuple of ints, optional<ul><li>Axis or axes along which a sum is perfomed.</li><li>The default, None, will sum all of the elementsof the input array.</li></ul></li></ul></li></ul><h2 id="numpy-transpose"><a href="#numpy-transpose" class="headerlink" title="numpy.transpose"></a>numpy.transpose</h2><ul><li><p>numpy.transpose(a, axes=None)</p></li><li><p>Permute the dimensions of the array.【tensor的维度换位】</p></li><li><p>Parameters:</p><ul><li><strong>a</strong> : array_like</li><li><strong>axes</strong> : list of ints, optinal<ul><li>Default, reverse the dimensions.</li><li>Otherwise permute the axes according to the values given.</li></ul></li></ul></li><li><p>Returns : ndarray</p></li><li><p>张量a的shape是(10,2,15), numpy.transport(2,0,1)的shape就是(15,10,2)</p></li><li><p>对于一维：行向量变成列向量</p></li><li><p>对于二维：矩阵的转置</p></li></ul><h2 id="numpy-save"><a href="#numpy-save" class="headerlink" title="numpy.save"></a>numpy.save</h2><ul><li><p><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.save.html">numpy.save(file, arr)</a> </p></li><li><p>Save an array to a binary file in Numpy .npy format.</p></li><li><p>Parameters:</p><ul><li><p><strong>file</strong> :file, str, or pathlib</p></li><li><p><strong>arr</strong> :array_like</p><p>Array data to be saved.</p></li></ul></li></ul><h2 id="numpy-clip"><a href="#numpy-clip" class="headerlink" title="numpy.clip"></a>numpy.clip</h2><ul><li>Clip(limit) the values in an array</li><li>numpy.clip(a, a_min, a_max)</li><li>Parameters:<ul><li><strong>a</strong> :array_like</li><li><strong>a_min</strong> : scalar or array_like</li><li><strong>a_max</strong> :scalar or array_like</li></ul></li></ul><h2 id="numpy-around"><a href="#numpy-around" class="headerlink" title="numpy.around"></a>numpy.around</h2><ul><li><p>Evenly round to the given number of decimals(十进制)</p></li><li><p>numpy.around(a)</p></li><li><p>Parameters：</p><ul><li><strong>a</strong> :array_like</li></ul></li><li><p>Notes: For values exactly halfway between rounded decimal values, Numpy rounds to the nearest even values.</p><p>【这什么意思呢？ 就是说对于0.5的这种，为了统计上平衡，不会全部向上取整或者向下取整，会向最近的偶数取整，around（2.5）=2】</p></li></ul><h2 id="numpy-log"><a href="#numpy-log" class="headerlink" title="numpy.log"></a>numpy.log</h2><ul><li>The natural logarithm log is the inverse of exponential functions, so that log(exp(x))=x.</li><li>numpy.log(x)</li><li>Parameters:<ul><li><strong>x</strong> : array_like</li></ul></li></ul><h2 id="numpy-ndarray-T"><a href="#numpy-ndarray-T" class="headerlink" title="numpy.ndarray.T"></a>numpy.ndarray.T</h2><ul><li>attribute, the transpose array.</li><li>ndarray.T</li></ul><h2 id="numpy-random-shuffle"><a href="#numpy-random-shuffle" class="headerlink" title="numpy.random.shuffle"></a>numpy.random.shuffle</h2><ul><li><p>Modify a sequence in-space by shufflng its contents.</p><p>This function only shuffles the array along the first axis of a multi-diensional array. The order of sub-arrays is changed but their contents remains the same.</p></li><li><p>numpy.random.shuffle(x)</p></li><li><p>Parameters:</p><ul><li><strong>x</strong> : array_like</li></ul></li><li><p><strong>e.g. shuffle two list, X and Y, together.</strong> <strong>【以相同的顺序打乱两个array】</strong></p><ul><li><p>np.random.seed(0)</p><p>randomize = np.arrange(len(X))</p><p>np.random.shuffle(randomize)</p><p>return X[randomize], Y[randomize]</p></li></ul></li></ul><h1 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h1><h2 id="skelearn-linear-model-LinearRegression"><a href="#skelearn-linear-model-LinearRegression" class="headerlink" title="skelearn.linear_model.LinearRegression"></a>skelearn.linear_model.LinearRegression</h2><ul><li>class sklearn.linear_model.LinearRegression(fit_intercept=True, normalize=False, copy_X=True, n_jobs=None)</li><li>Ordinary least squares Linear Regress(最小二乘法回归运算)</li><li>Parameters:<ul><li><strong>fit_intercept</strong> :bool, optional, defalut True【True：需要bias的截距项】</li><li><strong>normalize</strong> :bool, optional, default False 【True：对样本做feature scaling】</li></ul></li><li>Attributes：<ul><li><strong>coef_</strong> :array of shape(n_features) 【权重】</li><li><strong>intercept_</strong> :bias </li></ul></li><li>Methods：<ul><li><strong>fit(self,X,y[,sample_weight])</strong> :Fit linear model<ul><li>e.g. , LinearRegression().fit(x_data, y_data)</li></ul></li></ul></li></ul><h1 id="matplotlib-pyplot"><a href="#matplotlib-pyplot" class="headerlink" title="matplotlib.pyplot"></a>matplotlib.pyplot</h1><h2 id="matplotlib-pyplot-contourf"><a href="#matplotlib-pyplot-contourf" class="headerlink" title="matplotlib.pyplot.contourf"></a>matplotlib.pyplot.contourf</h2><ul><li><p>contour and contourf draw contour lines and filled contours, respectively.【一个画等高线，一个填充等高线/轮廓】</p></li><li><p>contour([X, Y, ] Z, [levels], **kwargs)</p></li><li><p>Parameters</p><ul><li><p><strong>X, Y</strong>: The coordinates of the values in Z. A and Y must both be 2-D with the sanme shape as Z(e.g. created via numpy.meshgrid), or they must both be 1-D such that len(X) == M is the number of columns in Z and len(Y) = N is the number of rows in Z.</p><p>【X，Y要么是由像numpy.mershgrid(x, y) 生成的网格点坐标矩阵，要么X，Y是（基）向量，X向量是x轴的，对应到Z矩阵，是Z矩阵的列数，Y向量同理】</p></li><li><p><strong>Z</strong> ：array-like(N,M)</p></li><li><p><strong>levels</strong> : int or array-like, optional. Determines the number and positions of contour lines / religions.【划分多少块等高区域】</p></li><li><p><strong>alpha</strong> :float, optional. Between 0(transparent) and 1(opaque).【透明度】</p></li><li><p><strong>cmap</strong> :str or Colormap, optional.</p></li></ul></li><li><p>e.g., pyplot.contourf(x, y, Z, 50, alpha=0.5, cmap=pyplot.get_cmap(‘jet’))【‘jet’是常用的那种红橙黄绿青蓝紫】</p></li></ul><h2 id="matplotlib-pyplot-plot"><a href="#matplotlib-pyplot-plot" class="headerlink" title="matplotlib.pyplot.plot"></a>matplotlib.pyplot.plot</h2><ul><li>plot([x], y, [fmt], <em>, data=None, *</em>kwargs)</li><li>The coordinates of the points or line nodes are given by x, y.</li><li>Parameters:<ul><li><strong>x, y</strong> :array-like or scalar.</li><li><strong>fmt</strong> :str, optional. A format string.<ul><li>e.g., ‘.’, point marker. ‘-‘, solid line style. ‘–’,dashed line style. ‘b’, blue.</li></ul></li><li><strong>ms/markersize</strong> : float</li><li><strong>lw/linewidth</strong> :float</li><li><strong>color</strong> :</li></ul></li></ul><h2 id="matplotlib-pyplot-xlim"><a href="#matplotlib-pyplot-xlim" class="headerlink" title="matplotlib.pyplot.xlim"></a>matplotlib.pyplot.xlim</h2><ul><li>xlim(<em>args, *</em>kwargs)</li><li>Get or set the x limits of the current axes.</li><li>e.g. <ul><li>left, right = xlim() :get</li><li>xlim(left, right) :set</li></ul></li></ul><h2 id="matplotlib-pyplot-show"><a href="#matplotlib-pyplot-show" class="headerlink" title="matplotlib.pyplot.show"></a>matplotlib.pyplot.show</h2><ul><li>show(<em>args, *</em>kwargs)</li><li>display a figure.</li></ul><h2 id="matplotlib-pyplot-vlines"><a href="#matplotlib-pyplot-vlines" class="headerlink" title="matplotlib.pyplot.vlines"></a>matplotlib.pyplot.vlines</h2><ul><li>Plot vertical lines.</li><li>vlines(x, ymin, ymax, color=’k’, linestyles=’solid’)</li><li>Parameters:<ul><li><strong>x</strong> :scalar or 1D array_like</li><li><strong>ymin, ymax</strong> :scalar or 1D array_like</li></ul></li></ul><h2 id="matplotlib-pyplot-hlines"><a href="#matplotlib-pyplot-hlines" class="headerlink" title="matplotlib.pyplot.hlines"></a>matplotlib.pyplot.hlines</h2><ul><li>Plot horizontal lines.</li><li>vlines(y, xmin, xmax, color=’k’, linestyles=’solid’)</li><li>Parameters:<ul><li><strong>y</strong> :scalar or 1D array_like</li><li><strong>xmin, xmax</strong> :scalar or 1D array_like</li></ul></li></ul><h2 id="matplotlib-pyplot-savefig"><a href="#matplotlib-pyplot-savefig" class="headerlink" title="matplotlib.pyplot.savefig"></a>matplotlib.pyplot.savefig</h2><ul><li>Save the current figure.</li><li>savefig(fname)</li><li>Parameters:<ul><li><strong>fname</strong> :str ot Pathlike</li></ul></li></ul><h2 id="matplotlib-pyplot-legend"><a href="#matplotlib-pyplot-legend" class="headerlink" title="matplotlib.pyplot.legend"></a>matplotlib.pyplot.legend</h2><ul><li>Place a lengend on the axes.</li><li>e.g. : legend() Labeling exisiting plot elements<ul><li>plt.plot(train_loss)</li><li>plt.plot(dev_loss)</li><li>plt.legend([‘train’, ‘dev’])</li></ul></li><li>e.g. : le</li></ul><h1 id="sys"><a href="#sys" class="headerlink" title="sys"></a>sys</h1><h2 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv[]"></a>sys.argv[]</h2><ul><li>python a.py data.csv<ul><li>sys.argv = [‘a.py’, ‘data.csv’]</li></ul></li></ul><h2 id="重定向到文件"><a href="#重定向到文件" class="headerlink" title="重定向到文件"></a>重定向到文件</h2><ul><li><p>f = open(‘out.csv’, ‘w’)</p><p>sys.stdout = f</p><p>print(‘此时print掉用的就是文件对象的write方法’)</p></li></ul>]]></content>
     
@@ -508,9 +508,9 @@
       <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
     
     
-      <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
-    
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
     
   </entry>
   
@@ -533,11 +533,11 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Gradient" scheme="https://f1ed.github.io/tags/Gradient/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="Gradient" scheme="https://f1ed.github.io/tags/Gradient/"/>
     
   </entry>
   
@@ -560,11 +560,11 @@
       <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Regression" scheme="https://f1ed.github.io/tags/Regression/"/>
-    
       <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
     
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="Regression" scheme="https://f1ed.github.io/tags/Regression/"/>
     
   </entry>
   
