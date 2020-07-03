@@ -9,12 +9,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: DeepLearning - fred&#39;s blog</title>
+<title>标签: Semi-supervised - fred&#39;s blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="fred&#39;s blog">
-<meta property="og:url" content="https://f1ed.github.io/tags/DeepLearning/index.html">
+<meta property="og:url" content="https://f1ed.github.io/tags/Semi-supervised/index.html">
 <meta property="og:site_name" content="fred&#39;s blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f1ed.github.io/images/og_image.png">
@@ -135,7 +135,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">DeepLearning</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Semi-supervised</a></li>
         </ul>
         </nav>
     </div>
@@ -145,23 +145,23 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/06/11/rnn/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/82213342_p0_master1200.jpg" alt="「机器学习-李宏毅」：Recurrent Neural Network（RNN）">
+        <a href="/2020/07/03/semi-supervised/" class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/81648714_p0.jpg" alt="「机器学习-李宏毅」:Semi-supervised Learning">
         </a>
     </div>
     
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/06/11/rnn/"><i class="fas fa-bars"></i>「机器学习-李宏毅」：Recurrent Neural Network（RNN）</a>
+                <a class="has-link-black-ter" href="/2020/07/03/semi-supervised/"><i class="fas fa-bars"></i>「机器学习-李宏毅」:Semi-supervised Learning</a>
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-10T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-06-11</time>
+                <time class="level-item has-text-grey" datetime="2020-07-02T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-07-03</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T08:43:33.524Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T09:09:13.296Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
                 
                 
                 <div class="level-item">
@@ -174,7 +174,7 @@
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    25 分钟 读完 (大约 3742 个字)
+                    31 分钟 读完 (大约 4713 个字)
                 </span>
                 
                 
@@ -182,7 +182,12 @@
         </div>
         
         <div class="content">
-            <p>这篇文章中首先从RNN能解决什么问题入手，分析了RNN与一般NN的区别。<br>然后着重讲解了基于RNN的LSTM模型，包括LSTM的细节、和一般NN的区别，以及如何训练LSTM模型。<br>具体阐述了在模型（RNN类模型）训练过程中为什么会遇到剧烈抖动问题和如何解决抖动的工程解决方法。</p>
+            <p>这篇文章开篇讲述了什么是Semi-supervised Learning（半监督学习）？</p>
+<p>再次，文章具体阐述了四种Semi-supervised Learning，包括Generative Model，Low-density，Smoothness Assumption和Better Representation。</p>
+<p>对于Generative Model，文章重点讲述了如何用EM算法来训练模型。</p>
+<p>对于Low-density，文章重点讲述了如何让模型进行Self-training，并且在训练中引入Entropy-based Regularization term来尽可能low-density的假设。</p>
+<p>对于Smoothness Assumption，文章重点讲述了Graph-based Approach（基于图的方法），并且在训练中引入Smoothness Regularization term来尽可能满足Smoothness Assumption的假设。</p>
+<p>对于Better Representation，本篇文章只是简单阐述了其思想，具体介绍见这篇博客。</p>
         </div>
     
         
@@ -193,313 +198,13 @@
             
             <div class="level-item is-size-7 is-uppercase">
                 <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/LSTM/" rel="tag">LSTM</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/RNN/" rel="tag">RNN</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
+                <a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Semi-supervised/" rel="tag">Semi-supervised</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
             </div>
             
         </div>
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/11/rnn/#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/04/25/CNN/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/76062610_p0_master1200.jpg" alt="「机器学习-李宏毅」：Convolution Neural Network（CNN）">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/25/CNN/"><i class="fas fa-bars"></i>「机器学习-李宏毅」：Convolution Neural Network（CNN）</a>
-            
-        </h1>
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-24T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-25</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T08:40:42.768Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
-                
-                
-                <div class="level-item">
-                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/">机器学习-李宏毅</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    <i class="far fa-clock"></i>&nbsp;
-                    
-                    
-                    21 分钟 读完 (大约 3084 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <div class="content">
-            <p>这篇文章中首先介绍了为什么要用CNN做图像识别，或者说图像识别问题的特点是什么？<br>文章中也详细介绍了CNN的具体架构，主要包括Convolution、Max Pooling、Flatten。<br>文章最后简要介绍了CNN在诸多领域的应用。</p>
-        </div>
-    
-        
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-mobile is-flex">
-        <div class="level-start">
-            
-            <div class="level-item is-size-7 is-uppercase">
-                <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/tags/CNN/" rel="tag">CNN</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
-            </div>
-            
-        </div>
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/25/CNN/#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/04/21/tips-for-DL/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/contest_pc_header_303.png" alt="「机器学习-李宏毅」：Tips for Deep Learning">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/21/tips-for-DL/"><i class="fas fa-bars"></i>「机器学习-李宏毅」：Tips for Deep Learning</a>
-            
-        </h1>
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-20T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-21</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T08:45:39.300Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
-                
-                
-                <div class="level-item">
-                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/">机器学习-李宏毅</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    <i class="far fa-clock"></i>&nbsp;
-                    
-                    
-                    36 分钟 读完 (大约 5358 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <div class="content">
-            <p>这篇文章中，详尽阐述了在训练Deep Neural Network时，改善performance的一些tips。<br>tips从Training和Testing两个方面展开。<br>在Training中结果不尽人意时，可以采取更换新的activation function（如ReLu,Maxout等）和采用Adaptive Learning Rate的GradientDescent算法（除了Adagrad,还有RMSprop、Momentum、Adam等）。<br>当在Training中得到好的performance，但在testing中perform bad时，即遇到了overfitting，又该怎么处理呢？文章后半部分详尽介绍了EarlyStopping、Regularization和Dropout三个solution。</p>
-        </div>
-    
-        
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-mobile is-flex">
-        <div class="level-start">
-            
-            <div class="level-item is-size-7 is-uppercase">
-                <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/tags/DNN/" rel="tag">DNN</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
-            </div>
-            
-        </div>
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/21/tips-for-DL/#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/04/18/Backpropagation/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/69391223_p0_master1200.jpg" alt="「机器学习-李宏毅」：Backpropagation">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/18/Backpropagation/"><i class="fas fa-bars"></i>「机器学习-李宏毅」：Backpropagation</a>
-            
-        </h1>
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-17T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-18</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T08:39:21.739Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
-                
-                
-                <div class="level-item">
-                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/">机器学习-李宏毅</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    <i class="far fa-clock"></i>&nbsp;
-                    
-                    
-                    12 分钟 读完 (大约 1828 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <div class="content">
-            <p>这篇文章中，讲解了Deep Learning中使用的一种高效Gradient Descent的算法：BackPropagation。<br>BackPropagation通过正向传播和反向传播两个阶段，最后能一起算出损失函数对每一个参数的gradient。</p>
-        </div>
-    
-        
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-mobile is-flex">
-        <div class="level-start">
-            
-            <div class="level-item is-size-7 is-uppercase">
-                <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/tags/Backpropagation/" rel="tag">Backpropagation</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
-            </div>
-            
-        </div>
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/18/Backpropagation/#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/04/18/DL-introdunction/" class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/79916708_p0_master1200.jpg" alt="「机器学习-李宏毅」：Deep Learning-Introduction">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/18/DL-introdunction/"><i class="fas fa-bars"></i>「机器学习-李宏毅」：Deep Learning-Introduction</a>
-            
-        </h1>
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-17T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-18</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T08:41:15.486Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
-                
-                
-                <div class="level-item">
-                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/">机器学习-李宏毅</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    <i class="far fa-clock"></i>&nbsp;
-                    
-                    
-                    7 分钟 读完 (大约 1099 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <div class="content">
-            <p>这篇文章中，介绍了Deep Learning的一般步骤。</p>
-        </div>
-    
-        
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-mobile is-flex">
-        <div class="level-start">
-            
-            <div class="level-item is-size-7 is-uppercase">
-                <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                <a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
-            </div>
-            
-        </div>
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/18/DL-introdunction/#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/07/03/semi-supervised/#more"><i class="fas fa-book-reader has-text-grey"></i>&nbsp;&nbsp;阅读更多</a>
                 </div>
             </div>
         </div>
