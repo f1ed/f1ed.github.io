@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://f1ed.github.io/"/>
+  <link href="https://f7ed.com/"/>
   <updated>2020-07-03T11:32:00.705Z</updated>
-  <id>https://f1ed.github.io/</id>
+  <id>https://f7ed.com/</id>
   
   <author>
     <name>f1ed</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>「机器学习-李宏毅」:Semi-supervised Learning</title>
-    <link href="https://f1ed.github.io/2020/07/03/semi-supervised/"/>
-    <id>https://f1ed.github.io/2020/07/03/semi-supervised/</id>
+    <link href="https://f7ed.com/2020/07/03/semi-supervised/"/>
+    <id>https://f7ed.com/2020/07/03/semi-supervised/</id>
     <published>2020-07-02T16:00:00.000Z</published>
     <updated>2020-07-03T11:32:00.705Z</updated>
     
@@ -37,21 +37,21 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Semi-supervised" scheme="https://f1ed.github.io/tags/Semi-supervised/"/>
+      <category term="Semi-supervised" scheme="https://f7ed.com/tags/Semi-supervised/"/>
     
   </entry>
   
   <entry>
     <title>「算法导论」:排序-总结</title>
-    <link href="https://f1ed.github.io/2020/06/29/sort-preview/"/>
-    <id>https://f1ed.github.io/2020/06/29/sort-preview/</id>
+    <link href="https://f7ed.com/2020/06/29/sort-preview/"/>
+    <id>https://f7ed.com/2020/06/29/sort-preview/</id>
     <published>2020-06-28T16:00:00.000Z</published>
     <updated>2020-07-03T08:50:09.474Z</updated>
     
@@ -65,21 +65,21 @@
     </summary>
     
     
-      <category term="算法导论" scheme="https://f1ed.github.io/categories/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+      <category term="算法导论" scheme="https://f7ed.com/categories/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
     
     
-      <category term="Intro-to-Algorithms" scheme="https://f1ed.github.io/tags/Intro-to-Algorithms/"/>
+      <category term="Intro-to-Algorithms" scheme="https://f7ed.com/tags/Intro-to-Algorithms/"/>
     
-      <category term="Sort" scheme="https://f1ed.github.io/tags/Sort/"/>
+      <category term="Sort" scheme="https://f7ed.com/tags/Sort/"/>
     
-      <category term="Algorithms" scheme="https://f1ed.github.io/tags/Algorithms/"/>
+      <category term="Algorithms" scheme="https://f7ed.com/tags/Algorithms/"/>
     
   </entry>
   
   <entry>
     <title>「Cryptography-Dan」:Stream Cipher 3</title>
-    <link href="https://f1ed.github.io/2020/06/26/StreamCipher3/"/>
-    <id>https://f1ed.github.io/2020/06/26/StreamCipher3/</id>
+    <link href="https://f7ed.com/2020/06/26/StreamCipher3/"/>
+    <id>https://f7ed.com/2020/06/26/StreamCipher3/</id>
     <published>2020-06-25T16:00:00.000Z</published>
     <updated>2020-07-03T08:45:16.978Z</updated>
     
@@ -95,21 +95,21 @@
     </summary>
     
     
-      <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
+      <category term="Cryptography-Dan" scheme="https://f7ed.com/categories/Cryptography-Dan/"/>
     
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
+      <category term="Cryptography" scheme="https://f7ed.com/tags/Cryptography/"/>
     
-      <category term="StreamCipher" scheme="https://f1ed.github.io/tags/StreamCipher/"/>
+      <category term="StreamCipher" scheme="https://f7ed.com/tags/StreamCipher/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Recurrent Neural Network（RNN）</title>
-    <link href="https://f1ed.github.io/2020/06/11/rnn/"/>
-    <id>https://f1ed.github.io/2020/06/11/rnn/</id>
+    <link href="https://f7ed.com/2020/06/11/rnn/"/>
+    <id>https://f7ed.com/2020/06/11/rnn/</id>
     <published>2020-06-10T16:00:00.000Z</published>
     <updated>2020-07-03T08:43:33.524Z</updated>
     
@@ -122,25 +122,25 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://f7ed.com/tags/DeepLearning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="RNN" scheme="https://f1ed.github.io/tags/RNN/"/>
+      <category term="RNN" scheme="https://f7ed.com/tags/RNN/"/>
     
-      <category term="LSTM" scheme="https://f1ed.github.io/tags/LSTM/"/>
+      <category term="LSTM" scheme="https://f7ed.com/tags/LSTM/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Convolution Neural Network（CNN）</title>
-    <link href="https://f1ed.github.io/2020/04/25/CNN/"/>
-    <id>https://f1ed.github.io/2020/04/25/CNN/</id>
+    <link href="https://f7ed.com/2020/04/25/CNN/"/>
+    <id>https://f7ed.com/2020/04/25/CNN/</id>
     <published>2020-04-24T16:00:00.000Z</published>
     <updated>2020-07-03T08:40:42.768Z</updated>
     
@@ -153,23 +153,23 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://f7ed.com/tags/DeepLearning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="CNN" scheme="https://f1ed.github.io/tags/CNN/"/>
+      <category term="CNN" scheme="https://f7ed.com/tags/CNN/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Tips for Deep Learning</title>
-    <link href="https://f1ed.github.io/2020/04/21/tips-for-DL/"/>
-    <id>https://f1ed.github.io/2020/04/21/tips-for-DL/</id>
+    <link href="https://f7ed.com/2020/04/21/tips-for-DL/"/>
+    <id>https://f7ed.com/2020/04/21/tips-for-DL/</id>
     <published>2020-04-20T16:00:00.000Z</published>
     <updated>2020-07-03T08:45:39.300Z</updated>
     
@@ -182,23 +182,23 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://f7ed.com/tags/DeepLearning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="DNN" scheme="https://f1ed.github.io/tags/DNN/"/>
+      <category term="DNN" scheme="https://f7ed.com/tags/DNN/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Backpropagation</title>
-    <link href="https://f1ed.github.io/2020/04/18/Backpropagation/"/>
-    <id>https://f1ed.github.io/2020/04/18/Backpropagation/</id>
+    <link href="https://f7ed.com/2020/04/18/Backpropagation/"/>
+    <id>https://f7ed.com/2020/04/18/Backpropagation/</id>
     <published>2020-04-17T16:00:00.000Z</published>
     <updated>2020-07-03T08:39:21.739Z</updated>
     
@@ -211,23 +211,23 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://f7ed.com/tags/DeepLearning/"/>
     
-      <category term="Backpropagation" scheme="https://f1ed.github.io/tags/Backpropagation/"/>
+      <category term="Backpropagation" scheme="https://f7ed.com/tags/Backpropagation/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Deep Learning-Introduction</title>
-    <link href="https://f1ed.github.io/2020/04/18/DL-introdunction/"/>
-    <id>https://f1ed.github.io/2020/04/18/DL-introdunction/</id>
+    <link href="https://f7ed.com/2020/04/18/DL-introdunction/"/>
+    <id>https://f7ed.com/2020/04/18/DL-introdunction/</id>
     <published>2020-04-17T16:00:00.000Z</published>
     <updated>2020-07-03T08:41:15.486Z</updated>
     
@@ -240,21 +240,21 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://f7ed.com/tags/DeepLearning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：HW2-Binary Income Predicting</title>
-    <link href="https://f1ed.github.io/2020/04/15/ml-lee-hw2/"/>
-    <id>https://f1ed.github.io/2020/04/15/ml-lee-hw2/</id>
+    <link href="https://f7ed.com/2020/04/15/ml-lee-hw2/"/>
+    <id>https://f7ed.com/2020/04/15/ml-lee-hw2/</id>
     <published>2020-04-14T16:00:00.000Z</published>
     <updated>2020-07-03T08:42:48.419Z</updated>
     
@@ -267,19 +267,19 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
+      <category term="Classification" scheme="https://f7ed.com/tags/Classification/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」:HW1-Predict PM2.5</title>
-    <link href="https://f1ed.github.io/2020/04/06/ml-lee-hw1/"/>
-    <id>https://f1ed.github.io/2020/04/06/ml-lee-hw1/</id>
+    <link href="https://f7ed.com/2020/04/06/ml-lee-hw1/"/>
+    <id>https://f7ed.com/2020/04/06/ml-lee-hw1/</id>
     <published>2020-04-05T16:00:00.000Z</published>
     <updated>2020-07-03T08:42:35.767Z</updated>
     
@@ -292,19 +292,19 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="Regression" scheme="https://f1ed.github.io/tags/Regression/"/>
+      <category term="Regression" scheme="https://f7ed.com/tags/Regression/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」:Classification-Logistic Regression</title>
-    <link href="https://f1ed.github.io/2020/04/01/Classification2/"/>
-    <id>https://f1ed.github.io/2020/04/01/Classification2/</id>
+    <link href="https://f7ed.com/2020/04/01/Classification2/"/>
+    <id>https://f7ed.com/2020/04/01/Classification2/</id>
     <published>2020-03-31T16:00:00.000Z</published>
     <updated>2020-07-03T08:40:06.165Z</updated>
     
@@ -317,25 +317,25 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
+      <category term="Classification" scheme="https://f7ed.com/tags/Classification/"/>
     
-      <category term="Logistic Regression" scheme="https://f1ed.github.io/tags/Logistic-Regression/"/>
+      <category term="Logistic Regression" scheme="https://f7ed.com/tags/Logistic-Regression/"/>
     
-      <category term="Softmax" scheme="https://f1ed.github.io/tags/Softmax/"/>
+      <category term="Softmax" scheme="https://f7ed.com/tags/Softmax/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」:Classification-Generative Model</title>
-    <link href="https://f1ed.github.io/2020/03/21/Classification1/"/>
-    <id>https://f1ed.github.io/2020/03/21/Classification1/</id>
+    <link href="https://f7ed.com/2020/03/21/Classification1/"/>
+    <id>https://f7ed.com/2020/03/21/Classification1/</id>
     <published>2020-03-20T16:00:00.000Z</published>
     <updated>2020-07-03T08:39:45.986Z</updated>
     
@@ -348,21 +348,21 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Classification" scheme="https://f1ed.github.io/tags/Classification/"/>
+      <category term="Classification" scheme="https://f7ed.com/tags/Classification/"/>
     
   </entry>
   
   <entry>
     <title>「Cryptography-Dan」:Stream Cipher 2</title>
-    <link href="https://f1ed.github.io/2020/03/19/StreamCipher2/"/>
-    <id>https://f1ed.github.io/2020/03/19/StreamCipher2/</id>
+    <link href="https://f7ed.com/2020/03/19/StreamCipher2/"/>
+    <id>https://f7ed.com/2020/03/19/StreamCipher2/</id>
     <published>2020-03-18T16:00:00.000Z</published>
     <updated>2020-07-03T08:45:05.098Z</updated>
     
@@ -375,21 +375,21 @@
     </summary>
     
     
-      <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
+      <category term="Cryptography-Dan" scheme="https://f7ed.com/categories/Cryptography-Dan/"/>
     
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
+      <category term="Cryptography" scheme="https://f7ed.com/tags/Cryptography/"/>
     
-      <category term="StreamCipher" scheme="https://f1ed.github.io/tags/StreamCipher/"/>
+      <category term="StreamCipher" scheme="https://f7ed.com/tags/StreamCipher/"/>
     
   </entry>
   
   <entry>
     <title>「Cryptography-Dan」:Stream Cipher 1</title>
-    <link href="https://f1ed.github.io/2020/03/15/StreamCipher1/"/>
-    <id>https://f1ed.github.io/2020/03/15/StreamCipher1/</id>
+    <link href="https://f7ed.com/2020/03/15/StreamCipher1/"/>
+    <id>https://f7ed.com/2020/03/15/StreamCipher1/</id>
     <published>2020-03-14T16:00:00.000Z</published>
     <updated>2020-07-03T08:44:51.408Z</updated>
     
@@ -402,21 +402,21 @@
     </summary>
     
     
-      <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
+      <category term="Cryptography-Dan" scheme="https://f7ed.com/categories/Cryptography-Dan/"/>
     
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
+      <category term="Cryptography" scheme="https://f7ed.com/tags/Cryptography/"/>
     
-      <category term="StreamCipher" scheme="https://f1ed.github.io/tags/StreamCipher/"/>
+      <category term="StreamCipher" scheme="https://f7ed.com/tags/StreamCipher/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Error</title>
-    <link href="https://f1ed.github.io/2020/03/15/error/"/>
-    <id>https://f1ed.github.io/2020/03/15/error/</id>
+    <link href="https://f7ed.com/2020/03/15/error/"/>
+    <id>https://f7ed.com/2020/03/15/error/</id>
     <published>2020-03-14T16:00:00.000Z</published>
     <updated>2020-07-03T08:41:50.041Z</updated>
     
@@ -429,21 +429,21 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="error" scheme="https://f1ed.github.io/tags/error/"/>
+      <category term="error" scheme="https://f7ed.com/tags/error/"/>
     
   </entry>
   
   <entry>
     <title>Adagrag-demo</title>
-    <link href="https://f1ed.github.io/2020/03/09/Adagrad-demo/"/>
-    <id>https://f1ed.github.io/2020/03/09/Adagrad-demo/</id>
+    <link href="https://f7ed.com/2020/03/09/Adagrad-demo/"/>
+    <id>https://f7ed.com/2020/03/09/Adagrad-demo/</id>
     <published>2020-03-08T16:00:00.000Z</published>
     <updated>2020-07-03T08:38:48.748Z</updated>
     
@@ -456,19 +456,19 @@
     </summary>
     
     
-      <category term="Python" scheme="https://f1ed.github.io/categories/Python/"/>
+      <category term="Python" scheme="https://f7ed.com/categories/Python/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="Gradient-Descent" scheme="https://f1ed.github.io/tags/Gradient-Descent/"/>
+      <category term="Gradient-Descent" scheme="https://f7ed.com/tags/Gradient-Descent/"/>
     
   </entry>
   
   <entry>
     <title>「Python」：Module &amp; Method</title>
-    <link href="https://f1ed.github.io/2020/03/07/python/"/>
-    <id>https://f1ed.github.io/2020/03/07/python/</id>
+    <link href="https://f7ed.com/2020/03/07/python/"/>
+    <id>https://f7ed.com/2020/03/07/python/</id>
     <published>2020-03-06T16:00:00.000Z</published>
     <updated>2020-07-03T08:42:56.875Z</updated>
     
@@ -481,17 +481,17 @@
     </summary>
     
     
-      <category term="Python" scheme="https://f1ed.github.io/categories/Python/"/>
+      <category term="Python" scheme="https://f7ed.com/categories/Python/"/>
     
     
-      <category term="Python" scheme="https://f1ed.github.io/tags/Python/"/>
+      <category term="Python" scheme="https://f7ed.com/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>「Cryptography-Dan」：Introduction</title>
-    <link href="https://f1ed.github.io/2020/03/04/Dan-Intro/"/>
-    <id>https://f1ed.github.io/2020/03/04/Dan-Intro/</id>
+    <link href="https://f7ed.com/2020/03/04/Dan-Intro/"/>
+    <id>https://f7ed.com/2020/03/04/Dan-Intro/</id>
     <published>2020-03-03T16:00:00.000Z</published>
     <updated>2020-07-03T08:40:56.053Z</updated>
     
@@ -505,19 +505,19 @@
     </summary>
     
     
-      <category term="Cryptography-Dan" scheme="https://f1ed.github.io/categories/Cryptography-Dan/"/>
+      <category term="Cryptography-Dan" scheme="https://f7ed.com/categories/Cryptography-Dan/"/>
     
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Cryptography" scheme="https://f1ed.github.io/tags/Cryptography/"/>
+      <category term="Cryptography" scheme="https://f7ed.com/tags/Cryptography/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Gradient</title>
-    <link href="https://f1ed.github.io/2020/03/01/Gradient/"/>
-    <id>https://f1ed.github.io/2020/03/01/Gradient/</id>
+    <link href="https://f7ed.com/2020/03/01/Gradient/"/>
+    <id>https://f7ed.com/2020/03/01/Gradient/</id>
     <published>2020-02-29T16:00:00.000Z</published>
     <updated>2020-07-03T08:42:12.163Z</updated>
     
@@ -530,21 +530,21 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Gradient" scheme="https://f1ed.github.io/tags/Gradient/"/>
+      <category term="Gradient" scheme="https://f7ed.com/tags/Gradient/"/>
     
   </entry>
   
   <entry>
     <title>「机器学习-李宏毅」：Regression</title>
-    <link href="https://f1ed.github.io/2020/02/29/Regression/"/>
-    <id>https://f1ed.github.io/2020/02/29/Regression/</id>
+    <link href="https://f7ed.com/2020/02/29/Regression/"/>
+    <id>https://f7ed.com/2020/02/29/Regression/</id>
     <published>2020-02-28T16:00:00.000Z</published>
     <updated>2020-07-03T08:43:13.142Z</updated>
     
@@ -557,14 +557,14 @@
     </summary>
     
     
-      <category term="机器学习-李宏毅" scheme="https://f1ed.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
+      <category term="机器学习-李宏毅" scheme="https://f7ed.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%9D%8E%E5%AE%8F%E6%AF%85/"/>
     
     
-      <category term="Machine-Learning" scheme="https://f1ed.github.io/tags/Machine-Learning/"/>
+      <category term="Machine-Learning" scheme="https://f7ed.com/tags/Machine-Learning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+      <category term="open-classes" scheme="https://f7ed.com/tags/open-classes/"/>
     
-      <category term="Regression" scheme="https://f1ed.github.io/tags/Regression/"/>
+      <category term="Regression" scheme="https://f7ed.com/tags/Regression/"/>
     
   </entry>
   
