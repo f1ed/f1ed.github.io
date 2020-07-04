@@ -160,9 +160,9 @@
     
       <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
     
-      <category term="CNN" scheme="https://f1ed.github.io/tags/CNN/"/>
-    
       <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
+    
+      <category term="CNN" scheme="https://f1ed.github.io/tags/CNN/"/>
     
   </entry>
   
@@ -218,9 +218,9 @@
     
       <category term="DeepLearning" scheme="https://f1ed.github.io/tags/DeepLearning/"/>
     
-      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
-    
       <category term="Backpropagation" scheme="https://f1ed.github.io/tags/Backpropagation/"/>
+    
+      <category term="open-classes" scheme="https://f1ed.github.io/tags/open-classes/"/>
     
   </entry>
   
