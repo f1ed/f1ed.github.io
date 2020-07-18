@@ -1,5 +1,5 @@
+https://f7ed.com/2020/07/18/Git-and-GitHub/
 https://f7ed.com/2020/07/03/semi-supervised/
 https://f7ed.com/2020/06/29/sort-preview/
 https://f7ed.com/2020/06/26/StreamCipher3/
 https://f7ed.com/2020/06/11/rnn/
-https://f7ed.com/2020/04/25/CNN/
