@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://f7ed.com/2020/07/21/Docker/</loc>
+    <loc>https://f7ed.com/2020/07/22/html-css/</loc>
     
-    <lastmod>2020-07-25T03:34:59.360Z</lastmod>
+    <lastmod>2020-07-25T03:44:57.007Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://f7ed.com/2020/07/18/Git-and-GitHub/</loc>
     
-    <lastmod>2020-07-18T04:36:33.350Z</lastmod>
+    <lastmod>2020-07-25T03:40:33.971Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://f7ed.com/2020/07/21/Docker/</loc>
+    
+    <lastmod>2020-07-25T03:34:59.360Z</lastmod>
     
   </url>
   
