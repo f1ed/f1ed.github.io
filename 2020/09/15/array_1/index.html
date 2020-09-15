@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="9ce18CEmjH" />
+<meta name="google-site-verification" content="GSUThrU_AtZE-dgdz1QWWouv0L2teKqHWrZg7DfHbXo" />
+<meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>「LeetCode」：Array 1 - fred&#39;s blog</title>
+
+
+    <meta name="description" content="8月某司实训+准备开学期末考，我可太咕了q w q…dbq，高产博主我…又回来了。 LeetCode Array专题，持久更新。（GitHub)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「LeetCode」：Array 1">
+<meta property="og:url" content="https://f7ed.com/2020/09/15/array_1/index.html">
+<meta property="og:site_name" content="fred&#39;s blog">
+<meta property="og:description" content="8月某司实训+准备开学期末考，我可太咕了q w q…dbq，高产博主我…又回来了。 LeetCode Array专题，持久更新。（GitHub)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://f7ed.com/gallery/thumbnails/84265167_p0_master1200.jpg">
+<meta property="article:published_time" content="2020-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-15T13:43:58.466Z">
+<meta property="article:author" content="f1ed">
+<meta property="article:tag" content="Algorithms">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="Array">
+<meta property="article:tag" content="Data-Structure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://f7ed.com/gallery/thumbnails/84265167_p0_master1200.jpg">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="「LeetCode」：Array 1" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/heart.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171512660-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-171512660-1');
+</script>
+
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?b1d53a77276f7e423bc7cf8fafd95b75";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/f1ed_logo.png" alt="「LeetCode」：Array 1" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/atom.xml">RSS</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/84265167_p0_master1200.jpg" alt="「LeetCode」：Array 1">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bars"></i>「LeetCode」：Array 1
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-09-14T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-09-15</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-09-15T13:43:58.466Z"><i class="far fa-calendar-check">&nbsp;</i>2020-09-15</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    29 分钟 读完 (大约 4325 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <p>8月某司实训+准备开学期末考，我可太咕了q w q…dbq，高产博主我…又回来了。</p>
+<p>LeetCode Array专题，持久更新。（<a href="https://github.com/f1ed/LeetCode">GitHub</a>)</p>
+<a id="more"></a>
+
+<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><h3 id="27-Remove-Elements"><a href="#27-Remove-Elements" class="headerlink" title="27. Remove Elements"></a>27. Remove Elements</h3><p><a href="https://leetcode.com/problems/remove-element/">27-Remove Elements</a> </p>
+<p>Solution</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">removeElement</span><span class="params">(self, nums: List[int], val: int)</span> -&gt; int:</span></span><br><span class="line"></span><br><span class="line">        tot = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> element <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> element == val:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                nums[tot] = element</span><br><span class="line">                tot = tot + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> tot</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li><p>Python的参数传递和函数返回值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeElement</span><span class="params">(self, nums:List[int], val:int)</span> -&gt; int:</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>题目要求：</p>
+<p>“remove all instances of that value <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> and return the new length.”</p>
+<p>“Do not allocate extra space for another array, you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm">in-place</a></strong> with O(1) extra memory.”</p>
+<p>“Confused why the returned value is an integer but your answer is an array?</p>
+<p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.”</p>
+<p>题目要求是在原数组上删除数值，不能额外开新的空间存储数组。</p>
+<p>意思就是说，虽然函数返回的是一个数值，但实际返回答案是一个数组。</p>
+<p>因为数组的传递是指针传递，返回的是数组长度，则相当于返回了这个in-place的新数组。</p>
+</li>
+</ol>
+<h3 id="26-Remove-Duplicates-from-Sorted-Array"><a href="#26-Remove-Duplicates-from-Sorted-Array" class="headerlink" title="26. Remove Duplicates from Sorted Array"></a>26. Remove Duplicates from Sorted Array</h3><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">26-Remove Duplicates from Sorted Array</a> </p>
+<p>Solution：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">removeDuplicates</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line"></span><br><span class="line">        tot = <span class="number">0</span></span><br><span class="line">        before = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[index] != before:</span><br><span class="line">                nums[tot] = nums[index]</span><br><span class="line">                before = nums[index]</span><br><span class="line">                tot = tot + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tot</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<ol>
+<li><p>第一次提交的时候<code>before = nums[0] - 1</code> 报错了，原因是传入数组长度为0，下标越界。</p>
+<p>注意空数组的下标越界问题。</p>
+</li>
+</ol>
+<h3 id="80-Remove-Duplicates-from-Sorted-Array-II"><a href="#80-Remove-Duplicates-from-Sorted-Array-II" class="headerlink" title="80. Remove Duplicates from Sorted Array II"></a>80. Remove Duplicates from Sorted Array II</h3><p><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/">80-Remove Duplicates from Sorted Array II</a> </p>
+<p>Solution:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">removeDuplicates</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        before = <span class="literal">None</span></span><br><span class="line">        before_cnt = <span class="number">0</span></span><br><span class="line">        length = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[index] != before:</span><br><span class="line">                nums[length] = nums[index]</span><br><span class="line">                before = nums[index]</span><br><span class="line">                length += <span class="number">1</span></span><br><span class="line">                before_cnt = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                before_cnt += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> before_cnt &lt;= <span class="number">2</span>:</span><br><span class="line">                    nums[length] = nums[index]</span><br><span class="line">                    length += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> length</span><br></pre></td></tr></table></figure>
+
+<h3 id="189-Rotate-Array"><a href="#189-Rotate-Array" class="headerlink" title="189. Rotate Array"></a>189. Rotate Array</h3><p><a href="https://leetcode.com/problems/rotate-array/">189-Rotate Array</a> </p>
+<p>Problem:</p>
+<p>简述题目大意，给一个列表nums，一个 $k$ 值，要求原址让列表循环右移 $k$ 位。</p>
+<p>Solution:</p>
+<p>其实以下三种做法时间空间复杂度差别不大，主要看个思路吧。</p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>Runtime</th>
+<th>Memory</th>
+<th align="center">Language</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S1</td>
+<td>64ms</td>
+<td>15.2MB</td>
+<td align="center">pyhon3</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>64ms</td>
+<td>15.1MB</td>
+<td align="center">python3</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>116ms</td>
+<td>15.1MB</td>
+<td align="center">python3</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>简单做法：空间换时间</p>
+<p>时间复杂度：$\mathcal{O}(n)$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ ，循环右移时多开了一个数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotate</span><span class="params">(self, nums: List[int], k: int)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        length = len(nums)</span><br><span class="line">        a = [<span class="number">0</span>] * length</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(length):</span><br><span class="line">            a[(index + k)%length] = nums[index]</span><br><span class="line">        nums[:] = a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用数学同余关系</p>
+<p>时间复杂度：$\mathcal{O}(n)$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ ，循环右移时只多开了一个变量。</p>
+<p>原理：</p>
+<blockquote>
+<p>定理[1]：</p>
+<p>设 $m$ 是正整数，整数 $a$ 满足 $(a,m)=1$ ，$b$ 是任意整数。若 $x$ 遍历模 $m$ 的一个完全剩余系，则 $ax+b$ 也遍历模 $m$ 的一个完全剩余系。</p>
+</blockquote>
+<p>由以上定理可以得知，设 $n$ 为列表长度， $x$ 是列表的下标，遍历 $n$ 的一个完全剩余系。</p>
+<ul>
+<li><p>如果 $(k,n)=1$ ， $kx$ 也遍历 $n$ 的一个完全剩余系。这种情况，列表下标通过 $k$ 的倍数的顺序连成一个环。</p>
+<p>：只需要额外一个变量 $temp$ 存储移动占用的值。</p>
+</li>
+<li><p>如果 $(k,n)\neq 1$ ，那么 $kx$ 不会遍历一个 $n$ 的完全剩余系，会出现下图的情况（如绿色的线的元素的 $idx = kx+0$ ，红色线的元素都是 $idx=kx+1$ ），会在 $k$ 的某个剩余类一直循环。</p>
+<p>：遍历每个 $k$ 的剩余类。 在每次循环移位时，需要记录该次循环的起始位，防止重复。</p>
+<img src="https://s1.ax1x.com/2020/09/14/wrcSVs.png" alt="wrcSVs.png" style="zoom:50%;" />
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotate</span><span class="params">(self, nums: List[int], k: int)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        length = len(nums)</span><br><span class="line">        k %= length</span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> cnt &lt; length:</span><br><span class="line">            current, prev = start, nums[start]</span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                current = (current + k) % length</span><br><span class="line">                prev, nums[current] = nums[current], prev</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> current == start:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            start += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用反转列表的思路</p>
+<p>时间复杂度：$\mathcal{O}(n)$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<p>原理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Original List                   : 1 2 3 4 5 6 7</span><br><span class="line">After reversing all numbers     : 7 6 5 4 3 2 1</span><br><span class="line">After reversing first k numbers : 5 6 7 4 3 2 1</span><br><span class="line">After revering last n-k numbers : 5 6 7 1 2 3 4 --&gt; Result</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Solution 3: Reverse</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(self, nums: list, begin: int, end: int)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="keyword">while</span> begin &lt; end:</span><br><span class="line">            nums[begin], nums[end] = nums[end], nums[begin]</span><br><span class="line">            begin += <span class="number">1</span></span><br><span class="line">            end -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotate</span><span class="params">(self, nums: List[int], k: int)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        k %= n</span><br><span class="line">        self.reverse(nums, <span class="number">0</span>, n<span class="number">-1</span>)</span><br><span class="line">        self.reverse(nums, <span class="number">0</span>, k<span class="number">-1</span>)</span><br><span class="line">        self.reverse(nums, k, n<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<hr>
+<ol>
+<li><p>Python用引用管理对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a1 = <span class="number">1</span>, *p = &amp;a1;</span><br><span class="line"><span class="keyword">int</span> a2 = <span class="number">2</span>, &amp;b = a2;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指针：指针变量是一个新变量，这个变量存储的是（变量a1的）地址，该地址指向一个存储单元。（该存储单元存放的是a1的值）。</li>
+<li>引用：引用的实质是变量的别名，所以a2和b实际是一个东西，在内存中占有同一个存储单元。</li>
+</ul>
+<p>所以python中交换对象可以直接<code>a,b = b,a</code> </p>
+</li>
+<li><p>Python 列表的操作：切片。</p>
+</li>
+</ol>
+<h3 id="41-First-Missing-Positive"><a href="#41-First-Missing-Positive" class="headerlink" title="41-First Missing Positive"></a>41-First Missing Positive</h3><p><a href="https://leetcode.com/problems/first-missing-positive/">41-First Missing Positive</a>  </p>
+<p>Solution:</p>
+<p>排一下序，维护一个expect变量就行了。</p>
+<p>时间复杂度：$\mathcal{O}(n\log{n})$ ，题目没有卡常。</p>
+<p>Runtime: 36 ms, faster than 70.96% of Python3 online submissions for First Missing Positive.</p>
+<p>空间复杂度：$\mathcal{O}(n)$</p>
+<p>Memory Usage: 13.8 MB, less than 69.19% of Python3 online submissions for First Missing Positive. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">firstMissingPositive</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        nums.sort()</span><br><span class="line">        expect = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> element <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> element == expect:</span><br><span class="line">                expect += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> element &gt; expect:</span><br><span class="line">                <span class="keyword">return</span> expect</span><br><span class="line">        <span class="keyword">return</span> expect</span><br></pre></td></tr></table></figure>
+
+<h3 id="299-Bulls-and-Cows"><a href="#299-Bulls-and-Cows" class="headerlink" title="299-Bulls and Cows"></a>299-Bulls and Cows</h3><p><a href="https://leetcode.com/problems/bulls-and-cows/">299-Bulls and Cows</a> </p>
+<p>Problem:</p>
+<p>题目大意是：给定两个相同长度的字符串，计算这两个字符串有多少个对应位数字相同，和多少个位置不对应但数字相同的个数。</p>
+<p>Solution:</p>
+<p>应用字符0-9本身数字的性质。</p>
+<p>时间复杂度：$\mathcal{O}(n)$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getHint</span><span class="params">(self, secret: str, guess: str)</span> -&gt; str:</span></span><br><span class="line">        <span class="comment"># 0-9 cnt for guess (expect the same digit)</span></span><br><span class="line">        cnt = [<span class="number">0</span>] * <span class="number">10</span></span><br><span class="line">        bulls = cows = <span class="number">0</span></span><br><span class="line">        g = <span class="keyword">lambda</span> a: ord(a) - ord(<span class="string">'0'</span>)</span><br><span class="line">        <span class="keyword">for</span> si, gi <span class="keyword">in</span> zip(secret, guess):</span><br><span class="line">            <span class="keyword">if</span> si == gi:</span><br><span class="line">                bulls += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cnt[g(gi)] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> si, gi <span class="keyword">in</span> zip(secret, guess):</span><br><span class="line">            <span class="keyword">if</span> si == gi:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">elif</span> cnt[g(si)] &gt; <span class="number">0</span>:</span><br><span class="line">                cows += <span class="number">1</span></span><br><span class="line">                cnt[g(si)] -= <span class="number">1</span></span><br><span class="line">        output = <span class="string">"&#123;&#125;A&#123;&#125;B"</span>.format(bulls, cows)</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<ol>
+<li><p>ord()函数和chr()函数</p>
+<p>ord()返回字符的ASCII码，chr函数返回ASCII码对应的字符。</p>
+</li>
+<li><p>浅析lambda表达式，匿名函数，类似于C语言的宏。</p>
+<p>格式：<code>lambda [arg1[, arg2,...]] : expression</code> </p>
+</li>
+<li><p>双变量同时遍历使用zip()函数</p>
+</li>
+</ol>
+<h3 id="134-Gas-Station"><a href="#134-Gas-Station" class="headerlink" title="134-Gas Station"></a>134-Gas Station</h3><p><a href="https://leetcode.com/problems/gas-station/">134-Gas Station</a> </p>
+<p>Problem：</p>
+<p>题目大意是：有N个环形加油站，每个加油站能加油gas[i]，一个汽车起始油量为0，且从i个站开到第i+1个站需要花费cost[i]的油量。找出这个车能顺时针跑完一圈的起始点（如果有，则唯一），如果不能返回-1。</p>
+<p>Solution：</p>
+<table>
+<thead>
+<tr>
+<th>Solution</th>
+<th>Runtime</th>
+<th>Memory</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S1-简单做法</td>
+<td>3244ms</td>
+<td>14.9MB</td>
+<td>python3</td>
+</tr>
+<tr>
+<td>S2-原理优化</td>
+<td>104ms</td>
+<td>14.8MB</td>
+<td>python3</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>简单解法：</p>
+<p>时间复杂度：$\mathcal{O}(n^2)$ ，实际远达不到 $n^2$ ，算有一点贪心叭。</p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<p>该汽车从起点i能跑完的必要条件：</p>
+<ul>
+<li><p>起始点 <code>gas[i] - cost[i] &gt;= 0</code> 。并且维护一个数组存放 <code>gas[i] - cost[i]</code> ，即这个站自给自足的油量余量。</p>
+</li>
+<li><p>如果从满足条件1的起点开始跑一圈， 要求路程中的油量必须大于等于0。维护一个汽车当前总油量 $S$ （用前缀和维护），每跑过一段路程，都要求 $S&gt;=0$ 。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canCompleteCircuit</span><span class="params">(self, gas: List[int], cost: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(gas)</span><br><span class="line">        remain = []</span><br><span class="line">        <span class="keyword">for</span> g, c <span class="keyword">in</span> zip(gas, cost):</span><br><span class="line">            remain.append(g - c)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> remain[i] &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                S = <span class="number">0</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">                    S += remain[(i + j) % n]</span><br><span class="line">                    <span class="keyword">if</span> S &lt; <span class="number">0</span>:</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> S &gt;= <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对问题分析进行再简化</p>
+<p>时间复杂度：$\mathcal{O}(n)$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  i	: <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line">g[i]: <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">c[i]: <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">1</span> <span class="number">2</span></span><br><span class="line">g-c :<span class="number">-2</span><span class="number">-2</span><span class="number">-2</span> <span class="number">3</span> <span class="number">3</span></span><br><span class="line">sum :<span class="number">-2</span><span class="number">-4</span><span class="number">-6</span><span class="number">-3</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如果 $S=\sum_{i=0}^{n-1} g[i]-c[i],S&lt;0$  那么一定无解， $S$ 称为总积累油量。</p>
+</li>
+<li><p>如果 $S&gt;=0$，如果有找出最优解的方法，则一定有解。</p>
+<ol>
+<li><p>起点满足 $g[i]-c[i]&gt;=0$ ，把这些点称为正余量点。</p>
+</li>
+<li><p>用 $\mathcal{O}(1)$ 算出从第 $i$ 个点出发到第 $n$ （n就是第0个点） 个点所积累的油量： $res[i] =S-sum[i-1]$ .即用总积累油量减去前 $i-1$ 段路程能积累的油量（一般积累为负）。(sum数组就是 g-c的前缀和)</p>
+</li>
+<li><p>对于满足起点要求 $g[i]-c[i]&gt;=0$ 的所有点，计算从第 $i$ 个点出发到第 $n$ 个点到油量积累。那么有最大油量积累的点即为最优起始点。（题目规定如果存在，则点唯一）</p>
+</li>
+<li><p>因此，因为 $S$ 固定，只需要找到 $sum$ 数组中的最小值的下标，下标+1即是结果。</p>
+</li>
+</ol>
+<ul>
+<li>证明其正确性：<ol>
+<li>如果满足 $g[i]-c[i]&gt;=0$ 的上述点 $i,j（i&lt;j)$  ，如果 $res[i]&gt;=res[j]$ ，说明从 $i$ 到 $j$ 是正油量积累，贪心的思想，那肯定积累的油量越多越好， $i$ 比 $j$ 优。</li>
+<li>如果 $res[i]&lt;=res[j]$ ，说明从 $i$ 到 $j$ 是负油量积累，如果从 $i$ 点出发，到 $j$ 点就负油量了；如果从 $j$ 点出发，该车最后再跑 $i$ 到$j$  段，因为保证了总积累油量是正，所以最后一定有足够的油量能跑完 $i$ 到 $j$ 段。</li>
+<li>再证只要 $S&gt;=0$ 则一定有解。是动态尝试起始点，( $i,j$ 都满足 $g[i]-c[i]&gt;=0$ ）从点 $i$ 开始，跑到点 $j$ 时，如果该途中途有出现油量不够，那就把 $i$ 到 $j$ 的这段路程放到路途的后面来跑，等油量积累够了再跑这段。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>Code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canCompleteCircuit</span><span class="params">(self, gas: List[int], cost: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(gas)</span><br><span class="line">        sum = <span class="number">0</span></span><br><span class="line">        remain = []</span><br><span class="line">        <span class="keyword">for</span> g, c <span class="keyword">in</span> zip(gas, cost):</span><br><span class="line">            remain.append(g - c)</span><br><span class="line">            sum += g - c</span><br><span class="line">        <span class="keyword">if</span> sum &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            remain[i] += remain[i - <span class="number">1</span>]</span><br><span class="line">        min_idx = remain.index(min(remain))</span><br><span class="line">        <span class="keyword">return</span> (min_idx + <span class="number">1</span>) % n</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<hr>
+<ol>
+<li>前缀和</li>
+<li><code>list.index(value)</code> 找出list中值为<code>value</code> 的第一个下标。</li>
+<li><code>min(list)</code> 返回list中的最小值。</li>
+</ol>
+<h3 id="118-Pascal’s-Triangle"><a href="#118-Pascal’s-Triangle" class="headerlink" title="118-Pascal’s Triangle"></a>118-Pascal’s Triangle</h3><p><a href="https://leetcode.com/problems/pascals-triangle/submissions/">118-Pascal’s Triangle</a> </p>
+<p>Problem:</p>
+<p>给定一个数字，输出如下规则的值。</p>
+<img src="https://s1.ax1x.com/2020/09/15/wyWI9s.gif" alt="wyWI9s.gif" style="zoom:50%;" />   
+
+<p>Solution：</p>
+<p>注意边界吧。（不太喜欢这种题qwq</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(self, numRows: int)</span> -&gt; List[List[int]]:</span></span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, numRows):</span><br><span class="line">            temp = [<span class="number">1</span>] * (i+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, i):</span><br><span class="line">                temp[j] = ans[i<span class="number">-1</span>][j<span class="number">-1</span>] + ans[i<span class="number">-1</span>][j]</span><br><span class="line">            ans.append(temp)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol>
+<li><p>Python 中的append会出现值被覆盖的情况：变量在循环外定义，但在循环中对该变量做出一定改变，然后append到列表，最后发现列表中的值都是一样的。</p>
+<p>因为Python中很多时候都是以对象的形式管理对象，因此append给列表的是一个地址。</p>
+</li>
+</ol>
+<h3 id="119-Pascal’s-Triangle-II"><a href="#119-Pascal’s-Triangle-II" class="headerlink" title="119-Pascal’s Triangle II"></a>119-Pascal’s Triangle II</h3><p><a href="https://leetcode.com/problems/pascals-triangle-ii/">119-Pascal’s Triangle II</a> </p>
+<p>Problem：</p>
+<p>给定一个数字，输出某一行。</p>
+<p>Solution：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRow</span><span class="params">(self, rowIndex: int)</span> -&gt; List[int]:</span></span><br><span class="line">        temp = [<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, rowIndex):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">                temp[j] += temp[j<span class="number">-1</span>]</span><br><span class="line">            temp.append(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> temp</span><br></pre></td></tr></table></figure>
+
+<h3 id="169-Majority-Element"><a href="#169-Majority-Element" class="headerlink" title="169-Majority Element"></a>169-Majority Element</h3><p><a href="https://leetcode.com/problems/majority-element/">169-Majority Element</a> </p>
+<p>Problem:</p>
+<p>给一串数字，找到出现次数大于 <code>n/2</code> 的数字。</p>
+<p>Solution：</p>
+<p>用字典计数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        cnt = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ele <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> ele <span class="keyword">in</span> cnt:</span><br><span class="line">                cnt[ele] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cnt[ele] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> max(cnt, key=cnt.get)</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<ol>
+<li>返回值最大/最小的键/索引。<ul>
+<li>列表：<ul>
+<li>最大值的索引：list.index(max(list))</li>
+<li>最小值的索引：list.index(min(list))</li>
+</ul>
+</li>
+<li>字典：<ul>
+<li>最大值的键：max(dict, key=dict.get)</li>
+<li>最小值的键：min(dict, key=dict.get)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="229-Majority-Element-II"><a href="#229-Majority-Element-II" class="headerlink" title="229-Majority Element II"></a>229-Majority Element II</h3><p><a href="https://leetcode.com/problems/majority-element-ii/">229-Majority Element II</a> </p>
+<p>Problem: </p>
+<p>给一串数字，返回出现次数大于 <code>n/3</code> 的数字。</p>
+<p>Solution：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        cnt = &#123;&#125;</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> ele <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> ele <span class="keyword">in</span> cnt:</span><br><span class="line">                cnt[ele] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cnt[ele] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> (k, v) <span class="keyword">in</span> cnt.items():</span><br><span class="line">            <span class="keyword">if</span> v &gt; n/<span class="number">3</span>:</span><br><span class="line">                ans.append(k)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol>
+<li><p>字典的实用方法：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>实现方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>删除字典元素</td>
+<td><code>del dict[&#39;Name&#39;]</code></td>
+</tr>
+<tr>
+<td>清空字典所有条目</td>
+<td><code>dict.clear()</code></td>
+</tr>
+<tr>
+<td>删除字典</td>
+<td><code>del dict</code></td>
+</tr>
+<tr>
+<td>返回指定键的值，如果值不存在返回default的值</td>
+<td><code>dict.get(key, default)</code></td>
+</tr>
+<tr>
+<td>如果键不存在字典中，添加键并将值设为default</td>
+<td><code>dict.setdefault(key, default=None)</code></td>
+</tr>
+<tr>
+<td>判读键是否存在</td>
+<td>1. <code>if k in dict</code> 2. <code>dict.has_key(key)</code> 存在返回true</td>
+</tr>
+<tr>
+<td>以列表返回可遍历的（键，值）元祖数组</td>
+<td><code>dict.items()</code></td>
+</tr>
+<tr>
+<td>以列表返回一个字典的所有键</td>
+<td><code>dict.keys()</code></td>
+</tr>
+<tr>
+<td>以列表返回字典中的所有值</td>
+<td><code>dict.values()</code></td>
+</tr>
+<tr>
+<td>返回最大值的键值</td>
+<td><code>max(dict, key=dict.get)</code></td>
+</tr>
+<tr>
+<td>返回最小值的键值</td>
+<td><code>min(dict, key=dict.get)</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>遍历字典的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">dict=&#123;<span class="string">"a"</span>:<span class="string">"Alice"</span>,<span class="string">"b"</span>:<span class="string">"Bruce"</span>,<span class="string">"J"</span>:<span class="string">"Jack"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例一：键循环</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> dict:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"dict[%s]="</span> % i,dict[i]</span><br><span class="line"><span class="comment"># 结果:</span></span><br><span class="line"><span class="comment"># dict[a]= Alice</span></span><br><span class="line"><span class="comment"># dict[J]= Jack</span></span><br><span class="line"><span class="comment"># dict[b]= Bruce</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例二：键值元组循环</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span>  dict.items():</span><br><span class="line">    <span class="keyword">print</span> i</span><br><span class="line"><span class="comment"># 结果:</span></span><br><span class="line"><span class="comment"># ('a', 'Alice')</span></span><br><span class="line"><span class="comment"># ('J', 'Jack')</span></span><br><span class="line"><span class="comment"># ('b', 'Bruce')</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例三：键值元组循环</span></span><br><span class="line"><span class="keyword">for</span> (k,v) <span class="keyword">in</span>  dict.items():</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"dict[%s]="</span> % k,v</span><br><span class="line"><span class="comment"># 结果:</span></span><br><span class="line"><span class="comment"># dict[a]= Alice</span></span><br><span class="line"><span class="comment"># dict[J]= Jack</span></span><br><span class="line"><span class="comment"># dict[b]= Bruce</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="274-H-Index"><a href="#274-H-Index" class="headerlink" title="274-H-Index"></a>274-H-Index</h3><p><a href="https://leetcode.com/problems/h-index/">274-H-Index</a> </p>
+<p>Problem:</p>
+<p>给出研究人员论文的论文引用次数，计算它的H指数（有h篇论文的引用次数至少为h，剩下N-h篇论文的引用次数不超过h）。</p>
+<p>Solution：</p>
+<p>时间复杂度：$\mathcal{O}(n\log{n})$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<p>排序后，再二分。（感觉自己的二分写的有点丑qwq</p>
+<p>还有一种思路是，排序完，从最大的h开始递减遍历，满足条件就返回。反正排序也要$\mathcal{O}(n\log{n})$ 的复杂度…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hIndex</span><span class="params">(self, citations: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(citations)</span><br><span class="line">        citations.sort()</span><br><span class="line">        begin = <span class="number">0</span></span><br><span class="line">        end = n - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> begin &lt;= end:</span><br><span class="line">            mid = (begin + end) &gt;&gt; <span class="number">1</span></span><br><span class="line">            h = n - mid</span><br><span class="line">            <span class="keyword">if</span> citations[mid] &gt;= h:</span><br><span class="line">                end = mid</span><br><span class="line">                <span class="keyword">if</span> begin == end:</span><br><span class="line">                    <span class="keyword">return</span> h</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                begin += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> n-begin</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol>
+<li>非递归写二分：<code>while begin &lt;= end</code> </li>
+</ol>
+<h3 id="275-H-Index-II"><a href="#275-H-Index-II" class="headerlink" title="275-H-Index II"></a>275-H-Index II</h3><p><a href="https://leetcode.com/problems/h-index-ii/">275-H-Index II</a> </p>
+<p>Problem:</p>
+<p>和274一样，给了递增的论文引用数，希望能用指数时间返回H指数。</p>
+<p>Solution：</p>
+<p>啊，就二分鸭。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hIndex</span><span class="params">(self, citations: List[int])</span> -&gt; int:</span></span><br><span class="line">        n = len(citations)</span><br><span class="line">        begin = <span class="number">0</span></span><br><span class="line">        end = n - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> begin &lt;= end:</span><br><span class="line">            mid = (begin + end) &gt;&gt; <span class="number">1</span></span><br><span class="line">            h = n - mid</span><br><span class="line">            <span class="keyword">if</span> citations[mid] &gt;= h:</span><br><span class="line">                end = mid</span><br><span class="line">                <span class="keyword">if</span> begin == end:</span><br><span class="line">                    <span class="keyword">return</span> h</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                begin += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> n - begin</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="243-Shortest-Word-Distance"><a href="#243-Shortest-Word-Distance" class="headerlink" title="243-Shortest Word Distance"></a>243-Shortest Word Distance</h3><p>qwq 这道题还收费来着，于是于是就开了个中国区的会员（中国区的会员便宜好多啊！！）</p>
+<p><a href="https://leetcode-cn.com/problems/shortest-word-distance/">243-Shortest Word Distance</a> </p>
+<p>Problem：</p>
+<p>给定一串单词，单词1和单词2，计算单词1单词2在单词列表中的距离。</p>
+<p>Solution：</p>
+<table>
+<thead>
+<tr>
+<th>Solution</th>
+<th>Runtime</th>
+<th>Memory</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S1-二分查找</td>
+<td>44ms</td>
+<td>15.7MB</td>
+<td>python3</td>
+</tr>
+<tr>
+<td>S2-线性维护</td>
+<td>40ms</td>
+<td>15.6MB</td>
+<td>python3</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>二分查找</p>
+<p>时间复杂度：$\mathcal{O}(n\log{n})$ </p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<p>（最开始还很疑惑啥是单词距离…单词1和单词2可能在单词列表中重复出现）</p>
+<p>计算出单词1和单词2在单词列表中出现的索引值列表，是递增有序的。</p>
+<p>对于单词1索引列表中的每个值，在单词2索引列表中查找该值的lower_bound，计算距离。</p>
+<p>同理，对于单词2索引列表中的每个值，也同样计算距离。</p>
+<p>找出最小距离。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lower_bound</span><span class="params">(a: list, x: int)</span> -&gt; int:</span></span><br><span class="line">    n = len(a)</span><br><span class="line">    begin = <span class="number">0</span></span><br><span class="line">    end = n - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> begin &lt;= end:</span><br><span class="line">        mid = (begin + end) &gt;&gt; <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a[mid] &gt;= x:</span><br><span class="line">            end = mid</span><br><span class="line">            <span class="keyword">if</span> begin == end:</span><br><span class="line">                <span class="keyword">return</span> begin</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            begin += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    ans = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findShortest</span><span class="params">(self, li1: list, li2: list)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="keyword">for</span> idx <span class="keyword">in</span> li1:</span><br><span class="line">            min_dis_idx = lower_bound(li2, idx)</span><br><span class="line">            <span class="keyword">if</span> min_dis_idx == <span class="number">-1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.ans = min(self.ans, li2[min_dis_idx] - idx)</span><br><span class="line">                <span class="keyword">if</span> self.ans == <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shortestDistance</span><span class="params">(self, words: List[str], word1: str, word2: str)</span> -&gt; int:</span></span><br><span class="line">        n = len(words)</span><br><span class="line">        li1 = []</span><br><span class="line">        li2 = []</span><br><span class="line">        self.ans = n</span><br><span class="line">        <span class="keyword">for</span> idx <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="comment"># li1 and li2 are ordered</span></span><br><span class="line">            <span class="keyword">if</span> words[idx] == word1:</span><br><span class="line">                li1.append(idx)</span><br><span class="line">            <span class="keyword">if</span> words[idx] == word2:</span><br><span class="line">                li2.append(idx)</span><br><span class="line">        self.findShortest(li1, li2)</span><br><span class="line">        <span class="keyword">if</span> self.ans &gt; <span class="number">1</span>:</span><br><span class="line">            self.findShortest(li2, li1)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.ans</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>线性维护：</p>
+<p>时间复杂度：$\mathcal{O}(n)$  </p>
+<p>空间复杂度：$\mathcal{O}(n)$ </p>
+<p>问题还能再简化，线性扫描单词列表，维护两个变量，单词1出现的最近索引，单词2出现的最近索引。扫描时计算距离，每当单词1或单词2出现时，就用另一个单词的最近索引计算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shortestDistance</span><span class="params">(self, words: List[str], word1: str, word2: str)</span> -&gt; int:</span></span><br><span class="line">        n = len(words)</span><br><span class="line">        lst1 = <span class="literal">None</span></span><br><span class="line">        lst2 = <span class="literal">None</span></span><br><span class="line">        ans = n</span><br><span class="line">        <span class="keyword">for</span> idx <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> words[idx] == word1:</span><br><span class="line">                lst1 = idx</span><br><span class="line">                <span class="keyword">if</span> lst2 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    ans = min(ans, lst1-lst2)</span><br><span class="line">            <span class="keyword">if</span> words[idx] == word2:</span><br><span class="line">                lst2 = idx</span><br><span class="line">                <span class="keyword">if</span> lst1 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    ans = min(ans, lst2-lst1)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<hr>
+<ol>
+<li><p>C++中：</p>
+<p>lower_bound(begin, end, num)：返回num的下界，即大于等于num的第一个索引位置。</p>
+<p>upper_bound(begin, end, num)：返回num的上界，即大于num的第一个索引位置。</p>
+<p>Python中用二分实现这两个函数。 </p>
+</li>
+</ol>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><ol>
+<li>《信息安全数学基础》 2.2同余类和剩余系。</li>
+</ol>
+
+        </div>
+    
+        <ul class="post-copyright">
+        <li><strong>本文标题：</strong><a href="https://f7ed.com/2020/09/15/array_1/">「LeetCode」：Array 1</a></li>
+        <li><strong>本文作者：</strong><a href="https://f7ed.com">f1ed</a></li>
+        <li><strong>本文链接：</strong><a href="https://f7ed.com/2020/09/15/array_1/">https://f7ed.com/2020/09/15/array_1/</a></li>
+        <li><strong>发布时间：</strong>2020-09-15</li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+        </ul>
+    
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Algorithms/" rel="tag">Algorithms</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Array/" rel="tag">Array</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Data-Structure/" rel="tag">Data-Structure</a>,&nbsp;<a class="has-link-grey -link" href="/tags/LeetCode/" rel="tag">LeetCode</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/qrcode_alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/qrcode_wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/07/22/html-css/">
+                <span class="level-item">「Web」:HTML and CSS</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: false,
+        app_id: 'U7ITnhsJjngmAcJUpFYdrq5m-gzGzoHsz',
+        app_key: 'cSRtvM6PbCOJBTVBAUURyFfO',
+        placeholder: 'xxxxxxxx'
+    });
+</script>
+
+    </div>
+</div>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/profile.png" alt="f1ed">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        f1ed
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        登高不傲，居低不怨。
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>成都</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+    <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+		<div>
+                <a href="/archives/">
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            24
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            6
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            33
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/f1ed" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/f1ed">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+
+   <div class="card widget column-left is-sticky" id="toc">
+       <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Array">
+        <span class="has-mr-6">1</span>
+        <span>Array</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#27-Remove-Elements">
+        <span class="has-mr-6">1.1</span>
+        <span>27. Remove Elements</span>
+        </a></li><li>
+        <a class="is-flex" href="#26-Remove-Duplicates-from-Sorted-Array">
+        <span class="has-mr-6">1.2</span>
+        <span>26. Remove Duplicates from Sorted Array</span>
+        </a></li><li>
+        <a class="is-flex" href="#80-Remove-Duplicates-from-Sorted-Array-II">
+        <span class="has-mr-6">1.3</span>
+        <span>80. Remove Duplicates from Sorted Array II</span>
+        </a></li><li>
+        <a class="is-flex" href="#189-Rotate-Array">
+        <span class="has-mr-6">1.4</span>
+        <span>189. Rotate Array</span>
+        </a></li><li>
+        <a class="is-flex" href="#41-First-Missing-Positive">
+        <span class="has-mr-6">1.5</span>
+        <span>41-First Missing Positive</span>
+        </a></li><li>
+        <a class="is-flex" href="#299-Bulls-and-Cows">
+        <span class="has-mr-6">1.6</span>
+        <span>299-Bulls and Cows</span>
+        </a></li><li>
+        <a class="is-flex" href="#134-Gas-Station">
+        <span class="has-mr-6">1.7</span>
+        <span>134-Gas Station</span>
+        </a></li><li>
+        <a class="is-flex" href="#118-Pascal’s-Triangle">
+        <span class="has-mr-6">1.8</span>
+        <span>118-Pascal’s Triangle</span>
+        </a></li><li>
+        <a class="is-flex" href="#119-Pascal’s-Triangle-II">
+        <span class="has-mr-6">1.9</span>
+        <span>119-Pascal’s Triangle II</span>
+        </a></li><li>
+        <a class="is-flex" href="#169-Majority-Element">
+        <span class="has-mr-6">1.10</span>
+        <span>169-Majority Element</span>
+        </a></li><li>
+        <a class="is-flex" href="#229-Majority-Element-II">
+        <span class="has-mr-6">1.11</span>
+        <span>229-Majority Element II</span>
+        </a></li><li>
+        <a class="is-flex" href="#274-H-Index">
+        <span class="has-mr-6">1.12</span>
+        <span>274-H-Index</span>
+        </a></li><li>
+        <a class="is-flex" href="#275-H-Index-II">
+        <span class="has-mr-6">1.13</span>
+        <span>275-H-Index II</span>
+        </a></li><li>
+        <a class="is-flex" href="#243-Shortest-Word-Distance">
+        <span class="has-mr-6">1.14</span>
+        <span>243-Shortest Word Distance</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#reference">
+        <span class="has-mr-6">2</span>
+        <span>reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+
+                
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/f1ed_logo.png" alt="「LeetCode」：Array 1" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 f1ed&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="f1ed&#39;s GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://f7ed.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>
