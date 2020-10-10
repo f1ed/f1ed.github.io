@@ -1,5 +1,5 @@
 https://f7ed.com/2020/09/29/LeetCode_String/
-https://f7ed.com/2020/09/15/array_1/
+https://f7ed.com/2020/09/15/LeetCode_array/
 https://f7ed.com/2020/07/22/html-css/
 https://f7ed.com/2020/07/21/Docker/
 https://f7ed.com/2020/07/18/Git-and-GitHub/
