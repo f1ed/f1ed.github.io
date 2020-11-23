@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://f7ed.com/2020/04/21/tips-for-DL/</loc>
+    <lastmod>2020-11-23</lastmod>
+  </url>  <url>
     <loc>https://f7ed.com/2020/10/31/unsupervised-learning-pca/</loc>
     <lastmod>2020-10-31</lastmod>
   </url>  <url>
@@ -38,9 +41,6 @@
     <lastmod>2020-07-03</lastmod>
   </url>  <url>
     <loc>https://f7ed.com/2020/06/29/sort-preview/</loc>
-    <lastmod>2020-07-03</lastmod>
-  </url>  <url>
-    <loc>https://f7ed.com/2020/04/21/tips-for-DL/</loc>
     <lastmod>2020-07-03</lastmod>
   </url>  <url>
     <loc>https://f7ed.com/2020/06/26/StreamCipher3/</loc>

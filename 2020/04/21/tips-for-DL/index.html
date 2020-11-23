@@ -21,11 +21,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f7ed.com/gallery/thumbnails/contest_pc_header_303.png">
 <meta property="article:published_time" content="2020-04-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-03T08:45:39.300Z">
+<meta property="article:modified_time" content="2020-11-23T12:43:04.900Z">
 <meta property="article:author" content="f1ed">
-<meta property="article:tag" content="Machine-Learning">
 <meta property="article:tag" content="DeepLearning">
-<meta property="article:tag" content="open-classes">
+<meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="DNN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://f7ed.com/gallery/thumbnails/contest_pc_header_303.png">
@@ -178,7 +177,7 @@ var _hmt = _hmt || [];
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-20T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-21</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T08:45:39.300Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-11-23T12:43:04.900Z"><i class="far fa-calendar-check">&nbsp;</i>2020-11-23</time>
                 
                 
                 <div class="level-item">
@@ -191,7 +190,7 @@ var _hmt = _hmt || [];
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    36 分钟 读完 (大约 5358 个字)
+                    32 分钟 读完 (大约 4782 个字)
                 </span>
                 
                 
@@ -208,13 +207,16 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 
 <h1 id="Recipe-of-Deep-Learning"><a href="#Recipe-of-Deep-Learning" class="headerlink" title="Recipe of Deep Learning"></a>Recipe of Deep Learning</h1><p>Deep Learning 的三个步骤：</p>
-<p><a href="https://imgchr.com/i/JGW8js"><img src="https://s1.ax1x.com/2020/04/21/JGW8js.md.png" alt="JGW8js.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGW8js.md.png" alt="JGW8js.md.png" style="zoom:53%;" />
+
 <p>如果在Training Data中没有得到好的结果，需要重新训练Neural Network。</p>
 <p>如果在Training Data中得到好的结果，在Testing Data（这里的Testing Data是指有Label的Data，比如Kaggle的Public Data或者是从Training Data中划分出的Development Data）没有得到的好的结果，说明Overfitting了，需要重新设计Neural Network的结构。</p>
-<h2 id="Do-not-always-blame-Overfitting"><a href="#Do-not-always-blame-Overfitting" class="headerlink" title="Do not always blame Overfitting"></a>Do not always blame Overfitting</h2><p><a href="https://imgchr.com/i/JGW3cj"><img src="https://s1.ax1x.com/2020/04/21/JGW3cj.md.png" alt="JGW3cj.md.png"></a> </p>
+<h2 id="Do-not-always-blame-Overfitting"><a href="#Do-not-always-blame-Overfitting" class="headerlink" title="Do not always blame Overfitting"></a>Do not always blame Overfitting</h2><img src="https://s1.ax1x.com/2020/04/21/JGW3cj.md.png" alt="JGW3cj.md.png" style="zoom:50%;" />
+
 <p>如果在Testing Data中，看到上图，20-layer的error小，56-layer的error大，56-layer一定overfitting了。</p>
 <p>No!!!不要总把原因归咎于Overfitting。</p>
-<p><a href="https://imgchr.com/i/JGW13Q"><img src="https://s1.ax1x.com/2020/04/21/JGW13Q.md.png" alt="JGW13Q.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGW13Q.md.png" alt="JGW13Q.md.png" style="zoom:50%;" />
+
 <p>再看Testing Data error之前，先看看Training Data的error。上图中，56-layer的DNN在Training Data的error本来就比20-layer的大，说明56-layer的DNN根本没有train好。</p>
 <p>所以56-layer的DNN在Testing Data上的error大，原因不是overfitting，而是模型根本没有train好。</p>
 <p><strong>注：</strong> Overfitting是在Training Data上error小，但在Testing Data上的error大。</p>
@@ -224,11 +226,13 @@ var _hmt = _hmt || [];
 <li>New activation function【neuron换新的激活函数】</li>
 <li>Adaptive Learning Rate</li>
 </ul>
-<h2 id="New-activation-function"><a href="#New-activation-function" class="headerlink" title="New activation function"></a>New activation function</h2><h3 id="Vanishing-Gradient-Problem"><a href="#Vanishing-Gradient-Problem" class="headerlink" title="Vanishing Gradient Problem"></a>Vanishing Gradient Problem</h3><p><a href="https://imgchr.com/i/JGWl9g"><img src="https://s1.ax1x.com/2020/04/21/JGWl9g.md.png" alt="JGWl9g.md.png"></a> </p>
+<h2 id="New-activation-function"><a href="#New-activation-function" class="headerlink" title="New activation function"></a>New activation function</h2><h3 id="Vanishing-Gradient-Problem"><a href="#Vanishing-Gradient-Problem" class="headerlink" title="Vanishing Gradient Problem"></a>Vanishing Gradient Problem</h3><img src="https://s1.ax1x.com/2020/04/21/JGWl9g.md.png" alt="JGWl9g.md.png" style="zoom:50%;" />
+
 <p>上图表示，在手写数字辨识中，Deeper layers并不能有好的performance。</p>
 <p>为什么会这样呢？</p>
 <p>因为出现了Vanishing Gradient Problem，即gradient随着deeper layer逐渐消失的问题。</p>
-<p><a href="https://imgchr.com/i/JGWM4S"><img src="https://s1.ax1x.com/2020/04/21/JGWM4S.md.png" alt="JGWM4S.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWM4S.md.png" alt="JGWM4S.md.png" style="zoom:70%;" />
+
 <p>上图中，假设neuron的activation function是sigmod函数。</p>
 <p>靠近Input layer层的参数的变化对Loss的影响很小，所以对Loss function做微分，gradient很小，参数更新慢。</p>
 <p>而靠近Output layer层的参数的编号对Loss的影响更大，所以对Loss function做微分，gradient很大，参数更新快。</p>
@@ -239,13 +243,15 @@ var _hmt = _hmt || [];
 <p>怎么直观理解靠近Input Layer的参数的gradient小呢？</p>
 <p>用微分的直观含义来表示gradient $\partial{l}/\partial{w}$ : </p>
 <p><strong>当 $w$ 增加 $\Delta{w}$ 时，如果 $l$ 的变化 $\Delta{l}$ 变化大，说明 $\partial{l}/\partial{w}$ 大，否则 $\partial{l}/\partial{w}$ 小。</strong></p>
-<p><a href="https://imgchr.com/i/JGWKN8"><img src="https://s1.ax1x.com/2020/04/21/JGWKN8.md.png" alt="JGWKN8.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWKN8.md.png" alt="JGWKN8.md.png" style="zoom:67%;" />
+
 <p>我们在DNN中使用的activation function是sigmod函数，sigmod函数会把值压到0和1之间。</p>
 <p>因此，上图中，其他值不变，只有连接 $x_N$ 的参数 $w$ 增加 $\Delta w$ 时，输入通过neuron的sigmod函数，函数的输出增加的 $\Delta$ 会变小，随着Deeper Layer，neuron的输出的 $\Delta$ 会越变越小，趋至0。</p>
 <p>最后DNN输出的变化对 loss的影响小，即 $\Delta{l}$ 趋至0，即参数的gradient  $\partial{l}/\partial{w}$ 趋至0。（即 Vanishing Gradient）</p>
 <h3 id="ReLu-：Rectified-Linear-Unit"><a href="#ReLu-：Rectified-Linear-Unit" class="headerlink" title="ReLu ：Rectified Linear Unit"></a>ReLu ：Rectified Linear Unit</h3><p>为了防止发生Vanishing Gradient Problem，在DNN中选择使用新的activation function。</p>
 <p>ReLu长下面这个样子：</p>
-<p><a href="https://imgchr.com/i/JGWuAf"><img src="https://s1.ax1x.com/2020/04/21/JGWuAf.md.png" alt="JGWuAf.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWuAf.md.png" alt="JGWuAf.md.png" style="zoom:33%;" />
+
 <p>z: input</p>
 <p>a: output</p>
 <p>当 $z\leq0$ 时， $a=0$ ；当 $z &gt;0$ 时， $a=z$ 。</p>
@@ -258,10 +264,12 @@ var _hmt = _hmt || [];
 </ol>
 <hr>
 <p>为什么ReLu没有vanishing gradient problem</p>
-<p><a href="https://imgchr.com/i/JGWmHP"><img src="https://s1.ax1x.com/2020/04/21/JGWmHP.md.png" alt="JGWmHP.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWmHP.md.png" alt="JGWmHP.md.png" style="zoom:67%;" />
+
 <p>上图DNN中，ReLu在输入是负数时，输出是0。因此这些输出是0的neuron可以去掉。</p>
 <p>就变成了下图这个A Thinner linear network。由于ReLu函数的性质，靠近Input Layer的参数不会有smaller gradient。</p>
-<p><a href="https://imgchr.com/i/JGWeBt"><img src="https://s1.ax1x.com/2020/04/21/JGWeBt.md.png" alt="JGWeBt.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWeBt.md.png" alt="JGWeBt.md.png" style="zoom:75%;" />
+
 <p>这里有一个Q&amp;A: </p>
 <p>Q1: function变成linear的，会不会DNN就变弱了？</p>
 <p>： 当neuron的operation region不变的话，DNN的确是linear的，但是当neuron的operation region改变后，就是unlinear的。</p>
@@ -269,19 +277,23 @@ var _hmt = _hmt || [];
 <p>Q2: ReLu 怎么微分？</p>
 <p>：ReLu在0点不可微，那就随便指定为0这样（台湾腔QAQ）。</p>
 <h3 id="ReLu-variant"><a href="#ReLu-variant" class="headerlink" title="ReLu - variant"></a>ReLu - variant</h3><p>当 $z\leq 0$ 时，输出为0，就不能更新参数了。于是就有下图变体：</p>
-<p><a href="https://imgchr.com/i/JGWZnI"><img src="https://s1.ax1x.com/2020/04/21/JGWZnI.md.png" alt="JGWZnI.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWZnI.md.png" alt="JGWZnI.md.png" style="zoom:40%;" />
+
 <p>当 $z\leq0$ 时，gradient都为0.01，为什么不能是其他值。于是就有下图变体：其中 $\alpha$ 也是一个需要学习的参数</p>
 <h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>Maxout，如下图，在设计neural network时，会给每一层的neuron分组，成为一个新的neuron。</p>
-<p><a href="https://imgchr.com/i/JGWk1H"><img src="https://s1.ax1x.com/2020/04/21/JGWk1H.md.png" alt="JGWk1H.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWk1H.md.png" alt="JGWk1H.md.png" style="zoom:75%;" />
+
 <p>Maxout也是一个Learnable activation function。</p>
 <p><strong>ReLu是Maxout学出来的一个特例。</strong></p>
-<p><a href="https://imgchr.com/i/JGWAcd"><img src="https://s1.ax1x.com/2020/04/21/JGWAcd.md.png" alt="JGWAcd.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWAcd.md.png" alt="JGWAcd.md.png" style="zoom:75%;" />
+
 <p>上图中，左图是ReLu。 ReLu的输入 $z = wx+b$ ，输出 $a$ 如上图的绿色的线。</p>
 <p>右图是Maxout。Maxout的输入 $z_1 =wx+b,z_2=0$ ，那么输出取max，输出 $a$ 如上图中绿色的线，和左图的ReLu相同。</p>
 <hr>
 <p><strong>Maxout is more than ReLu。</strong> </p>
 <p>当参数更新时，Maxout的函数图像如下图：</p>
-<p><a href="https://imgchr.com/i/JGWPhD"><img src="https://s1.ax1x.com/2020/04/21/JGWPhD.md.png" alt="JGWPhD.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWPhD.md.png" alt="JGWPhD.md.png" style="zoom:77%;" />
+
 <p>DNN中的参数是learnable的，所以Maxout也是一个learnable的activation function。</p>
 <p><u>Reason ：</u></p>
 <ul>
@@ -292,18 +304,21 @@ var _hmt = _hmt || [];
 </li>
 <li><p>How many pieces depending on how many elements in a group.</p>
 <p>分段函数分几段取决于一组中有多少个元素。</p>
-<p><a href="https://imgchr.com/i/JGWCtO"><img src="https://s1.ax1x.com/2020/04/21/JGWCtO.md.png" alt="JGWCtO.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWCtO.md.png" alt="JGWCtO.md.png" style="zoom:70%;" />
+
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="Maxout-how-to-train"><a href="#Maxout-how-to-train" class="headerlink" title="Maxout : how to train"></a>Maxout : how to train</h3><p>Given a training data x, we know which z would be the max.</p>
 <p>【当给出每笔training data时，我们能知道Maxout neuron中哪一个最大】</p>
-<p><a href="https://imgchr.com/i/JGW9AK"><img src="https://s1.ax1x.com/2020/04/21/JGW9AK.md.png" alt="JGW9AK.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGW9AK.md.png" alt="JGW9AK.md.png" style="zoom:75%;" />
+
 <p>如上图，在这笔training data x中，我们只train this thin and linear network 的参数，即max z相连的参数。</p>
 <p>每笔不同的training data x，会得到不同的thin and linear network，最后，会train到每一个参数。</p>
 <h2 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h2><h3 id="Review-Adagrad"><a href="#Review-Adagrad" class="headerlink" title="Review Adagrad"></a>Review Adagrad</h3><p>在这篇文章： <a href="/2020/03/01/Gradient/" title="Gradient">Gradient</a> 第一小节讲到一种adaptive learning rate的gradient 算法：Adagrad 算法。在那篇文章中，我们得出的结论是 the best step $\propto$  |First dertivative| / Second derivative.</p>
-<p><a href="https://imgchr.com/i/JGWF9e"><img src="https://s1.ax1x.com/2020/04/21/JGWF9e.md.png" alt="JGWF9e.md.png"></a>  </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWF9e.md.png" alt="JGWF9e.md.png" style="zoom:67%;" />
+
 <p>在上图中，两个方向，因为蓝色方向的二阶微分更小，所以蓝色方向应该有更大的learning rate。</p>
 <p>因此，在Adagrad中，我们用一阶微分来估量二阶微分的大小：</p>
 
@@ -313,7 +328,8 @@ $$
 
 
 <h3 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h3><p>但是，在训练NN时，Error Surface（Total Loss对参数的变化）的图像可能会更复杂，如下图：</p>
-<p><a href="https://imgchr.com/i/JGWS76"><img src="https://s1.ax1x.com/2020/04/21/JGWS76.md.png" alt="JGWS76.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGWS76.md.png" alt="JGWS76.md.png" style="zoom:67%;" />
+
 <p>因为函数图像过于复杂，可能在同一方向的不同位置，也需要有不同的learning rate。</p>
 <p>RMSProp是Adagrad的进阶版。</p>
 <p><strong>RMSProp过程：</strong> </p>
@@ -330,12 +346,14 @@ $$
 </ol>
 <p>但是在RMSProp中，加入了参数 $\alpha$ (需要手动调节大小的参数)，可以给当前算出来的gradient $g^t$ 更大的权重，即更相信现在gradient的方向，不那么相信以前gradient的方向。</p>
 <h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>Momentum，则是引用物理中的惯性。</p>
-<p><a href="https://imgchr.com/i/JGRxn1"><img src="https://s1.ax1x.com/2020/04/21/JGRxn1.md.png" alt="JGRxn1.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRxn1.md.png" alt="JGRxn1.md.png" style="zoom:47%;" />
+
 <p>上图中，当小球到达local minima时，会因为惯性继续往前更新，则有可能到达minima的位置。</p>
 <p>这里的Momentum，就代指上一次前进（参数更新）的方向。</p>
 <p><strong>Vanilla Gradient Descent</strong> </p>
 <p>如果将Gradient的步骤画出图来，就是下图这样：</p>
-<p><a href="https://imgchr.com/i/JGRXc9"><img src="https://s1.ax1x.com/2020/04/21/JGRXc9.md.png" alt="JGRXc9.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRXc9.md.png" alt="JGRXc9.md.png" style="zoom:47%;" />
+
 <p>过程：</p>
 <ol>
 <li><p>Start at position $\theta^0$</p>
@@ -352,7 +370,8 @@ $$
 <hr>
 <p><strong>Momentum</strong> </p>
 <p>在Momentum中，参数更新方向是当前Gradient方向和Momentum方向（上一次更新方向）的叠加。</p>
-<p><a href="https://imgchr.com/i/JGRjXR"><img src="https://s1.ax1x.com/2020/04/21/JGRjXR.md.png" alt="JGRjXR.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRjXR.md.png" alt="JGRjXR.md.png" style="zoom:50%;" />
+
 <p>Movement方向：上一次更新方向 - 当前gradient方向。</p>
 <p>过程：</p>
 <ol>
@@ -382,9 +401,11 @@ $$
 </ul>
 <hr>
 <p>再用那个小球的例子来直觉的解释Momentum：</p>
-<p><a href="https://imgchr.com/i/JGRO1J"><img src="https://s1.ax1x.com/2020/04/21/JGRO1J.md.png" alt="JGRO1J.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRO1J.md.png" alt="JGRO1J.md.png" style="zoom:70%;" />
+
 <p>当小球在local minima时，gradient为0，但是Momentum（即上次移动方向）是继续往前，于是小球可以继续向前更新。</p>
-<h3 id="Adam-RMSProp-Momentum"><a href="#Adam-RMSProp-Momentum" class="headerlink" title="Adam = RMSProp + Momentum"></a>Adam = RMSProp + Momentum</h3><p><a href="https://imgchr.com/i/JGRLp4"><img src="https://s1.ax1x.com/2020/04/21/JGRLp4.md.png" alt="JGRLp4.md.png"></a> </p>
+<h3 id="Adam-RMSProp-Momentum"><a href="#Adam-RMSProp-Momentum" class="headerlink" title="Adam = RMSProp + Momentum"></a>Adam = RMSProp + Momentum</h3><img src="https://s1.ax1x.com/2020/04/21/JGRLp4.md.png" alt="JGRLp4.md.png" style="zoom:77%;" />
+
 <p>Algorithm：Adam, our proposed algorithm for stochastic optimization. </p>
 <p>【Adam，是为了优化stochastic gradient】（至于什么是stochastic gradient，建议戳)</p>
 <p>$g_t^2$ indicates the elementwise square $g_t\odot g_t$ .</p>
@@ -439,13 +460,15 @@ $$
 <li>Stuck at saddle point</li>
 <li>Very slow at the plateau</li>
 </ul>
-<p><a href="https://imgchr.com/i/JG4l9O"><img src="https://s1.ax1x.com/2020/04/21/JG4l9O.md.png" alt="JG4l9O.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JG4l9O.md.png" alt="JG4l9O.md.png" style="zoom:77%;" />
+
 <p>（李老师说的，不是我说的QAQ）：但是Andrew（吴恩达）在2017年说过，不用太担心这个问题。为什么呢？</p>
 <p>如果要stuck at local minima，前提是每一维度都是local minima。</p>
 <p>如果在一个维度遇到local minima的概率是p，当NN很复杂时，有很多参数时，比如1000，那么遇到local minima的概率是 $p^{1000}$ ，趋近于0了，几乎不会发生。</p>
 <p>：所以不用太担心Gradient Descent的局限性。</p>
 <h1 id="Bad-Results-on-Testing-Data"><a href="#Bad-Results-on-Testing-Data" class="headerlink" title="Bad Results on Testing Data"></a>Bad Results on Testing Data</h1><h2 id="Early-Stopping"><a href="#Early-Stopping" class="headerlink" title="Early Stopping"></a>Early Stopping</h2><p>在更新参数时，可能会出现这样曲线图：</p>
-<p><a href="https://imgchr.com/i/JGRbhF"><img src="https://s1.ax1x.com/2020/04/21/JGRbhF.md.png" alt="JGRbhF.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRbhF.md.png" alt="JGRbhF.md.png" style="zoom:75%;" />
+
 <p>图中，Total Loss在training set中逐渐减小，但在validation set中逐渐增大。</p>
 <p>而我们真正关心的其实是validation set的Loss。</p>
 <p>所以想让参数停在validation set中loss最低时。</p>
@@ -527,17 +550,18 @@ $$
 <blockquote>
 <p>Weight decay（权值衰减）的生物意义：</p>
 <p>Our brain prunes（修剪） out the useless link between neurons.</p>
-<p><a href="https://imgchr.com/i/JGRHtU"><img src="https://s1.ax1x.com/2020/04/21/JGRHtU.md.png" alt="JGRHtU.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRHtU.md.png" alt="JGRHtU.md.png" style="zoom:47%;" />
 </blockquote>
 <h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>Wiki: <strong>Dropout</strong>是Google提出的一种正则化技术，用以在人工神经网络中对抗过拟合。Dropout有效的原因，是它能够避免在训练数据上产生复杂的相互适应。Dropout这个术语代指在神经网络中丢弃部分神经元（包括隐藏神经元和可见神经元）。在训练阶段，dropout使得每次只有部分网络结构得到更新，因而是一种高效的神经网络模型平均化的方法。[2]</p>
 <p>这里讲Dropout怎么做。</p>
-<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><p><a href="https://imgchr.com/i/JG4M4K"><img src="https://s1.ax1x.com/2020/04/21/JG4M4K.md.png" alt="JG4M4K.md.png"></a> </p>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><img src="https://s1.ax1x.com/2020/04/21/JG4M4K.md.png" alt="JG4M4K.md.png" style="zoom:55%;" /> 
+
 <ul>
 <li><p>Each time before updating the parameters:</p>
 <ul>
 <li><p>Each neuron has p% to dropout. Using the new thin network for training.</p>
 <p>【如上图，每个neuron有p的概率被dropout。于是NN就变成了下图thinner的NN】</p>
-<p><a href="https://imgchr.com/i/JGR5mq"><img src="https://s1.ax1x.com/2020/04/21/JGR5mq.md.png" alt="JGR5mq.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGR5mq.md.png" alt="JGR5mq.md.png" style="zoom:50%;" /> 
 </li>
 <li><p>For each mini-batch, we resample the dropout neurons.</p>
 <p>【每次mini-batch，都要重新dropout，更新NN的结构】</p>
@@ -554,10 +578,11 @@ $$
 </ul>
 <h3 id="Why-dropout-in-training：Intuitive-Reason"><a href="#Why-dropout-in-training：Intuitive-Reason" class="headerlink" title="Why dropout in training：Intuitive Reason"></a>Why dropout in training：Intuitive Reason</h3><ol>
 <li><p>这是一个比较有趣的比喻：</p>
-<p><a href="https://imgchr.com/i/JGRI00"><img src="https://s1.ax1x.com/2020/04/21/JGRI00.md.png" alt="JGRI00.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRI00.md.png" alt="JGRI00.md.png" style="zoom:50%;" /> 
 </li>
 <li><p>这也是一个有趣的比喻hhh:</p>
-<p><a href="https://imgchr.com/i/JGRo7V"><img src="https://s1.ax1x.com/2020/04/21/JGRo7V.md.png" alt="JGRo7V.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRo7V.md.png" alt="JGRo7V.md.png" style="zoom:50%;" /> 
+
 <p>即，团队合作的时候，如果每个人都认为队友在带我，那每个人都可能划水。</p>
 <p>但是，（training中）如果你知道你的队友在划水，那你可能会做的更好。</p>
 <p>但是，（testing中）发现每个人都有更好地做，都没有划水，那么结果就会很好。</p>
@@ -566,14 +591,17 @@ $$
 </ol>
 <h3 id="Why-multiply-1-p-in-testing-Intuitive-reason"><a href="#Why-multiply-1-p-in-testing-Intuitive-reason" class="headerlink" title="Why multiply (1-p%) in testing: Intuitive reason"></a>Why multiply (1-p%) in testing: Intuitive reason</h3><p>为什么在testing中 weights要乘（1-p%)?</p>
 <p>用一个具体的例子来直观说明：</p>
-<p><a href="https://imgchr.com/i/JGRf6s"><img src="https://s1.ax1x.com/2020/04/21/JGRf6s.md.png" alt="JGRf6s.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRf6s.md.png" alt="JGRf6s.md.png" style="zoom:67%;" />
+
 <p>上图中，如果dropout rate=0.5，假设只训练一次， $w_2,w_4$ 相连的neuron都被dropout。</p>
 <p>在testing中，因为不对neurondropout，所以如果不改变weight，计算出的结果 $z’\approx 2z$ 。</p>
 <p>因此将所有weight简单地和(1-p%) 相乘，能尽量保证计算出的结果 $z’\approx z$ 。</p>
 <h3 id="Dropout-is-a-kind-of-ensemble"><a href="#Dropout-is-a-kind-of-ensemble" class="headerlink" title="Dropout is a kind of ensemble"></a>Dropout is a kind of ensemble</h3><p>Ensemble(合奏)，如下图，将testing data丢给train好的NN来估计，最后的估计值取所有NN输出的平均，如下图：</p>
-<p><a href="https://imgchr.com/i/JGRhXn"><img src="https://s1.ax1x.com/2020/04/21/JGRhXn.md.png" alt="JGRhXn.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRhXn.md.png" alt="JGRhXn.md.png" style="zoom:60%;" />
+
 <p>为什么说dropout is a kind of ensemble?</p>
-<p><a href="https://imgchr.com/i/JGRRpQ"><img src="https://s1.ax1x.com/2020/04/21/JGRRpQ.md.png" alt="JGRRpQ.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRRpQ.md.png" alt="JGRRpQ.md.png" style="zoom:50%;" />
+
 <ul>
 <li><p>Using one mini-batch to train one network</p>
 <p>【dropout相当于每次用一个mini-batch来训练一个network】</p>
@@ -585,7 +613,14 @@ $$
 <p>由于每个神经元有 p%的概率被dropout，因此理论上，如果有M个neuron，可能会训练 $2^M$ 个network。</p>
 <p>但是在Ensemble中，将每个network存下来，testing的时候输出取平均，这样的过程太复杂了，结果也不一定会很好。</p>
 <p>所以在testing中，no dropout，对原始network中的每个参数乘 (1-p%)，用这样简单的操作来达到ensemble的目的。</p>
-<p><a href="https://imgchr.com/i/JGRWlj"><img src="https://s1.ax1x.com/2020/04/21/JGRWlj.md.png" alt="JGRWlj.md.png"></a> </p>
+<img src="https://s1.ax1x.com/2020/04/21/JGRWlj.md.png" alt="JGRWlj.md.png" style="zoom:60%;" />
+
+
+
+
+
+
+
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li>Keras: <a href="https://keras.io/getting-started/faq/#how-can-i-interrupt-training-when-the-validation-loss-isnt-decreasing-anymore">how can i interrupt training when the validation loss isn’t decresing anymore.</a> </li>
 <li>Dropout-wiki：<a href="https://zh.wikipedia.org/wiki/Dropout">https://zh.wikipedia.org/wiki/Dropout</a></li>
@@ -608,7 +643,7 @@ $$
             <div class="level-start">
                 <div class="level-item">
                 <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/DNN/" rel="tag">DNN</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Machine-Learning/" rel="tag">Machine-Learning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/open-classes/" rel="tag">open-classes</a>
+                    <a class="has-link-grey -link" href="/tags/DNN/" rel="tag">DNN</a>,&nbsp;<a class="has-link-grey -link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
                 </div>
             </div>
         </div>
