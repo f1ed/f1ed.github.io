@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f7ed.com/gallery/thumbnails/0321.jpg">
 <meta property="article:published_time" content="2020-03-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-11-24T11:51:39.324Z">
+<meta property="article:modified_time" content="2020-11-24T13:10:31.379Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="Classification">
 <meta property="article:tag" content="机器学习">
@@ -179,7 +179,7 @@ var _hmt = _hmt || [];
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-31T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-01</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-11-24T11:51:39.324Z"><i class="far fa-calendar-check">&nbsp;</i>2020-11-24</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-11-24T13:10:31.379Z"><i class="far fa-calendar-check">&nbsp;</i>2020-11-24</time>
                 
                 
                 <div class="level-item">
@@ -192,7 +192,7 @@ var _hmt = _hmt || [];
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    15 分钟 读完 (大约 2186 个字)
+                    15 分钟 读完 (大约 2260 个字)
                 </span>
                 
                 
@@ -221,8 +221,8 @@ var _hmt = _hmt || [];
 $$
 \begin{equation}
 \begin{aligned}
-Loss &= -\ln L(w, b)=\ln f_{w, b}\left(x^{1}\right)+\ln f_{w, b}\left(x^{2}\right)+\ln \left(1-f_{w, b}\left(x^{3}\right)\right) \cdots 
-\\ &=\sum_{n}-\left[\hat{y}^{n} \ln f_{w, b}\left(x^{n}\right)+\left(1-\hat{y}^{n}\right) \ln \left(1-f_{w, b}\left(x^{n}\right)\right)\right]
+ -\ln L(w, b)&=-(\ln f_{w, b}\left(x^{1}\right)+\ln f_{w, b}\left(x^{2}\right)+\ln \left(1-f_{w, b}\left(x^{3}\right)\right) \cdots )
+\\ Loss&=\sum_{n}-\left[\hat{y}^{n} \ln f_{w, b}\left(x^{n}\right)+\left(1-\hat{y}^{n}\right) \ln \left(1-f_{w, b}\left(x^{n}\right)\right)\right]
 \end{aligned}
 \end{equation}
 $$
@@ -230,12 +230,14 @@ $$
 <p><strong>目标</strong> ： $w^{*}, b^{*}=\arg \min _{w, b} L(w, b)$ </p>
 <blockquote>
 <p><a href="https://en.wikipedia.org/wiki/Cross_entropy">Cross entropy</a>（交叉熵）</p>
+<p>关于熵、交叉熵、相对熵（KL散度）的理解：<a href="https://www.youtube.com/watch?v=ErfnhcEV1O8">强烈安利</a> </p>
 <p>上式中的 $\left[\hat{y}^{n} \ln f_{w, b}\left(x^{n}\right)+\left(1-\hat{y}^{n}\right) \ln \left(1-f_{w, b}\left(x^{n}\right)\right)\right]$ 其实是两个Bernoulli distribution的交叉熵。</p>
-<p>交叉熵是什么？ 简单来说，交叉熵是评估两个distribution 有多接近。所以当两个分布的交叉熵为0时，表明这两个分布一模一样。</p>
+<p>交叉熵是什么？ 简单来说，交叉熵是评估两个distribution 有多接近。所以当这两个Bernoulli 分布的交叉熵为0时，表明这两个分布一模一样。</p>
 <p>对于 $\hat{y}^{n} \ln f_{w, b}\left(x^{n}\right)+\left(1-\hat{y}^{n}\right) \ln \left(1-f_{w, b}\left(x^{n}\right)\right)$ ：</p>
-<p> Distribution p: p(x = 1) = $\hat{y}^n$ ; p( x = 0 ) = 1 - $\hat{y}^n$ </p>
+<p>Distribution p: p(x = 1) = $\hat{y}^n$ ; p( x = 0 ) = 1 - $\hat{y}^n$ </p>
 <p>Distribution q: q(x = 1 ) =  $f(x^n)$ ; q(x = 0 ) = 1 - $f(x^n)$ </p>
 <p>交叉熵  $H(p,q)=-\Sigma_xp(x)\ln(q(x))$ </p>
+<p>p是真实的分布，q是预测的分布。</p>
 </blockquote>
 <p>因此，这个损失函数的表达式其实也是输出分布和target分布的交叉熵，即：</p>
 <p>$L(f)=\sum_{n} C\left(f\left(x^{n}\right), \hat{y}^{n}\right)$ </p>
@@ -385,7 +387,10 @@ $$
 <img src="https://s1.ax1x.com/2020/04/01/G8T981.md.png" alt="G8T981.md.png" style="zoom:57%;" />
 
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li>Multi-class Classification推导：Bishop，P209-210</li>
+<li><p>Multi-class Classification推导：Bishop，P209-210</p>
+</li>
+<li><p>关于Entropy, Cross Entropy, KL-Divergence的理解：强烈安利：<a href="https://www.youtube.com/watch?v=ErfnhcEV1O8">https://www.youtube.com/watch?v=ErfnhcEV1O8</a> </p>
+</li>
 </ol>
 
         </div>
