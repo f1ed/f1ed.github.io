@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="9ce18CEmjH" />
+<meta name="google-site-verification" content="GSUThrU_AtZE-dgdz1QWWouv0L2teKqHWrZg7DfHbXo" />
+<meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>「Math」:Entropy, Cross-Entropy and DL-Divergence - fred&#39;s blog</title>
+
+
+    <meta name="description" content="在机器学习中，常用cross-entropy来作为模型的损失函数，这篇文章将阐述信息学中的entropy（熵）是什么，cross-entropy（交叉熵）又是什么，KL-Divergence和entropy、cross-entropy的关系是什么？ 如何具象的理解这些概念？ 在开始阅读这篇文章之前，先提及一下香农对bit的定义，香农认为bit是用来消除信息的不确定性的。 bit：uncertain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Math」:Entropy, Cross-Entropy and DL-Divergence">
+<meta property="og:url" content="https://f7ed.com/2021/01/16/entropy-and-more/index.html">
+<meta property="og:site_name" content="fred&#39;s blog">
+<meta property="og:description" content="在机器学习中，常用cross-entropy来作为模型的损失函数，这篇文章将阐述信息学中的entropy（熵）是什么，cross-entropy（交叉熵）又是什么，KL-Divergence和entropy、cross-entropy的关系是什么？ 如何具象的理解这些概念？ 在开始阅读这篇文章之前，先提及一下香农对bit的定义，香农认为bit是用来消除信息的不确定性的。 bit：uncertain">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://f7ed.com/gallery/thumbnails/85250793_p0_master1200.jpg">
+<meta property="article:published_time" content="2021-01-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-16T07:13:27.910Z">
+<meta property="article:author" content="f1ed">
+<meta property="article:tag" content="Math">
+<meta property="article:tag" content="Information-Theory">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://f7ed.com/gallery/thumbnails/85250793_p0_master1200.jpg">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="「Math」:Entropy, Cross-Entropy and DL-Divergence" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/heart.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171512660-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-171512660-1');
+</script>
+
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?b1d53a77276f7e423bc7cf8fafd95b75";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/f1ed_logo.png" alt="「Math」:Entropy, Cross-Entropy and DL-Divergence" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/atom.xml">RSS</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/85250793_p0_master1200.jpg" alt="「Math」:Entropy, Cross-Entropy and DL-Divergence">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-bars"></i>「Math」:Entropy, Cross-Entropy and DL-Divergence
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-01-15T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2021-01-16</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-01-16T07:13:27.910Z"><i class="far fa-calendar-check">&nbsp;</i>2021-01-16</time>
+                
+                
+                <div class="level-item">
+                <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/Information-Theory/">Information-Theory</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    <i class="far fa-clock"></i>&nbsp;
+                    
+                    
+                    13 分钟 读完 (大约 1885 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <p>在机器学习中，常用cross-entropy来作为模型的损失函数，这篇文章将阐述信息学中的entropy（熵）是什么，cross-entropy（交叉熵）又是什么，KL-Divergence和entropy、cross-entropy的关系是什么？</p>
+<p>如何具象的理解这些概念？</p>
+<p>在开始阅读这篇文章之前，先提及一下香农对bit的定义，香农认为bit是用来消除信息的不确定性的。</p>
+<p>bit：uncertainty divided by 2.</p>
+<p><a href="https://www.youtube.com/watch?v=ErfnhcEV1O8">原视频</a> 讲的很好，本文只是在此基础上对一些总结，方便理解物质化（马原.jpg）。</p>
+<a id="more"></a>
+
+<h1 id="公式总概"><a href="#公式总概" class="headerlink" title="公式总概"></a>公式总概</h1><p>bit：用来消除信息的不确定性</p>
+<p>Entropy（熵）： $H(p)=-\sum_i p_i\log(p_i)$ </p>
+<p>度量概率分布的平均信息量（即不确定性）。值越大，不确定性越大。</p>
+<p>Cross-Entropy（交叉熵）： $H(p,q)=-\sum_i p_i\log(q_i)$ </p>
+<p>度量两个分布的相似程度（一般 $p$ 为真实分布，$q$为预测分布），值越大，两个分布越不相似。</p>
+<p>KL-Divergence（KL散度，也叫相对熵） ：$D_{KL}(p|q)=H(p,q)-H(q)$ </p>
+<p>度量交叉熵超过熵的那一部分。</p>
+<h1 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy-熵"></a>Entropy-熵</h1><p><strong>实例1：</strong></p>
+<p>sunny和rainy的发生的概率都是0.5，天气预报预测明天的天气为sunny，将sunny消息发给用户。</p>
+<p>该条消息不管多长，有用的信息其实只有1个比特，即uncertainty divided by 2.</p>
+<p><strong>实例2：</strong></p>
+<p>有八种不同的天气，发生的概率相同，当天气预报将预测消息发送给用户时。</p>
+<p>该条消息能使得uncertainty divided By 8.即有用信息为3个比特。</p>
+<p><strong>实例3:</strong></p>
+<p>sunny发生的概率为0.75，rainy的概率为0.25，如果天气预测明天的天气：</p>
+<blockquote>
+<p>将这个例子理解为抽球游戏，盒子里有3个红球（表示sunny天气），1个白球（rainy天气）。</p>
+<p>事件 $X$ 表示为在盒子里抽中球的颜色，可得知抽中红球的概率为0.75，抽中白球的概率是0.25。</p>
+<p>抽中哪个球是不确定的，即uncertainty 如果原来是4，即不知道将抽中这四个球中的哪一个。</p>
+<ul>
+<li><p>如果抽中白球，那该信息表示：就是那4个球中的唯一一个白球，uncertainty 从原来的4变为1，即 uncertainty divided by 4.表示该信息，需要有用比特， $\log_2(4)=\log_2(1/0.25)=2$ 个比特来表示。即抽打白球的情况的不确定性更大，需要更多的比特来消除不确定性，来表示白球的发生。所以该条信息中只有2个比特是useful information.</p>
+</li>
+<li><p>如果抽中红球，该信息表示为：是那3个红球中的一个，uncertainty 从原来的4变为3</p>
+<p>（如果和抽中白球的情况统一，最后的确定发生的uncertainty都表示为1，即在没有抽之前，抽到红球的uncertainty为 $1/0.75=4/3$ ）</p>
+<p>即uncertainty divided by 4/3.表示该信息需要有用 $\log_2(4/3)=\log_2(1/0.75)=-\log_2(0.75)=0.41$ 比特来表示。即抽到红球的情况不确定性没有那么大，只需要较少比特即可消除不确定性，来表示红球的发生。所以该条信息中只有0.41个比特是useful information.</p>
+</li>
+</ul>
+<p>这里也可以看出，如果一个事件的发生的概率越小（越不可能发生），即对该事件发生的不确定性越大，但一旦发生了，所携带的信息量就会很大，因为需要用更多的比特来消除不确定性。</p>
+</blockquote>
+<p>回到本例子：</p>
+<ul>
+<li><p>如果预测天气为rainy，将预测消息发给用户，则该条消息包含2比特（$\log_2(1/0.25)=-\log_2(0.25)=2$）的有用信息，即对rainy天气发送的不确定性更大，需要更多的比特来消除不确定性。</p>
+</li>
+<li><p>如果预测天气为sunny，因为在预测之前，用户对sunny发生的可能性就没有那么大，因此只需要0.41比特（$\log_2(1/0.75)=-\log_2(0.75)$)来消除不确定性。</p>
+</li>
+</ul>
+<p>那平均下来，气象局发送的平均信息量为 $0.75\times 0.41+0.25\times2=0.81$ bits.</p>
+<hr>
+<p>因此我们用 $\log_2(1/p)=-\log_2p$ 来表示事件发生时所携带的信息量。（或者说需要这么多信息量来消除事件发生的不确定性）</p>
+<p>用 $-\sum_i{p_i}\log_2{p_i}$ 来表示该事件的平均信息量（概率分布的不确定性），这就是信息熵（Entropy）。</p>
+<p>Entropy：<br>$$<br>H(p)=-\sum_i pi\log_2(p_i)<br>$$<br>熵越大，说明携带的平均信息量越多，即不确定性越强，需要越多的比特来消除不确定性。所以熵是用来衡量不确定性的量。</p>
+<blockquote>
+<p>和化学中衡量混乱程度的熵，是类似的。</p>
+</blockquote>
+<h1 id="Cross-Entropy-交叉熵"><a href="#Cross-Entropy-交叉熵" class="headerlink" title="Cross-Entropy-交叉熵"></a>Cross-Entropy-交叉熵</h1><p><strong>例1：</strong></p>
+<p>从上面的实例2来看，即8中天气发生概率相同，对天气表示进行信息编码，为下图：</p>
+<img src="https://s3.ax1x.com/2021/01/16/sDloKf.png" alt="例1" style="zoom:33%;" />
+
+<p>entropy为3bits，而cross-entropy（交叉熵），也就是消息（比特流）的平均长度，为3bits.</p>
+<p><strong>例2：</strong></p>
+<p>但如果8种天气发生的可能性为下图：</p>
+<img src="https://s3.ax1x.com/2021/01/16/sDl5xP.png" alt="例2" style="zoom:33%;" />
+
+<p>算出来的entropy为2.23bits，即平均信息量为2.23bits。</p>
+<p>如果仍是用这样的编码，cross-entropy为3bits，就多出一些冗余信息量。</p>
+<p><strong>例3:</strong></p>
+<p>如果换一种编码方式：</p>
+<img src="https://s3.ax1x.com/2021/01/16/sD12LT.png" alt="例3" style="zoom:33%;" />
+
+<p>算出来的cross-entropy为 $0.35 \times2+0.35\times2+0.1\times3+…+0.01\times5=2.42$ bits，就非常接近entropy=2.23bits。</p>
+<p>说明这种编码方式冗余量很小，非常接近真实的概率分布所包含的平均信息。</p>
+<p><strong>例4:</strong></p>
+<p>如果天气的概率分布变为下图，entropy不变仍然为2.23bits：</p>
+<img src="https://s3.ax1x.com/2021/01/16/sDl42t.png" alt="例4" style="zoom:33%;" />
+
+<p>那么算出来的cross-entropy为 $0.01\times2+0.01\times 2+0.04\times3+…+0.35\times5=4.58$ bits，远大于entropy的值。说明这种编码方式冗余量很大。</p>
+<hr>
+<p>换一种角度看例4，把信息编码认为是预测的概率分布，例4点编码表示的分布如下：</p>
+<img src="https://s3.ax1x.com/2021/01/16/sD1rJs.png" alt="cross-entropy" style="zoom:33%;" />
+
+<p>Cross-Entropy：<br>$$<br>H(p,q)=-\sum_i p_i\log(q_i)<br>$$<br>所以cross-entropy可以理解为<strong>信息/比特流的平均长度。</strong></p>
+<p>如果预测的概率分布非常接近真实的概率分布，那比特流的平均长度也会非常接近原分布的平均信息量。</p>
+<p>如果预测的概率分布 $q$ 和真实分布 $p$ 完全一样，那么cross-entropy等于entropy。</p>
+<p>所以cross-entropy可以用来衡量两个概率分布的相似程度。</p>
+<p>用在机器学习中用作评判模型好坏的损失函数，度量模型预测分布和真实分布的相似程度。</p>
+<h1 id="KL-Divergence-KL散度"><a href="#KL-Divergence-KL散度" class="headerlink" title="KL-Divergence-KL散度"></a>KL-Divergence-KL散度</h1><p>而如果预测的概率分布和真实分布不同，那么cross-entropy的值就会大于entropy的值，超过的部分就叫做relative entropy（相对熵），也就是KL-Divergence（Kullback-Leibler Divergence，KL散度）</p>
+<p>即可以得到等式：$\text{Cross-Entropy = Entropy+KL-Divergence}$ </p>
+<p>则KL-Divergence：<br>$$<br>\begin{align}<br>D_{KL}(p|q)=H(p,q)-H(p) &amp;= -\sum_i p_i\ln q_i - \sum_i p_i\ln p_i  \<br>&amp;= -\sum_i p_i \ln \frac{p_i}{q_i} \<br>&amp;= \sum_i p_i \ln \frac{q_i}{p_i}<br>\end{align}<br>$$</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li>视频链接：<a href="https://www.youtube.com/watch?v=ErfnhcEV1O8">https://www.youtube.com/watch?v=ErfnhcEV1O8</a></li>
+</ol>
+
+        </div>
+    
+        <ul class="post-copyright">
+        <li><strong>本文标题：</strong><a href="https://f7ed.com/2021/01/16/entropy-and-more/">「Math」:Entropy, Cross-Entropy and DL-Divergence</a></li>
+        <li><strong>本文作者：</strong><a href="https://f7ed.com">f1ed</a></li>
+        <li><strong>本文链接：</strong><a href="https://f7ed.com/2021/01/16/entropy-and-more/">https://f7ed.com/2021/01/16/entropy-and-more/</a></li>
+        <li><strong>发布时间：</strong>2021-01-16</li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+        </ul>
+    
+        
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Information-Theory/" rel="tag">Information-Theory</a>,&nbsp;<a class="has-link-grey -link" href="/tags/Math/" rel="tag">Math</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/qrcode_alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/qrcode_wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/31/unsupervised-learning-pca/">
+                <span class="level-item">「机器学习-李宏毅」:Unsupervised-PCA</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: false,
+        app_id: 'U7ITnhsJjngmAcJUpFYdrq5m-gzGzoHsz',
+        app_key: 'cSRtvM6PbCOJBTVBAUURyFfO',
+        placeholder: 'xxxxxxxx'
+    });
+</script>
+
+    </div>
+</div>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/profile.png" alt="f1ed">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        f1ed
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        登高不傲，居低不怨。
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>成都</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+    <nav class="level menu-list is-mobile" style="margin-bottom:1rem">
+            <div class="level-item has-text-centered is-marginless">
+		<div>
+                <a href="/archives/">
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            30
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            8
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            43
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/f1ed" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/f1ed">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+
+   <div class="card widget column-left is-sticky" id="toc">
+       <div class="card-content" style="max-height:calc(100vh - 22px);overflow:scroll">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#公式总概">
+        <span class="has-mr-6">1</span>
+        <span>公式总概</span>
+        </a></li><li>
+        <a class="is-flex" href="#Entropy-熵">
+        <span class="has-mr-6">2</span>
+        <span>Entropy-熵</span>
+        </a></li><li>
+        <a class="is-flex" href="#Cross-Entropy-交叉熵">
+        <span class="has-mr-6">3</span>
+        <span>Cross-Entropy-交叉熵</span>
+        </a></li><li>
+        <a class="is-flex" href="#KL-Divergence-KL散度">
+        <span class="has-mr-6">4</span>
+        <span>KL-Divergence-KL散度</span>
+        </a></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">5</span>
+        <span>Reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+
+                
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/f1ed_logo.png" alt="「Math」:Entropy, Cross-Entropy and DL-Divergence" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 f1ed&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+		<br>
+		<a href="http://www.beian.miit.gov.cn/" target="_blank">蜀ICP备2020028586号</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                        <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="f1ed&#39;s GitHub" href="https://github.com/f1ed">
+                        
+                        <i class="fab fa-github"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://f7ed.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>
