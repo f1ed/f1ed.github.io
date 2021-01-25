@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://f7ed.com/2020/04/18/Backpropagation/</loc>
+    
+    <lastmod>2021-01-25T08:35:43.736Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://f7ed.com/2020/03/01/Gradient/</loc>
     
     <lastmod>2021-01-19T03:05:04.128Z</lastmod>
@@ -208,13 +215,6 @@
     <loc>https://f7ed.com/2020/03/21/Classification1/</loc>
     
     <lastmod>2020-07-03T08:39:45.986Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://f7ed.com/2020/04/18/Backpropagation/</loc>
-    
-    <lastmod>2020-07-03T08:39:21.739Z</lastmod>
     
   </url>
   
