@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f7ed.com/gallery/thumbnails/81648714_p0.jpg">
 <meta property="article:published_time" content="2020-07-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-03T11:32:00.705Z">
+<meta property="article:modified_time" content="2021-01-30T02:59:21.563Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="Machine-Learning">
 <meta property="article:tag" content="open-classes">
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-07-02T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-07-03</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-07-03T11:32:00.705Z"><i class="far fa-calendar-check">&nbsp;</i>2020-07-03</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-01-30T02:59:21.563Z"><i class="far fa-calendar-check">&nbsp;</i>2021-01-30</time>
                 
                 
                 <div class="level-item">
@@ -190,7 +190,7 @@ var _hmt = _hmt || [];
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    29 分钟 读完 (大约 4394 个字)
+                    30 分钟 读完 (大约 4545 个字)
                 </span>
                 
                 
@@ -216,12 +216,13 @@ var _hmt = _hmt || [];
 <p>用来训练的数据集 $R$  中的数据labeled data，即 ${(x^r,\hat{y}^r)}_{r=1}^R$ .</p>
 <p>比如在图像分类数据集中： $x^r$ 是image，对应的target output $y^r$ 是分类的label。</p>
 <p>而<strong>Semi-supervised learning（半监督式学习）</strong>：</p>
-<p>用来的训练的数据集由两部分组成 $\{(x^r,\hat{y}^r)\}_{r=1}^R$   ,    $\{x^u\}_{u=R}^{R+U}$   ，即labeled data和unlabeled data，而且通常情况下，unlabeled data的数量远远高于labeled data是数量，即 $U&gt;&gt;R$ .</p>
-<p>Semi-supervised learning 又分为两种，Transductive learning （转导/推论推导）和 Inductive learning（归纳推理）</p>
+<p>用来的训练的数据集由两部分组成 $\{(x^r,\hat{y}^r)\}_{r=1}^R$   ,    $\{x^u\}_{u=R}^{R+U}$   ，即labeled data和unlabeled data，而且通常情况下，unlabeled data的数量远远高于labeled data的数量，即 $U&gt;&gt;R$ .</p>
+<p>对于一般的机器学习，有训练集（labeled）和测试集，测试集是不会出现在训练集中的，这种情况就是inductive learning（归纳推理，即通过已有的labeled的data去推断没有见过的其他的数据的label）。</p>
+<p>而Semi-supervised learning 又分为两种，Transductive learning （转导/推论推导）和 Inductive learning（归纳推理）</p>
 <ul>
-<li>Transductive learing: unlabeled data is the testing data. 即测试数据在训练中用过。</li>
-<li>Inductive learning: unlabeled data is not the testing data.测试数据是训练中没有用过的数据。</li>
-<li>这里的使用testing data是指用testing data的feature，而不是使用testing data的label。</li>
+<li>Transductive learing: unlabeled data is the testing data. 即这里用来训练的   $\{x^u\}_{u=R}^{R+U}$   就是来自测试数据集中的数据。（只使用他的feature，而不使用他的label！）</li>
+<li>Inductive learning: unlabeled data is not the testing data.即用来训练的   $\{x^u\}_{u=R}^{R+U}$   不是来自测试数据集中的数据，是另外的unlabeled data。</li>
+<li>这里的使用testing data是指使用testing data的feature，即unlabel而不是使用testing data的label。</li>
 </ul>
 <hr>
 <p>为什么会有semi-supervised learning？</p>
@@ -241,7 +242,7 @@ var _hmt = _hmt || [];
 <p>The distribution of the unlabeled data tell us something.</p>
 <p>半监督式学习之所以有用，是因为这些unlabeled data的分布能告诉我们一些东西。</p>
 <p>通常这也伴随着一些假设，所以半监督式学习是否有用往往取决于这些假设是否合理。</p>
-<h1 id="Semi-supervised-Learning-for-Generative-Model"><a href="#Semi-supervised-Learning-for-Generative-Model" class="headerlink" title="Semi-supervised Learning for Generative Model"></a>Semi-supervised Learning for Generative Model</h1><h2 id="Supervised-Generative-Model"><a href="#Supervised-Generative-Model" class="headerlink" title="Supervised Generative Model"></a>Supervised Generative Model</h2><p>在<a href="/2020/03/21/Classification1/" title="这篇">这篇</a>文章中，有详细讲述分类问题中的generative model。</p>
+<h1 id="Semi-supervised-Learning-for-Generative-Model"><a href="#Semi-supervised-Learning-for-Generative-Model" class="headerlink" title="Semi-supervised Learning for Generative Model"></a>Semi-supervised Learning for Generative Model</h1><h2 id="Supervised-Generative-Model"><a href="#Supervised-Generative-Model" class="headerlink" title="Supervised Generative Model"></a>Supervised Generative Model</h2><p>在<a href="/2020/03/20/Classification1/" title="这篇">这篇</a>文章中，有详细讲述分类问题中的generative model。</p>
 <p>给定一个labelled training data $x^r\in C_1,C_2$ 训练集。</p>
 <p>prior probability（先验概率）有 $P(C_i)$ 和 $P(x|C_i)$ ，假设是Gaussian模型，则 $P(x|C_i)$ 由Gaussian模型中的 $\mu^i,\Sigma$ 参数决定。</p>
 <p>根据已有的labeled data，计算出假设的Gaussian模型的参数（如下图），从而得出prior probability。</p>
@@ -302,13 +303,13 @@ var _hmt = _hmt || [];
 <h1 id="Low-density-Separation-Assumption"><a href="#Low-density-Separation-Assumption" class="headerlink" title="Low-density Separation Assumption"></a>Low-density Separation Assumption</h1><p>另一种假设是Low-density Separation的假设，即这个世界是非黑即白的”Black-or-white”。</p>
 <p>两种类别之间是low-density，交界处有明显的鸿沟，因此要么是类别1，要么是类别2，没有第三种情况。</p>
 <h2 id="Self-training"><a href="#Self-training" class="headerlink" title="Self-training"></a>Self-training</h2><p>对于Low-density Separation Assumption的假设，使用Self-training的方法。</p>
-<p>Given：labeled data set $={(x^r,\hat{y}^r}<em>{r=1}^R$ ,unlabeled data set $={x^u}</em>{u=l}^R+U$ .</p>
+<p>Given：labeled data set  $=\{(x^r,\hat{y}^r\}_{r=1}^R$   ,unlabeled data set $ =\{x^u\}_{u=R}^{R+U}$   .</p>
 <p><strong>Repeat：</strong> </p>
 <ol>
-<li><p>Train model $f^<em>$ from labeled data set. ($f^</em>$ is independent to the model)</p>
+<li><p>Train model  $f^*$  from labeled data set.  $f^*$   is independent to the model)</p>
 <p>从labeled data set中训练出一个模型</p>
 </li>
-<li><p>Apply $f^*$ to the unlabeled data set. Obtain pseudo-label ${(x^u,y^u}_{u=l}^{R+U}$ .</p>
+<li><p>Apply $f^*$ to the unlabeled data set. Obtain pseudo-label  $\{(x^u,y^u\}_{u=l}^{R+U}\}$  </p>
 <p>用这个模型 $f^*$ 来预测unlabeled data set， 获得伪label</p>
 </li>
 <li><p>Remove a set of data from unlabeled data set, and add them into the labeled data set.</p>
@@ -325,8 +326,8 @@ var _hmt = _hmt || [];
 </ol>
 <p><strong>注意：</strong> Regression模型是不能self-training的，因为unlabeled data和其pseudo-label放在模型中的loss为0，无法再minimize。</p>
 <h2 id="Hard-Label"><a href="#Hard-Label" class="headerlink" title="Hard Label"></a>Hard Label</h2><p><strong>V.S.  semi-supervised learning for generative model</strong> </p>
-<p>Semi-supervised learning for generative model和Low-density Separation的区别其实是soft label 和soft label的区别。</p>
-<p>generative model是利用来unlabeled data的 $P(C_1|x^u)$ posterior probability来计算新的prior probability，迭代更新模型。</p>
+<p>Semi-supervised learning for generative model和Low-density Separation的区别其实是soft label 和hard label的区别。</p>
+<p>Generative Model是利用来unlabeled data的 $P(C_1|x^u)$ posterior probability来计算新的prior probability，迭代更新模型。</p>
 <p>而low-density是计算出unlabeled data的pseudo-label，选择性扩大labeled data set(即加入部分由pseudo-label的unlabeled data)来迭代训练模型。</p>
 <p>因此，如果考虑Neural Network：</p>
 <p>($\theta^*$ 是labeled data计算所得的network parameters)</p>
@@ -335,19 +336,19 @@ var _hmt = _hmt || [];
 
 <p>如果是使用hard label，则 $x^u$ 的target是 $\begin{bmatrix} 1 \ 0\end{bmatrix}$ .</p>
 <p>如果是使用soft label，则 $x^u$ 的target是 $\begin{bmatrix} 0.7 \ 0.3\end{bmatrix}$ .</p>
-<p>如果是使用soft label，则self-training不会有效，因为新的data加进去，不会增大模型的loss，也就无法再minimize.</p>
+<p>如果是使用soft label，则self-training不会有效，因为新的data对原loss的改变为0，不会增大模型的loss，也就无法再对其minimize.</p>
 <p><strong>所以基于Low-density Separation的假设，是非黑即白的，需要使用hard label来self-training。</strong> </p>
 <h2 id="Entropy-based-Regularization"><a href="#Entropy-based-Regularization" class="headerlink" title="Entropy-based Regularization"></a>Entropy-based Regularization</h2><p>在训练模型中，我们需要尽量保证unlabeled data在模型中的分布是low-density separation。</p>
 <p>即下图中，unlabeled data得到的pseudo-label的分布应该尽量集中，而不应该太分散。</p>
-<img src="https://s1.ax1x.com/2020/07/03/NXRJiR.md.png" alt="NXRJiR.md.png" style="zoom:50%;" /> 
+<img src="https://s1.ax1x.com/2020/07/03/NXRJiR.md.png" alt="NXRJiR.md.png" style="zoom:30%;" /> 
 
 
 
 <p>所以，在训练中，<strong>如何评估 $y^u$ 的分布的集中度？</strong></p>
 <p>根据信息学，使用 $y^u$ 的entropy，即  $E\left(y^{u}\right)=-\sum_{m=1}^{5} y_{m}^{u} \ln \left(y_{m}^{u}\right)$ </p>
-<p>(注：这里的 $y^u_m$ 应该是  $y^u=m$ 的概率)</p>
+<p>(注：这里的 $y^u_m$ 是变量  $y^u=m$ 的概率)</p>
 <p>当 $E(y^u)$ 越小，说明 $y^u$ 分布越集中，如下图。</p>
-<img src="https://s1.ax1x.com/2020/07/03/NXR3dJ.md.png" alt="NXR3dJ.md.png" style="zoom:50%;" />
+<img src="https://s1.ax1x.com/2020/07/03/NXR3dJ.md.png" alt="NXR3dJ.md.png" style="zoom:40%;" />
 
 <hr>
 <p>因此，在self-training中：</p>
@@ -426,7 +427,7 @@ var _hmt = _hmt || [];
 <p>The labeled data influence their neighbors.</p>
 <p>Propagate through the graph.</p>
 <p>【label data 不仅会影响他们的邻居，还会一直传播下去】</p>
-<img src="https://s1.ax1x.com/2020/07/03/NXRmR0.md.png" alt="NXRmR0.md.png" style="zoom:50%;" />
+<img src="https://s1.ax1x.com/2020/07/03/NXRmR0.md.png" alt="NXRmR0.md.png" style="zoom:40%;" />
 
 <p>如果data points够多，图建的好，就会像下图这样：</p>
 <img src="https://s1.ax1x.com/2020/07/03/NXREIs.png" alt="NXREIs.png" style="zoom:50%;" />

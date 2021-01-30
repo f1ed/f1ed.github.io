@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://f7ed.com/2020/07/03/semi-supervised/</loc>
+    
+    <lastmod>2021-01-30T02:59:21.563Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://f7ed.com/2020/03/20/Classification1/</loc>
     
     <lastmod>2021-01-30T02:41:30.234Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>https://f7ed.com/2020/07/21/Docker/</loc>
     
     <lastmod>2020-07-25T03:34:59.360Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://f7ed.com/2020/07/03/semi-supervised/</loc>
-    
-    <lastmod>2020-07-03T11:32:00.705Z</lastmod>
     
   </url>
   
