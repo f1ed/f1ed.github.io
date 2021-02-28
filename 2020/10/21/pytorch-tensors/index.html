@@ -9,31 +9,31 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>「PyTorch」：Tensors Explained And Operations - fred&#39;s blog</title>
+<title>「PyTorch」：2-Tensors Explained And Operations - fred&#39;s blog</title>
 
 
     <meta name="description" content="PyTorch框架学习。 本篇文章主要介绍PyTorch中的Tensor及其基本操作，主要分为四个方面：Reshape, Element-wise, Reduction和Access。 Tensor的具体操作介绍，建议配合Colab笔记使用： PyTorch Tensors Explained  Tensor Operations: Reshape   Tensor Operations: Ele">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「PyTorch」：Tensors Explained And Operations">
-<meta property="og:url" content="https://f7ed.com/2020/10/21/Tensors/index.html">
+<meta property="og:title" content="「PyTorch」：2-Tensors Explained And Operations">
+<meta property="og:url" content="https://f7ed.com/2020/10/21/pytorch-tensors/index.html">
 <meta property="og:site_name" content="fred&#39;s blog">
 <meta property="og:description" content="PyTorch框架学习。 本篇文章主要介绍PyTorch中的Tensor及其基本操作，主要分为四个方面：Reshape, Element-wise, Reduction和Access。 Tensor的具体操作介绍，建议配合Colab笔记使用： PyTorch Tensors Explained  Tensor Operations: Reshape   Tensor Operations: Ele">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://f7ed.com/gallery/thumbnails/84019673_p0_master1200.jpg">
+<meta property="og:image" content="https://f7ed.com/gallery/thumbnails/a0b70de959696be3ebc674582469d70d.png">
 <meta property="article:published_time" content="2020-10-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-25T01:19:40.815Z">
+<meta property="article:modified_time" content="2021-02-28T14:13:23.746Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="open-classes">
 <meta property="article:tag" content="DEEPLIZARD">
 <meta property="article:tag" content="PyTorch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://f7ed.com/gallery/thumbnails/84019673_p0_master1200.jpg">
+<meta name="twitter:image" content="https://f7ed.com/gallery/thumbnails/a0b70de959696be3ebc674582469d70d.png">
 
 
 
 
 
-<link rel="alternative" href="/atom.xml" title="「PyTorch」：Tensors Explained And Operations" type="application/atom+xml">
+<link rel="alternative" href="/atom.xml" title="「PyTorch」：2-Tensors Explained And Operations" type="application/atom+xml">
 
 
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/f1ed_logo.png" alt="「PyTorch」：Tensors Explained And Operations" height="28">
+                <img src="/images/f1ed_logo.png" alt="「PyTorch」：2-Tensors Explained And Operations" height="28">
             
             </a>
         </div>
@@ -162,14 +162,14 @@ var _hmt = _hmt || [];
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/84019673_p0_master1200.jpg" alt="「PyTorch」：Tensors Explained And Operations">
+            <img class="thumbnail" src="/gallery/thumbnails/a0b70de959696be3ebc674582469d70d.png" alt="「PyTorch」：2-Tensors Explained And Operations">
         </span>
     </div>
     
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <i class="fas fa-bars"></i>「PyTorch」：Tensors Explained And Operations
+                <i class="fas fa-bars"></i>「PyTorch」：2-Tensors Explained And Operations
             
         </h1>
         
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-10-20T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-10-21</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-10-25T01:19:40.815Z"><i class="far fa-calendar-check">&nbsp;</i>2020-10-25</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-02-28T14:13:23.746Z"><i class="far fa-calendar-check">&nbsp;</i>2021-02-28</time>
                 
                 
                 <div class="level-item">
@@ -190,7 +190,7 @@ var _hmt = _hmt || [];
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    34 分钟 读完 (大约 5063 个字)
+                    34 分钟 读完 (大约 5067 个字)
                 </span>
                 
                 
@@ -209,7 +209,7 @@ var _hmt = _hmt || [];
 <p><a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/PyTorch%20Tensors%20Explained.ipynb">PyTorch Tensors Explained</a> </p>
 <p><a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AReshape.ipynb">Tensor Operations: Reshape</a> </p>
 <p> <a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AElement-Wise.ipynb">Tensor Operations: Element-wise</a>  </p>
-<p><a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AElement-Wise.ipynb">Tensor Operation: Reduction and Access</a>  </p>
+<p><a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AReduction%20and%20Access.ipynb">Tensor Operation: Reduction and Access</a>  </p>
 <p>英文的表达解释都是比较清晰且精确的，所以以英语的形式作为主要记录，文中会夹带一些中文总结语句，方便阅读。</p>
 <a id="more"></a>
 
@@ -524,7 +524,7 @@ var _hmt = _hmt || [];
 <h3 id="Broadcasting"><a href="#Broadcasting" class="headerlink" title="Broadcasting"></a>Broadcasting</h3><p>Broadcasting describes how tensors with different shapes are treated during element-wise operations.</p>
 <p>Broadcasting is the concept whose implementation allows us to add scalars to higher dimensional tensors.</p>
 <p>【broadcast描述了不同shape之间的tensor如何进行element-wise操作】</p>
-<p>【broadcast运行我们增加scalars到高维度】</p>
+<p>【broadcast允许我们增加scalars到高维度】</p>
 <p>Let’s think about the <code>t1 + 2</code> operation. Here, the scaler valued tensor is being broadcasted to the shape of <code>t1</code>, and then, the element-wise operation is carried out.</p>
 <p>【在t1+2时，scalar 2实际是先被broadcast到和t1相同的shape, 再执行element-wise操作】</p>
 <p>We have two tensors with different shapes. The goal of broadcasting is to make the tensors have the same shape so we can perform element-wise operations on them.</p>
@@ -570,17 +570,17 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t.sum()</span><br><span class="line">t.prod()</span><br><span class="line">t.mean()</span><br><span class="line">t.std()</span><br></pre></td></tr></table></figure>
 
 <h3 id="Reducing-Tensors-By-Axes"><a href="#Reducing-Tensors-By-Axes" class="headerlink" title="Reducing Tensors By Axes"></a>Reducing Tensors By Axes</h3><p>只需要对这些方法传一个维度对参数。</p>
-<p>(具体操作见colab笔记本：<a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AElement-Wise.ipynb">Tensor Operation: Reduction and Access</a> )</p>
+<p>(具体操作见colab笔记本：<a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AReduction%20and%20Access.ipynb">Tensor Operation: Reduction and Access</a>   )</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t.sum(dim=<span class="number">0</span>)</span><br><span class="line">t.sum(dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 <h3 id="Argmax"><a href="#Argmax" class="headerlink" title="Argmax"></a>Argmax</h3><p><em>Argmax</em> returns the index location of the maximum value inside a tensor.</p>
 <p>【Argmax返回最大value的index】</p>
-<p>(具体操作见colab笔记本：<a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AElement-Wise.ipynb">Tensor Operation: Reduction and Access</a> )</p>
+<p>(具体操作见colab笔记本：<a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AReduction%20and%20Access.ipynb">Tensor Operation: Reduction and Access</a>  )</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.argmax(dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="Aceessing-Elements-Inside-Tensors"><a href="#Aceessing-Elements-Inside-Tensors" class="headerlink" title="Aceessing Elements Inside Tensors"></a>Aceessing Elements Inside Tensors</h2><p>The last type of common operation that we need for tensors is the ability to access data from within the tensor.</p>
 <p>【Access操作能获得tensor中的数据，即将tensor中的数据拿出来放在Python内置的数据结构中】</p>
-<p>(具体操作见colab笔记本：<a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AElement-Wise.ipynb">Tensor Operation: Reduction and Access</a> )</p>
+<p>(具体操作见colab笔记本：<a href="https://colab.research.google.com/github/f1ed/PyTorch-Notebook/blob/master/Tensor%20Operations%EF%BC%9AReduction%20and%20Access.ipynb">Tensor Operation: Reduction and Access</a> ) </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t.mean().item()</span><br><span class="line">t.mean(dim=<span class="number">0</span>).tolist()</span><br><span class="line">t.mean(dim=<span class="number">0</span>).numpy()</span><br></pre></td></tr></table></figure>
 
 <h3 id="Advanced-Indexing-And-Slicing"><a href="#Advanced-Indexing-And-Slicing" class="headerlink" title="Advanced Indexing And Slicing"></a>Advanced Indexing And Slicing</h3><p>PyTorch Tensor支持大多数NumPy的index和slicing操作。</p>
@@ -592,9 +592,9 @@ var _hmt = _hmt || [];
         </div>
     
         <ul class="post-copyright">
-        <li><strong>本文标题：</strong><a href="https://f7ed.com/2020/10/21/Tensors/">「PyTorch」：Tensors Explained And Operations</a></li>
+        <li><strong>本文标题：</strong><a href="https://f7ed.com/2020/10/21/pytorch-tensors/">「PyTorch」：2-Tensors Explained And Operations</a></li>
         <li><strong>本文作者：</strong><a href="https://f7ed.com">f1ed</a></li>
-        <li><strong>本文链接：</strong><a href="https://f7ed.com/2020/10/21/Tensors/">https://f7ed.com/2020/10/21/Tensors/</a></li>
+        <li><strong>本文链接：</strong><a href="https://f7ed.com/2020/10/21/pytorch-tensors/">https://f7ed.com/2020/10/21/pytorch-tensors/</a></li>
         <li><strong>发布时间：</strong>2020-10-21</li>
         <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
@@ -665,8 +665,8 @@ var _hmt = _hmt || [];
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/11/unsupervised-learning-word-embedding/">
-                <span class="level-item">「机器学习-李宏毅」:Unsupervised Learning：Word Embedding</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/20/pytorch-introduction/">
+                <span class="level-item">「PyTorch」：1-PyTorch Explained</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -759,7 +759,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            32
+                            35
                         </p>
                     </a>
                 </div>
@@ -981,7 +981,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/f1ed_logo.png" alt="「PyTorch」：Tensors Explained And Operations" height="28">
+                    <img src="/images/f1ed_logo.png" alt="「PyTorch」：2-Tensors Explained And Operations" height="28">
                 
                 </a>
                 <p class="is-size-7">
