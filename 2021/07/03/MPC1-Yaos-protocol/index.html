@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f7ed.com/gallery/thumbnails/uhhjkfakiqfafa.png">
 <meta property="article:published_time" content="2021-07-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-03T13:22:17.237Z">
+<meta property="article:modified_time" content="2021-07-04T09:55:40.486Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="MPC">
 <meta property="article:tag" content="Lectures">
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2021-07-02T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2021-07-03</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-07-03T13:22:17.237Z"><i class="far fa-calendar-check">&nbsp;</i>2021-07-03</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-07-04T09:55:40.486Z"><i class="far fa-calendar-check">&nbsp;</i>2021-07-04</time>
                 
                 
                 <div class="level-item">
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 
 <h1 id="Secure-computation"><a href="#Secure-computation" class="headerlink" title="Secure computation"></a>Secure computation</h1><h2 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h2><p>什么是安全计算？</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZtqf.png" alt="什么是安全多方计算" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZtqf.png" alt="什么是安全多方计算" style="zoom:50%;" />
 
 <ul>
 <li><p>Mutually distrusting parties, each with a private input.</p>
@@ -238,10 +238,10 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <p>以上性质及时在某些参与方勾结欺骗的情况下，也是成立的。</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZUZ8.png" alt="有恶意参与方的多方安全计算" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZUZ8.png" alt="有恶意参与方的多方安全计算" style="zoom:50%;" />
 
 <h3 id="scenarios"><a href="#scenarios" class="headerlink" title="scenarios"></a>scenarios</h3><p>Example 1: Sugar Beets——甜菜定价</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZYsP.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZYsP.png" style="zoom:43%;" />
 
 <ul>
 <li><p>Farmers make bids (“at price X, I will produce Y amount”)</p>
@@ -257,13 +257,13 @@ var _hmt = _hmt || [];
 <p>但是双方不希望透露自己心中的定价，因为这会破坏经济市场的balabala</p>
 <p>因此，在2009年，通过双方可以通过安全计算得到市场出请价。</p>
 <p>Example 2: Ad conversion——广告投放</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZBGj.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZBGj.png" style="zoom:43%;" />
 
 <p>特斯拉存储了到店购买汽车的用户邮箱，而谷歌希望能个性化的投放汽车广告。</p>
 <p>因此，如果双方公开数据库中的数据，就可以通过上图的SQL语句筛选出目标用户。</p>
 <p>但这样会侵犯用户的用户的隐私，所以特斯拉和谷歌都不会直接公开用户的信息。由此，双方可以通过安全计算得到广告投放的目标用户。</p>
 <p>Example 3: Wage Equity Study——薪资公平性研究</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZrzn.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZrzn.png" style="zoom:43%;" />
 
 <p>研究人员想研究Boston的薪资水平是否是性别平等的，但各企业不会愿意直接公开薪资。</p>
 <p>而通过安全计算，可以在保护企业薪资隐私的情况下，得到相关研究结果。</p>
@@ -284,10 +284,10 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h3 id="Security-in-ideal-world"><a href="#Security-in-ideal-world" class="headerlink" title="Security in ideal world"></a>Security in ideal world</h3><p>在理想情况下，假设有一个可信第三方，Alice和Bob把自己的输入<code>x, y</code> 告诉她，可信第三方计算<code>f(x, y)</code> ，再把计算结果分别分发给Alice和Bob。</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZ0iQ.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZ0iQ.png" style="zoom:43%;" />
 
 <p>在理想情况中，如果有一个恶意的参与方，结果会怎么样？（你看图，变坏的人变丑了2333</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZDRs.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZDRs.png" style="zoom:43%;" />
 
 <p>corrupt party’s view:</p>
 <ol>
@@ -302,7 +302,7 @@ var _hmt = _hmt || [];
 <p>【对于每一个尝试攻击真实安全计算协议的攻击者来说，总有一种方式达到 和攻击理想情况的 相同影响。】</p>
 <p>首先，先解释在real protocol中，恶意参与方会产生什么样的effect？</p>
 <p>下图是一个现实的MPC协议交互图（有恶意参与方）：</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZyMq.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZyMq.png" style="zoom:43%;" />
 
 <p>effect：</p>
 <ul>
@@ -318,7 +318,7 @@ var _hmt = _hmt || [];
 <p>Universally Composable Security: A New Paradigm for Cryptographic Protocols</p>
 </blockquote>
 <p><strong>Security definition</strong>: For every real-world adversary $\mathcal{A}$, there exists an ideal adversary $\mathcal{A’}$ s.t. joint distribution (HonestOutput,AdvOutput) is indistinguishable.</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZRdU.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZRdU.png" style="zoom:53%;" />
 
 <p>【对于每一个真实协议交互下的攻击者 $\mathcal{A}$ ，都存在一个在理论协议情况下的攻击者 $\mathcal{A’}$ ，这两个攻击者产生的effect是相同的，两种情况下的诚信参与方的输出和恶意参与方的输出的 联合分布 是不可区分的。】</p>
 <p>现在，来解释如何产生上文提到的：For every “attack” against real protocol, there is a way to achieve “same effect” in ideal world.</p>
@@ -360,19 +360,19 @@ var _hmt = _hmt || [];
 <ol>
 <li><p>Write truth table of function f</p>
 <p>【写下函数f的真值表，该函数对于Alice方有4种输入，对Bob方有4种输入】</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRn8z9.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRn8z9.png" style="zoom:53%;" />
 </li>
 <li><p>For each possible input, choose random cryptographic key</p>
 <p>【对于函数的每一种输入，Alice都选择一个随机的密钥（也叫label），对于Alice方的输入有4种密钥，对于Bob方的输入有4种密钥。】</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZ2ZT.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZ2ZT.png" style="zoom:53%;" />
 </li>
 <li><p>Encrypt each output with corresponding keys</p>
 <p>【再用对应的输入密钥加密每一个函数的输出】</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZhi4.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZhi4.png" style="zoom:53%;" />
 </li>
 <li><p>Randomly permute ciphertexts, send to Bob</p>
 <p>【对第三步的加密真值表随机置换，得到garbled truth table，再发给Bob。】</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRn3RJ.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRn3RJ.png" style="zoom:53%;" />
 
 </li>
 </ol>
@@ -385,7 +385,7 @@ var _hmt = _hmt || [];
 <p>A：在对字符加密前，可以对字符加一些标记，比如前导0，或者特殊字符串之类。</p>
 </blockquote>
 <p>在Bob收到garbled truth table和garbled input后，Bob的视角可以模拟成下图：</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZ4JJ.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZ4JJ.png" style="zoom:53%;" />
 
 <p>并且，对于distinguisher来说，只要密钥{A, B}中有一个不知道，那么 $\mathbb{E}<em>{A, B}(C)\approx \mathbb{E}</em>{A’, B’}(C’)$ ，（即和其他不知道的输入的加密是不可区分的）这样的模拟就是不可区分的。                                                                                                                                                                                                                                                                                                                                                                                                                                     </p>
 <h3 id="Extending-warm-up-protocol"><a href="#Extending-warm-up-protocol" class="headerlink" title="Extending warm-up protocol"></a>Extending warm-up protocol</h3><p>但这样的协议还存在一些问题：</p>
@@ -398,22 +398,22 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <p>这里会先解决第一个问题，想法是把这个复杂函数拆分成多个garbled truth table，可以用一个garbled table 的garbled outputs作为另一个garbled table的keys，就像这样：</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZ5W9.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZ5W9.png" style="zoom:53%;" />
 
 <p>第二个问题，关于OT的部分，后文会继续解释。</p>
 <h3 id="Garbled-circuit-framework"><a href="#Garbled-circuit-framework" class="headerlink" title="Garbled circuit framework"></a>Garbled circuit framework</h3><p>对于garbled circuit framework的提出，出自姚期智院士86年的论文。</p>
 <p>用boolean电路表示一个函数，电路由一些门组成：</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZTQ1.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZTQ1.png" style="zoom:53%;" />
 
 <p>(Alice) Garbling a circuit: </p>
 <ol>
 <li><p>Pick random labels W0, W1 on each wire</p>
 <p>【对于每一个wire，都会选择两个label来表示true和false，比如选择A0是true，A1是false，这里的label其实就是上文提到的加密密钥。】</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZIzR.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZIzR.png" style="zoom:53%;" />
 </li>
 <li><p>“Encrypt” truth table of each gate</p>
 <p>【然后，对每一个门，都用对应的label加密真值表】</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZ7sx.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZ7sx.png" style="zoom:53%;" />
 </li>
 <li><p>Garbled circuit = all encrypted gates</p>
 <p>Garbled encoding = one label per wire</p>
@@ -432,7 +432,7 @@ var _hmt = _hmt || [];
 </ol>
 <p>对于接受方Bob来说，它的任务就是用garbled input来evaluate garbled circuits。他只能学习到每个wire的一个label，计算上不可能的去猜测这个wire的另一个label是什么。而对于输出门的输出wire，即使揭露输出wire的两个label也只会泄漏电路的输出。</p>
 <p>在BellareHoangRogaway12中有对gabled circuit做一些正式的符号定义：</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZHL6.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZHL6.png" style="zoom:53%;" />
 
 <ul>
 <li><p>Privacy: (F,X,d) reveals nothing beyond f and f(x)</p>
@@ -469,7 +469,7 @@ var _hmt = _hmt || [];
 <p>需要用一些支持blind key生成的公钥加密算法，比如ElGamal，群中的某些元素没有对应的离散对数，也就无法知道其对应的私钥。</p>
 </blockquote>
 <h3 id="Yao’s-protocol-overview"><a href="#Yao’s-protocol-overview" class="headerlink" title="Yao’s protocol: overview"></a>Yao’s protocol: overview</h3><p>Yao协议：</p>
-<img src="https://z3.ax1x.com/2021/07/03/RRZOoD.png" style="zoom:33%;" />
+<img src="https://z3.ax1x.com/2021/07/03/RRZOoD.png" style="zoom:63%;" />
 
 <ol>
 <li>Gabler生成每个wire的label，把garbled circuit f（加密的真值表）、garbled input x（Alice输入对应的labels)和output wire labels（输出wire对应的labels）发送给Evaluator</li>
