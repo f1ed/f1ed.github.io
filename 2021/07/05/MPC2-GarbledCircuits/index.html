@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://f7ed.com/gallery/thumbnails/mpc2fasasafsa.png">
 <meta property="article:published_time" content="2021-07-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-06T08:24:00.834Z">
+<meta property="article:modified_time" content="2021-07-06T08:51:35.042Z">
 <meta property="article:author" content="f1ed">
 <meta property="article:tag" content="MPC">
 <meta property="article:tag" content="Lectures">
@@ -178,7 +178,7 @@ var _hmt = _hmt || [];
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2021-07-04T16:00:00.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2021-07-05</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-07-06T08:24:00.834Z"><i class="far fa-calendar-check">&nbsp;</i>2021-07-06</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2021-07-06T08:51:35.042Z"><i class="far fa-calendar-check">&nbsp;</i>2021-07-06</time>
                 
                 
                 <div class="level-item">
@@ -191,7 +191,7 @@ var _hmt = _hmt || [];
                     <i class="far fa-clock"></i>&nbsp;
                     
                     
-                    27 分钟 读完 (大约 4108 个字)
+                    27 分钟 读完 (大约 4119 个字)
                 </span>
                 
                 
@@ -256,7 +256,7 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<p>通过Point-and-permute技术，evaluator在评估电路时不再需要对每个密文尝试性解密，garbler在混淆电路时也不再需要做ciphertextexpansion。</p>
+<p>通过Point-and-permute技术，evaluator在评估电路时不再需要对每个密文尝试性解密，garbler在混淆电路时也不再需要做ciphertext expansion。</p>
 <p>同时，该技术支持简单的one-time pad加密，即 $\mathbb{E}_{A, B}(C)=H(A, B)\oplus C$ ，$H$ 可以是任意的一种加密方式，比如AES。</p>
 <img src="https://z3.ax1x.com/2021/07/06/RoqgDe.png" alt="support one-time pad" style="zoom:50%;" />
 
@@ -480,8 +480,8 @@ var _hmt = _hmt || [];
 
 <p>可见对于32-bit的乘法、开方操作，使用generalized garbling技术开销非常大，因为这是和 $m$ 相关的。</p>
 <h2 id="CRT-form"><a href="#CRT-form" class="headerlink" title="CRT form"></a>CRT form</h2><p>而这个可以通过中国剩余定理(Chinese remainder theorem, CRT)来进行优化。</p>
-<p>相较于之前在 $\mathbb{Z}<em>{32}=\mathbb{Z}</em>{4294967296}$ 进行算数运算，通过CRT可以在 $\mathbb{Z}<em>{2\cdot 3\cdot 5\cdot 7\cdot 11\cdots 29}=\mathbb{Z}</em>{6469693239}$ 下进行高效的乘法、开方操作。</p>
-<p>通过把一个32-bit的数 $x$ 表示为 $(x%2, x%3,x%5,\cdots,x%29)$ ，对每个余数单独进行算数运算，最后通过中国剩余定理，即可求解出结果。</p>
+<p>相较于之前在 $\mathbb{Z}_{32}=\mathbb{Z}_{4294967296}$ 进行算数运算，通过CRT可以在 $\mathbb{Z}_{2\cdot 3\cdot 5\cdot 7\cdot 11\cdots 29}=\mathbb{Z}_{6469693239}$ 下进行高效的乘法、开方操作。</p>
+<p>通过把一个32-bit的数 $x$ 表示为 $(x\%2, x\%3,x\%5,\cdots,x\%29)$ ，对每个余数单独进行算数运算，最后通过中国剩余定理，即可求解出结果。</p>
 <p>将使用CRT表示方法的系统与上述方法比较：</p>
 <img src="https://www.imgpp.com/images/2021/07/06/2021-07-06-4.04.10.png" alt="CRT system" style="zoom:50%;" />
 
@@ -510,7 +510,7 @@ var _hmt = _hmt || [];
 <p>转换方法如下图所示：</p>
 <img src="https://z3.ax1x.com/2021/07/06/RoLKKO.png" alt="convert CRT values to PMR" style="zoom:50%;" />
 
-<p>要实现上述的转换方法，只需要实现 $(x%p, x%q)\mapsto \lfloor \frac{x}{p}\rfloor%q$ 模块的garbled circuits。</p>
+<p>要实现上述的转换方法，只需要实现 $(x\%p, x\%q)\mapsto \lfloor \frac{x}{p}\rfloor\%q$ 模块的garbled circuits。</p>
 <p>实现该模块的具体步骤可以参考下图：</p>
 <img src="https://www.imgpp.com/images/2021/07/06/2021-07-06-4.05.40.png" alt="gadget" style="zoom:50%;" />
 
@@ -533,7 +533,7 @@ var _hmt = _hmt || [];
 <hr>
 <p>最后分析一下CRT表示方式的比较效率：</p>
 <ul>
-<li><p>$(x%p, x%q)\mapsto \lfloor \frac{x}{p}\rfloor%q$ 模块大约需要 $2p+2q$ 的开销。</p>
+<li> $(x\%p, x\%q)\mapsto \lfloor \frac{x}{p}\rfloor\%q$  模块大约需要 $2p+2q$ 的开销。
 </li>
 <li><p>而将CRT转换为PMR：对于每一个质数对都需要上述模块。</p>
 </li>
